@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Why LUFS Matter More Than Peak Meters</title>
+<meta name="description" content="Learn why peak meters cannot predict perceived loudness, how LUFS works, and why modern mastering measures what listeners actually hear.">
+
+<style>
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.7;
+    max-width:900px;
+    margin:40px auto;
+    padding:0 20px;
+    color:#222;
+}
+
+h1,h2{
+    color:#111;
+    line-height:1.3;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:25px 0;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:left;
+}
+
+th{
+    background:#f5f5f5;
+}
+
+blockquote{
+    border-left:4px solid #ddd;
+    margin:20px 0;
+    padding-left:20px;
+    color:#555;
+}
+
+.cta{
+    margin-top:60px;
+    padding:30px;
+    background:#f8f8f8;
+    border-radius:8px;
+}
+</style>
+
+<link rel="canonical" href="https://the.freq.in/blog/why-lufs-matter-more-than-peak-meters">
+
+</head>
+
+<body>
+
+<article>
+
+<h1>Why LUFS Matter More Than Peak Meters</h1>
+
+<p>
+For decades, engineers watched one meter more than any other: the peak meter.
+If the signal stayed below 0 dBFS, everything appeared to be under control.
+</p>
+
+<p>
+But there was one problem.
+</p>
+
+<p>
+Peak meters tell you how high the waveform reaches.
+They do not tell you how loud people will perceive it.
+</p>
+
+<p>
+Modern mastering shifted toward LUFS because it measures something much closer to human hearing.
+Instead of asking, "How high is the waveform?", LUFS asks, "How loud does this actually sound?"
+</p>
+
+<hr>
+
+<h2>What Does a Peak Meter Measure?</h2>
+
+<p>
+A digital peak meter measures the highest instantaneous sample level in a recording.
+</p>
+
+<p>
+If a snare drum reaches -0.5 dBFS for a fraction of a millisecond, the peak meter records that value, even if the rest of the song is relatively quiet.
+</p>
+
+<p>
+This is important for preventing clipping.
+</p>
+
+<p>
+It tells you whether the waveform exceeds the digital ceiling.
+It says almost nothing about perceived loudness.
+</p>
+
+<hr>
+
+<h2>Your Ear Doesn't Judge Loudness From Peaks</h2>
+
+<p>
+Human hearing integrates sound over time.
+Instead of reacting to individual samples, the auditory system combines energy across short time windows while also weighting frequencies according to our sensitivity.
+</p>
+
+<p>
+A brief transient may produce an extremely high peak without sounding particularly loud.
+Conversely, a sustained vocal, guitar or synth pad can feel much louder despite producing lower peaks.
+</p>
+
+<p>
+The ear cares about accumulated energy, not isolated spikes.
+</p>
+
+<hr>
+
+<h2>LUFS Measures Perceived Loudness</h2>
+
+<p>
+LUFS stands for Loudness Units relative to Full Scale.
+Unlike peak meters, LUFS was designed around psychoacoustic research into how humans perceive loudness.
+</p>
+
+<p>
+Rather than measuring only maximum amplitude, LUFS analyzes:
+</p>
+
+<ul>
+
+<li>Average energy over time</li>
+
+<li>Frequency weighting that reflects human hearing</li>
+
+<li>Long-term listening perception instead of instantaneous peaks</li>
+
+</ul>
+
+<p>
+The result is a measurement that correlates far more closely with what listeners actually experience.
+</p>
+
+<hr>
+
+<h2>Why Streaming Services Use LUFS</h2>
+
+<p>
+Most streaming platforms normalize playback loudness.
+</p>
+
+<p>
+If one song is mastered significantly louder than another, the platform simply turns it down until both reach a similar playback level.
+</p>
+
+<p>
+This largely ended the loudness war.
+</p>
+
+<p>
+Making a master excessively loud no longer guarantees it will sound louder during playback.
+Instead, it often sacrifices dynamics while being turned down anyway.
+</p>
+
+<p>
+Today, preserving musical dynamics usually produces a better listening experience than maximizing meter readings.
+</p>
+
+<hr>
+
+<h2>Peak Level vs Perceived Loudness</h2>
+
+<table>
+
+<tr>
+<th>Peak Meter</th>
+<th>LUFS</th>
+</tr>
+
+<tr>
+<td>Measures maximum instantaneous level.</td>
+<td>Measures perceived loudness over time.</td>
+</tr>
+
+<tr>
+<td>Protects against clipping.</td>
+<td>Represents listening level.</td>
+</tr>
+
+<tr>
+<td>Ignores frequency sensitivity.</td>
+<td>Includes psychoacoustic frequency weighting.</td>
+</tr>
+
+<tr>
+<td>Can be identical for very different sounding mixes.</td>
+<td>Usually aligns much more closely with listener perception.</td>
+</tr>
+
+</table>
+
+<hr>
+
+<h2>Why Compression Changes LUFS</h2>
+
+<p>
+Compression doesn't necessarily create higher peaks.
+In many cases it actually reduces them.
+</p>
+
+<p>
+What compression often increases is average energy.
+By reducing the difference between loud and quiet moments, more of the music remains close to the average listening level.
+</p>
+
+<p>
+The result is a mix that usually measures louder in LUFS even when peak values barely change.
+</p>
+
+<p>
+This is another example of loudness depending on perception rather than amplitude alone.
+</p>
+
+<hr>
+
+<h2>The Meter Should Match the Ear</h2>
+
+<p>
+Peak meters remain essential.
+Without them, digital clipping would become difficult to detect.
+</p>
+
+<p>
+But peak meters answer a technical question.
+</p>
+
+<blockquote>
+How close is the waveform to digital overload?
+</blockquote>
+
+<p>
+LUFS answers a perceptual question.
+</p>
+
+<blockquote>
+How loud will listeners perceive this music?
+</blockquote>
+
+<p>
+Both measurements matter because they solve different problems.
+One protects audio quality.
+The other reflects human hearing.
+</p>
+
+<hr>
+
+<h2>Why This Matters</h2>
+
+<p>
+Modern mastering isn't about making waveforms as large as possible.
+It's about achieving an appropriate perceived loudness while preserving clarity, punch and musical dynamics.
+</p>
+
+<p>
+LUFS became the industry standard because it measures something peak meters never could: the way people actually hear loudness.
+Understanding that distinction leads to better mastering decisions and mixes that translate more naturally across playback systems.
+</p>
+
+<p>
+The next article explores this idea further by showing how two mixes with identical peak levels can sound dramatically different, despite looking almost identical on a meter.
+</p>
+
+</article>
+
+<div class="cta">
+
+<h2>Hear Psychoacoustics Working For You</h2>
+
+<p>
+The concepts explored throughout this series form the foundation of modern mixing practice.
+FREQ applies these same psychoacoustic principles through algorithm-based DSP to produce mixes that translate naturally across listening systems.
+</p>
+
+<p>
+<strong>FREQ is free until the first 500 users or 2 years, whichever comes first.</strong>
+</p>
+
+<p>
+<a href="https://thefreq.in">Log in to FREQ</a>
+</p>
+
+<p>
+Prefer a professionally mixed release? Book a session directly with Kushal Jaju on
+<a href="https://www.soundbetter.com/profiles/69654-kushal-jaju" rel="noopener noreferrer" target="_blank">SoundBetter</a>.
+</p>
+
+</div>
+
+</body>
+</html>
