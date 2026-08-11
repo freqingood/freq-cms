@@ -28,7 +28,7 @@
   "canonical_url": "https://thefreq.in/blogs/balance-master-translation",
   "permanent_article_id": "FREQ-005",
   "title": "From Balance to Finished Master: How to Make Your Mix Sound Right Everywhere",
-  "conceptual_fingerprint": "A four-part practical framework for taking a mix from rough balance to streaming-ready master inside FREQ: build balance using mono and low-volume checks as the diagnostic that a mix will translate everywhere, add tonal character through an era-based console stage, run a full mastering chain, and land at a streaming-normalized loudness target (-14 LUFS) rather than competing on peak loudness. Positions Optimize Balance as both a starting point and a recovery reset throughout the workflow.",
+  "conceptual_fingerprint": "A four-part practical framework for taking a mix from rough balance to streaming-ready master inside FREQ: build balance using mono and low-volume checks as the diagnostic that a mix will translate everywhere, add tonal character through an era-based console stage, run a full mastering chain, and land at a platform-normalized loudness target rather than competing on peak loudness. Positions Optimize Balance as both a starting point and a recovery reset throughout the workflow.",
   "author": {
     "@type": "Person",
     "name": "Kushal Jaju"
@@ -73,7 +73,7 @@
       "name": "What LUFS should I master to for streaming?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most streaming platforms normalise to around -14 LUFS integrated loudness. Mastering toward that target means your song plays back at a consistent volume next to other tracks, without being turned down for being too loud or sounding weak for being too quiet. FREQ shows a live LUFS readout so you can hit the target precisely."
+        "text": "LUFS is the standard measurement of integrated loudness, defined by the ITU-R BS.1770 recommendation. Streaming platforms use it to normalise playback volume, but each platform sets its own target, roughly -14 LUFS on Spotify and YouTube, around -16 LUFS on Apple Music, and various points in between elsewhere, so there is no single universal number to master to. What matters is that your master is not pushed so loud that a platform turns it down, and not so quiet that it sounds weak next to other tracks. FREQ shows a live LUFS readout so you can see where your master actually lands and adjust with real numbers instead of guessing."
       }
     },
     {
@@ -115,7 +115,7 @@
   code { background: #f5f5f5; padding: 2px 5px; border-radius: 3px; }
   hr { border: none; border-top: 1px solid #e0e0e0; margin: 2em 0; }
   .cta { background: #f6f6f6; padding: 30px; border-radius: 10px; margin-top: 50px; }
-  
+
 .article-dateline{color:#777;font-size:0.9em;margin-top:-10px;margin-bottom:30px;}
 </style>
 </head>
@@ -218,7 +218,7 @@
 <strong>
      Collapsing your mix to mono forces every element to share the same space.
     </strong>
-    In stereo, you can hide a crowded mix by spreading things left and right. In mono, that escape route disappears. If an element vanishes or turns to mush in mono, it is being masked; two sounds are competing for the same frequency range.
+    In stereo, you can hide a crowded mix by spreading things left and right. In mono, that escape route disappears. If an element vanishes or turns to mush in mono, it is being masked; two sounds are competing for the same frequency range, a phenomenon rooted in how the ear's <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4227665/">auditory filters</a> group nearby frequencies together.
    </p>
 <p>
     FREQ
@@ -228,7 +228,7 @@
     Mix at Low Volume
    </h3>
 <p>
-    Loud is seductive and dishonest. At high volume, your ears exaggerate bass and treble, so almost any mix sounds big and exciting; this is just how human hearing works. Mix loud and you will make decisions that fall apart the moment someone plays the song quietly.
+    Loud is seductive and dishonest. At high volume, your ears exaggerate bass and treble, so almost any mix sounds big and exciting; this is a documented feature of hearing described by <a href="https://www.iso.org/standard/83117.html">equal-loudness contours</a>, which show that the ear's frequency response changes with playback level. Mix loud and you will make decisions that fall apart the moment someone plays the song quietly.
    </p>
 <p>
 <strong>
@@ -347,9 +347,9 @@
    </p>
 <p>
 <strong>
-     Most streaming platforms normalise playback to around -14 LUFS integrated loudness.
+     LUFS (Loudness Units Full Scale) is the standard measurement of integrated loudness, defined by the ITU-R BS.1770 recommendation.
     </strong>
-    LUFS measures perceived loudness over the whole song. If your master is much louder than the target, the platform turns it down, and over-compressing to "win" on loudness just makes your song quieter and flatter than a track that respected the target.
+    Streaming platforms use LUFS to normalise playback volume, but each platform sets its own target: Spotify and YouTube normalise around -14 LUFS, Apple Music sits closer to -16 LUFS, and other services fall in between, several also enforcing a true-peak ceiling. There is no single universal number every platform shares. If your master is much louder than a platform's target, that platform turns it down, and over-compressing to "win" on loudness just makes your song quieter and flatter than a track that respected the target.
    </p>
 <p>
     FREQ
@@ -357,7 +357,7 @@
     <strong>
      live LUFS readout
     </strong>
-    as you work, so you can master toward the streaming target instead of guessing. Watch the integrated LUFS value and use final gain to land near -14 LUFS for streaming release.
+    as you work, so you can see where your master actually lands and master with real numbers in front of you instead of guessing.
    </p>
 <p>
     Before you call it done, run the
@@ -417,9 +417,9 @@
      What LUFS should I master to for streaming?
     </strong>
 <br/>
-    Most streaming platforms normalise to around -14 LUFS integrated loudness. Mastering toward that target means your song plays back at a consistent volume next to other tracks, without being turned down for being too loud or sounding weak for being too quiet.
+    LUFS is the standard measurement of integrated loudness, defined by the ITU-R BS.1770 recommendation. Streaming platforms use it to normalise playback volume, but each platform sets its own target, roughly -14 LUFS on Spotify and YouTube, around -16 LUFS on Apple Music, and various points in between elsewhere, so there is no single universal number to master to. What matters is that your master is not pushed so loud that a platform turns it down, and not so quiet that it sounds weak next to other tracks.
     FREQ
-    shows a live LUFS readout so you can hit the target precisely.
+    shows a live LUFS readout so you can see where your master actually lands and adjust with real numbers instead of guessing.
    </p>
 <p>
 <strong>
