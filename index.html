@@ -120,6 +120,26 @@
             box-shadow: 0 8px 24px rgba(245, 12, 160, .35)
         }
 
+        .nr {
+            display: flex;
+            align-items: center;
+            gap: 28px
+        }
+
+        .nlink {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(240, 234, 223, .6);
+            text-decoration: none;
+            transition: color .25s
+        }
+
+        .nlink:hover {
+            color: var(--teal)
+        }
+
         /* HERO 3D FIELD */
         #hero {
             height: 100vh;
@@ -2054,7 +2074,11 @@
     <div id="curR"></div>
     <nav id="nav">
         <div class="logo">the<b>freq</b>.in</div>
-        <button class="nbtn" onclick="window.location.href='https://app.thefreq.in/login'">Shape your mix</button>
+        <div class="nr">
+            <a class="nlink" href="/sitemap.html">Learn</a>
+            <a class="nlink" href="/about.html">About</a>
+            <button class="nbtn" onclick="window.location.href='https://app.thefreq.in/login'">Shape your mix</button>
+        </div>
     </nav>
 
     <!-- HERO -->
