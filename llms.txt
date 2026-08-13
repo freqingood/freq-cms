@@ -6,6 +6,7 @@
 - [Get Started with FREQ](https://thefreq.in/blogs/get-started) — onboarding
 - [Mixing engine](https://app.thefreq.in/login)
 - [About / Author](https://thefreq.in/about.html) — Kushal Jaju, mixing & mastering engineer
+- [FAQ](https://thefreq.in/faq.html) — pricing/trial status, file formats, privacy, collaboration, export
 - [Full article index](https://thefreq.in/sitemap.html)
 - [Full content summaries](https://thefreq.in/llms-full.txt) — condensed content for all 108 articles, one file
 
