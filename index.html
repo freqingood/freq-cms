@@ -7,6 +7,7 @@
     <title>thefreq.in — Your music. Heard.</title>
     <meta name="description" content="FREQ is a mixing engine and psychoacoustics-driven learning resource. Shape your mix in a three-dimensional stage, and read 100+ articles on how the ear perceives sound, from masking and translation to arrangement and production.">
     <link rel="canonical" href="https://thefreq.in/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <!-- freq-og-tags -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="thefreq.in — Your music. Heard.">
@@ -18,6 +19,7 @@
     <meta name="twitter:description" content="A mixing engine that places every sound in a three-dimensional stage, backed by 100+ articles on the psychoacoustics of mixing and arrangement.">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FREQ","url":"https://thefreq.in","sameAs":["https://www.linkedin.com/in/kushal-jaju-5ba001200","https://soundbetter.com/profiles/65153-artist-with-side-effects"],"founder":{"@type":"Person","name":"Kushal Jaju"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"thefreq.in","url":"https://thefreq.in","publisher":{"@type":"Organization","name":"FREQ"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"No. Freq runs entirely in your browser. The processing itself happens on Freq's cloud engine, not your laptop, so there's nothing to download or update."}},{"@type":"Question","name":"How does a session actually start?","acceptedAnswer":{"@type":"Answer","text":"You upload your multitrack, and the Optimize Balance Wizard reads it and returns a starting balance. From there, you shape the mix yourself using depth and console assignment."}},{"@type":"Question","name":"What if I want to undo something or go back to an earlier version?","acceptedAnswer":{"@type":"Answer","text":"Every meaningful state in a session is saved automatically. You can restore any earlier version instantly."}},{"@type":"Question","name":"Can I work on a mix with someone else?","acceptedAnswer":{"@type":"Answer","text":"Yes. Collaborators see your full session, including depth positions, console choices, and notes."}},{"@type":"Question","name":"How do I share a mix for review?","acceptedAnswer":{"@type":"Answer","text":"You can stream it live to everyone reviewing at once. Once approved, there is a single official master to download."}},{"@type":"Question","name":"Why depth instead of just volume or EQ?","acceptedAnswer":{"@type":"Answer","text":"Depth adds a front-to-back axis to a mix, so elements can sit at different distances from the listener instead of competing for the same frequency and volume space."}},{"@type":"Question","name":"Will my mix still hold up on headphones, in a car, or on a phone speaker?","acceptedAnswer":{"@type":"Answer","text":"Freq is built around designing translation into the mix itself, rather than relying on mastering to fix it afterward."}}]}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
@@ -2079,6 +2081,70 @@
                 padding: 20px 24px
             }
         }
+
+        /* ── FAQ ── */
+        .faq {
+            padding: 120px 44px 100px;
+            max-width: 860px;
+            margin: 0 auto
+        }
+
+        .faq-head {
+            text-align: center;
+            margin-bottom: 56px
+        }
+
+        .faq-item {
+            padding: 26px 0;
+            border-bottom: .5px solid var(--dim)
+        }
+
+        .faq-q {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(19px, 2.4vw, 23px);
+            font-weight: 600;
+            color: #f7efe2;
+            margin-bottom: 10px
+        }
+
+        .faq-a {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 680px
+        }
+
+        .faq-a a {
+            color: var(--teal);
+            text-decoration: none;
+            border-bottom: .5px solid rgba(0, 206, 209, .35)
+        }
+
+        .faq-more {
+            text-align: center;
+            margin-top: 44px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .faq-more a {
+            color: var(--pink);
+            text-decoration: none
+        }
+
+        .faq-more a:hover {
+            text-decoration: underline
+        }
+
+        @media(max-width:900px) {
+            .faq {
+                padding: 80px 24px 60px
+            }
+        }
     </style>
 </head>
 
@@ -2310,6 +2376,44 @@
         <div class="wg" id="wg"></div>
     </section>
 
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="faq-head">
+            <div class="sk rv">Questions</div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.5vw,52px);font-weight:700;line-height:1.04;color:#f7efe2"
+                class="rv d1">Before you <em style="font-style:italic;color:var(--pink)">start.</em></h2>
+        </div>
+        <div class="faq-item rv">
+            <div class="faq-q">Do I need to install anything?</div>
+            <div class="faq-a">No. Freq runs entirely in your browser. The processing itself happens on Freq's cloud engine, not your laptop — nothing to download or update.</div>
+        </div>
+        <div class="faq-item rv">
+            <div class="faq-q">How does a session actually start?</div>
+            <div class="faq-a">You upload your multitrack, and the Optimize Balance Wizard reads it and returns a starting balance. From there, you shape the mix yourself using depth and console assignment.</div>
+        </div>
+        <div class="faq-item rv">
+            <div class="faq-q">What if I want to undo something or go back to an earlier version?</div>
+            <div class="faq-a">Every meaningful state in a session is saved automatically. You can restore any earlier version instantly, instead of guessing which file was "the good one."</div>
+        </div>
+        <div class="faq-item rv">
+            <div class="faq-q">Can I work on a mix with someone else — an engineer or a collaborator?</div>
+            <div class="faq-a">Yes. Whoever you're working with sees your full session — depth positions, console choices, and notes — not just a bounced file and a text message.</div>
+        </div>
+        <div class="faq-item rv">
+            <div class="faq-q">How do I share a mix for review?</div>
+            <div class="faq-a">Stream it live to everyone reviewing at once. Once it's approved, there's a single official master to download, instead of five files named "final" across different inboxes.</div>
+        </div>
+        <div class="faq-item rv">
+            <div class="faq-q">Why depth instead of just volume or EQ?</div>
+            <div class="faq-a">Turning something up or carving it with EQ can only do so much before you run out of room. Depth adds a front-to-back axis, so elements can sit at different distances from the listener instead of competing for the same space. We write about the reasoning in more detail in <a href="https://thefreq.in/blogs/depth-vs-volume" target="_blank" rel="noopener">Depth in Mixing Explained</a>.</div>
+        </div>
+        <div class="faq-item rv">
+            <div class="faq-q">Will my mix still hold up on headphones, in a car, or on a phone speaker?</div>
+            <div class="faq-a">Translation is one of the harder problems in mixing generally. Freq is built around treating it as something to design into the mix itself, not fix afterward at mastering — the same principle behind <a href="https://thefreq.in/blogs/how-does-a-mix-survive-different-playback-systems" target="_blank" rel="noopener">how a mix survives different playback systems</a>.</div>
+        </div>
+        <div class="faq-more rv">Want the reasoning behind decisions like these? <a href="https://thefreq.in/sitemap.html">Explore the full library →</a></div>
+    </section>
+
     <!-- SIGNUP -->
     <section class="signup" id="signup">
         <div class="sorb sorb1"></div>
@@ -2341,14 +2445,18 @@
         function fsz() { FW = fc.width = fc.offsetWidth; FH = fc.height = fc.offsetHeight; nodes = []; const N = 120; for (let i = 0; i < N; i++) { nodes.push({ x: (Math.random() - .5) * 2, y: (Math.random() - .5) * 2, z: Math.random(), c: Math.random() < .5 ? '245,12,160' : '0,206,209', ph: Math.random() * Math.PI * 2 }) } }
         window.addEventListener('resize', fsz); fsz();
         let ft = 0;
+        let heroVisible = true;
+        if ('IntersectionObserver' in window) { new IntersectionObserver(es => { heroVisible = es[0].isIntersecting }, { threshold: 0 }).observe(document.getElementById('hero')) }
         (function frame() {
-            fx.clearRect(0, 0, FW, FH); ft += .004;
-            const cx = FW / 2, cy = FH / 2;
-            const px = (gmx - .5) * .6, py = (gmy - .5) * .6;
-            const sorted = nodes.map(n => { const z = n.z; const scale = 1 / (0.4 + z * 1.6); const x = cx + (n.x + px * (1 - z)) * FW * .5 * scale; const y = cy + (n.y + py * (1 - z)) * FH * .5 * scale; const r = (1 - z) * 2.6 + .4; const a = (1 - z) * .7 + .08; return { x, y, r, a, c: n.c, z, pulse: .6 + .4 * Math.sin(ft * 2 + n.ph) } }).sort((p, q) => q.z - p.z);
-            // connections (near depth only)
-            for (let i = 0; i < sorted.length; i++) { for (let j = i + 1; j < sorted.length; j++) { const a = sorted[i], b = sorted[j]; if (Math.abs(a.z - b.z) > .12) continue; const d = Math.hypot(a.x - b.x, a.y - b.y); if (d < 90) { fx.beginPath(); fx.moveTo(a.x, a.y); fx.lineTo(b.x, b.y); fx.strokeStyle = `rgba(245,12,160,${(1 - d / 90) * .05 * a.a})`; fx.lineWidth = .5; fx.stroke() } } }
-            sorted.forEach(n => { fx.beginPath(); fx.arc(n.x, n.y, n.r * n.pulse, 0, Math.PI * 2); fx.fillStyle = `rgba(${n.c},${n.a * n.pulse})`; fx.shadowBlur = n.r * 4; fx.shadowColor = `rgba(${n.c},${n.a * .5})`; fx.fill(); fx.shadowBlur = 0 });
+            if (heroVisible) {
+                fx.clearRect(0, 0, FW, FH); ft += .004;
+                const cx = FW / 2, cy = FH / 2;
+                const px = (gmx - .5) * .6, py = (gmy - .5) * .6;
+                const sorted = nodes.map(n => { const z = n.z; const scale = 1 / (0.4 + z * 1.6); const x = cx + (n.x + px * (1 - z)) * FW * .5 * scale; const y = cy + (n.y + py * (1 - z)) * FH * .5 * scale; const r = (1 - z) * 2.6 + .4; const a = (1 - z) * .7 + .08; return { x, y, r, a, c: n.c, z, pulse: .6 + .4 * Math.sin(ft * 2 + n.ph) } }).sort((p, q) => q.z - p.z);
+                // connections (near depth only)
+                for (let i = 0; i < sorted.length; i++) { for (let j = i + 1; j < sorted.length; j++) { const a = sorted[i], b = sorted[j]; if (Math.abs(a.z - b.z) > .12) continue; const d = Math.hypot(a.x - b.x, a.y - b.y); if (d < 90) { fx.beginPath(); fx.moveTo(a.x, a.y); fx.lineTo(b.x, b.y); fx.strokeStyle = `rgba(245,12,160,${(1 - d / 90) * .05 * a.a})`; fx.lineWidth = .5; fx.stroke() } } }
+                sorted.forEach(n => { fx.beginPath(); fx.arc(n.x, n.y, n.r * n.pulse, 0, Math.PI * 2); fx.fillStyle = `rgba(${n.c},${n.a * n.pulse})`; fx.shadowBlur = n.r * 4; fx.shadowColor = `rgba(${n.c},${n.a * .5})`; fx.fill(); fx.shadowBlur = 0 });
+            }
             requestAnimationFrame(frame)
         })();
 
@@ -2378,23 +2486,27 @@
         function tsz() { TW = tf.width = tf.offsetWidth; TH = tf.height = tf.offsetHeight; tnodes = []; const N = 90; for (let i = 0; i < N; i++) { tnodes.push({ bx: (i / N - .5) * 1.9, zTarget: Math.random(), y0: (Math.random() - .5) * .3, c: Math.random() < .5 ? '245,12,160' : '0,206,209', ph: Math.random() * 6.28 }) } }
         window.addEventListener('resize', tsz); tsz();
         let tProg = 0, tt = 0;
+        let tpinVisible = true;
+        if ('IntersectionObserver' in window) { new IntersectionObserver(es => { tpinVisible = es[0].isIntersecting }, { threshold: 0 }).observe(document.getElementById('tpinWrap')) }
         (function tframe() {
-            tx.clearRect(0, 0, TW, TH); tt += .005;
-            const cx = TW / 2, cy = TH / 2;
-            const arr = tnodes.map(n => {
-                // flat state: all z~0.5, tight band, grey. 3D state: spread z, colored, wide
-                const z = 0.5 + (n.zTarget - 0.5) * tProg;
-                const scale = 1 / (0.4 + z * 1.6);
-                const spreadY = (n.y0 + (n.zTarget - .5) * .8 * tProg);
-                const x = cx + n.bx * TW * .5 * scale;
-                const y = cy + spreadY * TH * .8 * scale + Math.sin(tt * 2 + n.ph) * 4 * tProg;
-                const r = (1 - z) * 2.4 * tProg + (1 - tProg) * 1.2 + .4;
-                const baseA = (1 - z) * .7 + .1;
-                const a = baseA * (0.5 + 0.5 * tProg) + (1 - tProg) * .25;
-                const col = tProg < .15 ? '150,150,150' : n.c;
-                return { x, y, r, a, col, z };
-            }).sort((p, q) => q.z - p.z);
-            arr.forEach(n => { tx.beginPath(); tx.arc(n.x, n.y, n.r, 0, 6.29); tx.fillStyle = `rgba(${n.col},${n.a})`; tx.shadowBlur = n.r * 4 * tProg; tx.shadowColor = `rgba(${n.col},${n.a * .6})`; tx.fill(); tx.shadowBlur = 0 });
+            if (tpinVisible) {
+                tx.clearRect(0, 0, TW, TH); tt += .005;
+                const cx = TW / 2, cy = TH / 2;
+                const arr = tnodes.map(n => {
+                    // flat state: all z~0.5, tight band, grey. 3D state: spread z, colored, wide
+                    const z = 0.5 + (n.zTarget - 0.5) * tProg;
+                    const scale = 1 / (0.4 + z * 1.6);
+                    const spreadY = (n.y0 + (n.zTarget - .5) * .8 * tProg);
+                    const x = cx + n.bx * TW * .5 * scale;
+                    const y = cy + spreadY * TH * .8 * scale + Math.sin(tt * 2 + n.ph) * 4 * tProg;
+                    const r = (1 - z) * 2.4 * tProg + (1 - tProg) * 1.2 + .4;
+                    const baseA = (1 - z) * .7 + .1;
+                    const a = baseA * (0.5 + 0.5 * tProg) + (1 - tProg) * .25;
+                    const col = tProg < .15 ? '150,150,150' : n.c;
+                    return { x, y, r, a, col, z };
+                }).sort((p, q) => q.z - p.z);
+                arr.forEach(n => { tx.beginPath(); tx.arc(n.x, n.y, n.r, 0, 6.29); tx.fillStyle = `rgba(${n.col},${n.a})`; tx.shadowBlur = n.r * 4 * tProg; tx.shadowColor = `rgba(${n.col},${n.a * .6})`; tx.fill(); tx.shadowBlur = 0 });
+            }
             requestAnimationFrame(tframe)
         })();
 
@@ -2481,14 +2593,18 @@
         });
         // float animation for cloud bubbles
         let ct = 0;
+        let cloudVisible = true;
+        if ('IntersectionObserver' in window) { new IntersectionObserver(es => { cloudVisible = es[0].isIntersecting }, { threshold: 0 }).observe(document.getElementById('cloudStage')) }
         (function cloudFloat() {
-            ct += .008;
-            if (window.innerWidth > 900) {
-                document.querySelectorAll('.qbub').forEach(b => {
-                    const fx = parseFloat(b.dataset.fx), fy = parseFloat(b.dataset.fy), ph = parseFloat(b.dataset.ph);
-                    const ox = Math.sin(ct + ph) * 10 * fx, oy = Math.cos(ct * .8 + ph) * 10 * fy;
-                    if (b.classList.contains('in')) b.style.transform = `translate(${ox}px,${oy}px)`;
-                });
+            if (cloudVisible) {
+                ct += .008;
+                if (window.innerWidth > 900) {
+                    document.querySelectorAll('.qbub').forEach(b => {
+                        const fx = parseFloat(b.dataset.fx), fy = parseFloat(b.dataset.fy), ph = parseFloat(b.dataset.ph);
+                        const ox = Math.sin(ct + ph) * 10 * fx, oy = Math.cos(ct * .8 + ph) * 10 * fy;
+                        if (b.classList.contains('in')) b.style.transform = `translate(${ox}px,${oy}px)`;
+                    });
+                }
             }
             requestAnimationFrame(cloudFloat);
         })();
