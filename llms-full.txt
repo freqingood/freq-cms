@@ -1,8 +1,8 @@
 # thefreq.in — Full Content Index
 
-> Condensed summaries of all 106 articles on thefreq.in, for AI systems that want fuller context without crawling each page individually. Site is organized in two parts: the Arrange for the Ear arrangement series (read in sequence) and the foundational perception/mixing/career library.
+> Condensed summaries of all 108 articles on thefreq.in, for AI systems that want fuller context without crawling each page individually. Site is organized in two parts: the Arrange for the Ear arrangement series (read in sequence) and the foundational perception/mixing/career library.
 
-Author: Kushal Jaju, mixing & mastering engineer, Pune, India. https://thefreq.in/about.html
+Author: Kushal Jaju, mixing & mastering engineer, Satara, India. https://thefreq.in/about.html
 
 ---
 
@@ -413,9 +413,9 @@ Detail: Argues that kick and bass separation is achieved through distinct harmon
 
 ## What Is Emphasis and De-Emphasis EQ? The Secret Behind Smarter Saturation
 URL: https://thefreq.in/blogs/emphasis-de-emphasis-eq
-Published: 2026-08-04 | Updated: 2026-08-11 | ID: FREQ-013
+Published: 2026-08-04 | Updated: 2026-08-13 | ID: FREQ-013
 Summary: Learn how emphasis and de-emphasis EQ works, why engineers boost frequencies before saturation or compression, and how nonlinear DSP creates harmonics exactly where you want them without permanently changing tonal balance.
-Detail: Explains emphasis and de-emphasis EQ as a way of steering nonlinear processors like saturators and compressors, boosting a frequency before the nonlinear stage so it generates concentrated harmonic content there, then applying an equal opposite cut afterward to restore the original tonal balance while keeping the new harmonics. Frames this as controlling processing behavior itself rather than just tone, since the EQ move is temporary but its effect on the nonlinear processor is permanent.
+Detail: Explains emphasis and de-emphasis EQ as a way of steering nonlinear processors like saturators and compressors, boosting a frequency before the nonlinear stage so it generates concentrated harmonic content there, then applying an equal opposite cut afterward to restore the original tonal balance while keeping the new harmonics. Frames this as controlling processing behavior itself rather than just tone, since the EQ move is temporary but its effect on the nonlinear processor is permanent. Extended to trace the technique to its origin in compander architecture (compressor plus expander), the pre-emphasis/de-emphasis pairing used in noise-reduction and broadcast systems such as Dolby NR, dbx and FM broadcast, and to explain how a mismatch between the compression and expansion stages of a compander can introduce a controlled, frequency-specific saturation between the two, which mixing engineers can exploit deliberately rather than treat as a side effect to eliminate.
 
 ## Good Mixing Habits: How to Finish Mixes Faster With Fresh Ears
 URL: https://thefreq.in/blogs/good-mixing-habits
@@ -524,6 +524,18 @@ URL: https://thefreq.in/blogs/wideners-sound-hollow
 Published: 2026-08-04 | Updated: 2026-08-11 | ID: FREQ-066
 Summary: Learn why stereo wideners can make a mix sound hollow or phasey. Discover how comb filtering, the Haas Effect and mono compatibility influence perceived width and clarity.
 Detail: Explains that stereo wideners built on short delays create width by exploiting the same timing cues as the Haas Effect, but those same timing differences generate comb filtering that removes energy at predictable points across the spectrum. Argues stereo playback can mask this hollow, phasey quality because each ear receives different information, while summing to mono removes that disguise and exposes the full effect, making mono compatibility an essential check and favoring width built from arrangement and depth over aggressive widening processors.
+
+## What Is Traffic Control in Mixing?
+URL: https://thefreq.in/blogs/what-is-traffic-control-in-mixing
+Published: 2026-08-12 | Updated: 2026-08-12 | ID: FREQ-106
+Summary: A bass fights a guitar, a vocal fights a synth, a stereo drum bus feels crowded. The instinct is to EQ or compress the whole source. Traffic control asks a smaller question first: where is the perceptual collision actually happening, using orchestral seating as the model for organizing overlap instead of eliminating it.
+Detail: Standalone article following the closed 22-article Arrange for the Ear extension (FREQ-084 through FREQ-105), introducing 'traffic control' as a cross-cutting mixing/arrangement principle: process only the dimension (frequency, space, time, dynamics, register, density, articulation, depth, harmonic structure) in which a perceptual conflict actually exists, rather than defaulting to broad processing on an entire source. Uses orchestral seating and section layout as the governing analogy, reusing when-should-instruments-fuse-or-stay-independent.html's fusion-vs-independence distinction to explain when overlap should be preserved rather than removed. Cross-links how-does-spatial-position-give-an-instrument-its-identity.html for spatial identity, frequency-masking.html and temporal-masking.html for the underlying masking mechanisms being routed around. Extends FREQ's Mid/Side and dynamic-EQ mixing-side content into a general decision framework, and reasserts the overarching FREQ thesis (Composition/Arrangement/Production/Mixing/Mastering/Translation) as connective tissue back to the just-closed series.
+
+## Why Smooth the Source Before Parallel Saturation or Compression?
+URL: https://thefreq.in/blogs/smoothing-the-source-before-parallel-nonlinear-processing
+Published: 2026-08-13 | Updated: 2026-08-13 | ID: FREQ-107
+Summary: Nonlinear plugins and hardware react to whatever peaks reach them, which makes parallel blends inconsistent. Gently clipping or smoothing the source first gives saturators, compressors and even nonlinear reverbs a predictable signal to react to, and opens the door to shaping that reaction with emphasis and de-emphasis EQ.
+Detail: Companion article to emphasis-de-emphasis-eq.html (FREQ-013), addressing a practical problem in parallel processing: nonlinear plugins and hardware (saturators, compressors, nonlinear reverbs) react to the loudest peaks that reach them, so an unpredictable input produces an inconsistent parallel blend. Proposes gently clipping or otherwise smoothing the source before it hits the nonlinear parallel path so the processor reacts consistently take after take, then explicitly sequences this with emphasis/de-emphasis EQ from FREQ-013, arguing that once the nonlinear stage's baseline reaction is predictable, emphasis/de-emphasis becomes a reliable way to steer where within that predictable reaction the saturation or compression concentrates. Extends the same smoothing logic to nonlinear reverbs, framing a stable input as what allows a reverb's nonlinear response to be tailored to sit in a track's spectral or temporal gaps rather than react unpredictably. Notes that a spectral dynamics plugin can replace a limiter or clipper as the smoothing stage for a different sonic result, without changing the underlying principle. Cross-links transients-matter.html for why transient inconsistency matters and mixing-order-matters.html for the broader sequencing philosophy.
 
 # Cluster: Pre-Mix Prep & Tracking
 https://thefreq.in/topics/pre-mix-prep-and-tracking.html

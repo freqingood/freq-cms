@@ -7,7 +7,7 @@
 - [Mixing engine](https://app.thefreq.in/login)
 - [About / Author](https://thefreq.in/about.html) — Kushal Jaju, mixing & mastering engineer
 - [Full article index](https://thefreq.in/sitemap.html)
-- [Full content summaries](https://thefreq.in/llms-full.txt) — condensed content for all 106 articles, one file
+- [Full content summaries](https://thefreq.in/llms-full.txt) — condensed content for all 108 articles, one file
 
 ## Arrange for the Ear (arrangement series, read in order)
 
@@ -125,6 +125,8 @@ Hub: https://thefreq.in/topics/mixing-technique.html
 - [Why Does 250 Hz Matter in Mixing?](https://thefreq.in/blogs/why-250hz-matters): Learn why 250 Hz is one of the most influential frequency regions in mixing, how it relates to critical bands and upward spread of masking, and why cleaning the low mids improves clarity.
 - [Why Alternate Mixes Matter as a Deliverable](https://thefreq.in/blogs/why-alternate-mixes-matter): Alternate mixes are more than extra exports. Learn why instrumental, vocal, performance, clean, and other mix versions matter and how professional delivery protects the music.
 - [Why Do Wideners Sound Hollow?](https://thefreq.in/blogs/wideners-sound-hollow): Learn why stereo wideners can make a mix sound hollow or phasey. Discover how comb filtering, the Haas Effect and mono compatibility influence perceived width and clarity.
+- [What Is Traffic Control in Mixing?](https://thefreq.in/blogs/what-is-traffic-control-in-mixing): A bass fights a guitar, a vocal fights a synth, a stereo drum bus feels crowded. The instinct is to EQ or compress the whole source. Traffic control asks a smaller question first: where is the perceptual collision actually happening, using orchestral seating as the model for organizing overlap instead of eliminating it.
+- [Why Smooth the Source Before Parallel Saturation or Compression?](https://thefreq.in/blogs/smoothing-the-source-before-parallel-nonlinear-processing): Nonlinear plugins and hardware react to whatever peaks reach them, which makes parallel blends inconsistent. Gently clipping or smoothing the source first gives saturators, compressors and even nonlinear reverbs a predictable signal to react to, and opens the door to shaping that reaction with emphasis and de-emphasis EQ.
 
 ### Pre-Mix Prep & Tracking
 Hub: https://thefreq.in/topics/pre-mix-prep-and-tracking.html
