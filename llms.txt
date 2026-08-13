@@ -8,7 +8,7 @@
 - [About / Author](https://thefreq.in/about.html) — Kushal Jaju, mixing & mastering engineer
 - [FAQ](https://thefreq.in/faq.html) — pricing/trial status, file formats, privacy, collaboration, export
 - [Full article index](https://thefreq.in/sitemap.html)
-- [Full content summaries](https://thefreq.in/llms-full.txt) — condensed content for all 108 articles, one file
+- [Full content summaries](https://thefreq.in/llms-full.txt) — condensed content for all 109 articles, one file
 
 ## Arrange for the Ear (arrangement series, read in order)
 
@@ -128,6 +128,7 @@ Hub: https://thefreq.in/topics/mixing-technique.html
 - [Why Do Wideners Sound Hollow?](https://thefreq.in/blogs/wideners-sound-hollow): Learn why stereo wideners can make a mix sound hollow or phasey. Discover how comb filtering, the Haas Effect and mono compatibility influence perceived width and clarity.
 - [What Is Traffic Control in Mixing?](https://thefreq.in/blogs/what-is-traffic-control-in-mixing): A bass fights a guitar, a vocal fights a synth, a stereo drum bus feels crowded. The instinct is to EQ or compress the whole source. Traffic control asks a smaller question first: where is the perceptual collision actually happening, using orchestral seating as the model for organizing overlap instead of eliminating it.
 - [Why Smooth the Source Before Parallel Saturation or Compression?](https://thefreq.in/blogs/smoothing-the-source-before-parallel-nonlinear-processing): Nonlinear plugins and hardware react to whatever peaks reach them, which makes parallel blends inconsistent. Gently clipping or smoothing the source first gives saturators, compressors and even nonlinear reverbs a predictable signal to react to, and opens the door to shaping that reaction with emphasis and de-emphasis EQ.
+- [When Did Clipping Become a Problem?](https://thefreq.in/blogs/when-did-clipping-become-a-problem): Clipping is often taught as a digital-era problem, but overload has existed as long as recording systems have had finite headroom. A history of tape saturation, hard clipping, full scale, and how clipping became a deliberate production tool rather than only an accident.
 
 ### Pre-Mix Prep & Tracking
 Hub: https://thefreq.in/topics/pre-mix-prep-and-tracking.html
