@@ -1,6 +1,6 @@
 # thefreq.in — Full Content Index
 
-> Condensed summaries of all 108 articles on thefreq.in, for AI systems that want fuller context without crawling each page individually. Site is organized in two parts: the Arrange for the Ear arrangement series (read in sequence) and the foundational perception/mixing/career library.
+> Condensed summaries of all 116 articles on thefreq.in, for AI systems that want fuller context without crawling each page individually. Site is organized in two parts: the Arrange for the Ear arrangement series (read in sequence) and the foundational perception/mixing/career library.
 
 Author: Kushal Jaju, mixing & mastering engineer, Satara, India. https://thefreq.in/about.html
 
@@ -704,6 +704,51 @@ URL: https://thefreq.in/blogs/slow-days-as-training
 Published: 2026-08-09 | Updated: 2026-08-11 | ID: FREQ-054
 Summary: Slow days are an opportunity to train as a mixer. Learn how to use time without client work to experiment with plugins, techniques, workflows, and new approaches.
 Detail: Reframes days without client work as deliberate practice rather than downtime, comparing it to athletic training: client sessions are competition, slow days are where a mixer can safely fail. Gives concrete training exercises, learning unused plugins, solving familiar problems with unfamiliar tools, revisiting old mixes, and deliberately targeting avoided skills, as ways to expand a mixer's vocabulary before a project demands it.
+
+# Cluster: Sound Like a Band
+https://thefreq.in/topics/sound-like-a-band.html
+
+## Chasing The Beatles' Sound: Recreating the 1966-67 Mixing Constraints
+URL: https://thefreq.in/blogs/how-to-sound-like-the-beatles
+Published: 2026-08-14 | Updated: 2026-08-14 | ID: FREQ-109
+Summary: How to chase The Beatles' 1966-67 sound without claiming to recreate it exactly. A mixing framework built on mono-derived sources, decisive panning, simple dynamics and removing modern stereo tools.
+Detail: Opens FREQ's Sound Like a Band cluster, which looks at how specific, well-known records and production eras got their sound and how to chase that character in a modern mix without claiming to reproduce it exactly. Argues that a Beatles-inspired mix comes mainly from removing modern mixing options rather than adding a vintage plugin: collapsing sources to mono and rebuilding stereo through decisive panning instead of stereo widening, using single-band dynamics instead of multiband or lookahead processing, avoiding noise gates and modern automation, and solving separation through arrangement, register, level and panning before EQ. Cites the historical role of ADT (built at Abbey Road in 1966) and the mono mix as the primary version of Revolver-era releases, then closes with a depth-hierarchy reference table so the constraints can be applied to any modern multitrack.
+
+## Chasing Pink Floyd's Sound: Recreating the 1972-75 Sonic Constraints
+URL: https://thefreq.in/blogs/how-to-sound-like-pink-floyd
+Published: 2026-08-14 | Updated: 2026-08-14 | ID: FREQ-110
+Summary: How to chase Pink Floyd's 1972-75 sound without claiming to recreate it exactly. A mixing framework built on deliberate depth, strategic stereo, tape delay, plate reverb and restrained, non-modern dynamics.
+Detail: Continues FREQ's Sound Like a Band cluster by contrasting the Pink Floyd approach with the Beatles profile: instead of removing options through severe track limitations, the 1972-75 era used its available technology, EMT plate reverb, tape delay, Fairchild-style limiting, deliberate stereo and quadraphonic-era placement, to build front-to-back depth, movement and scale rather than modern hyper-control. Treats depth as a dynamic parameter that moves through a song rather than a fixed setting, distinguishes the approach from a "wall of sound" by arguing scale comes from contrast and space rather than density, and closes with a depth-hierarchy reference table. Cites Alan Parsons' account of the Dark Side of the Moon sessions (Fairchild limiters, Kepex gates, 16-track Studer A80, tape-based delay) for its historical claims.
+
+## Chasing Michael Jackson's Sound: Recreating the Thriller-Era Sonic Constraints
+URL: https://thefreq.in/blogs/how-to-sound-like-michael-jackson
+Published: 2026-08-14 | Updated: 2026-08-14 | ID: FREQ-111
+Summary: How to chase Michael Jackson's Off the Wall / Thriller-era sound without claiming to recreate it exactly. A mixing framework built on transient preservation, fader rides over compression, a centred low end and forward vocal hierarchy.
+Detail: Continues FREQ's Sound Like a Band cluster by contrasting the Off the Wall/Thriller-era approach, associated with engineer Bruce Swedien, with the Beatles and Pink Floyd profiles: precision and transient preservation achieved mainly through manual fader rides and selective, light hardware compression (often 1-2dB) rather than heavy mix-bus compression, with an analog signal path (tape, console, EMT 250 reverb) still coloring the sound. Frames the lead vocal as depth 1 at all times, the low end as centred and effectively mono, and effects as subordinate to the source rather than compositional in their own right, distinguishing this from Pink Floyd's environment-as-composition approach. Cites Bruce Swedien interviews on his compression philosophy and use of the EMT 250, and closes with a depth-hierarchy reference table.
+
+## Chasing Red Hot Chili Peppers' Sound: The Blood Sugar Sex Magik Constraints
+URL: https://thefreq.in/blogs/how-to-sound-like-red-hot-chili-peppers
+Published: 2026-08-14 | Updated: 2026-08-14 | ID: FREQ-112
+Summary: How to chase Red Hot Chili Peppers' early-90s sound without claiming to recreate it exactly. A mixing framework built on mono-centric placement, a forward bass, dry ambience and performance over processing.
+Detail: Anchors to 1991's Blood Sugar Sex Magik (Rick Rubin producing, Brendan O'Brien engineering and mixing at The Mansion and Record Plant) as a mono-centric, bass-forward, dry, performance-led counterpoint to the Beatles, Pink Floyd and Michael Jackson profiles. Uses engineer Jim Scott's more explicitly documented Californication approach (1999), mono by default, no added reverb, fader rides in place of heavy compression, minimal re-EQ of already-good drums, as a transparent extension of the same Rubin-era aesthetic while explicitly distinguishing it from Californication's later, more processed and heavily mastered sound rather than treating the two records as interchangeable. Argues the fingerprint comes from restraint, not manufacturing excitement with processing when the performance already has it, and closes with a depth-hierarchy reference table where bass and vocal share top priority alongside kick, snare and guitar.
+
+## Chasing Radiohead's Sound: The OK Computer Sonic Constraints
+URL: https://thefreq.in/blogs/how-to-sound-like-radiohead
+Published: 2026-08-14 | Updated: 2026-08-14 | ID: FREQ-113
+Summary: How to chase Radiohead's OK Computer-era sound without claiming to recreate it exactly. A mixing framework built on an analog-first signal path, early digital experimentation and deliberate depth contrast.
+Detail: Anchors to Radiohead's 1995-97, OK Computer era as a fingerprint built on a specific technological boundary: analog multitrack and consoles alongside early digital tools (Pro Tools, samplers, digital reverb and delay), documented through producer Nigel Godrich's own 1997 equipment list. Frames the profile as analog-first with early digital intervention rather than either pure analog limitation (the Beatles) or modern digital perfection, treats instrument overlap and texture as identity rather than a problem to sterilize, allows aggressive hardware compression and gating unlike the Michael Jackson profile, and treats extreme depth contrast, a dry vocal at depth 1 beside a reverb tail at depth 8, as the central dramatic device. Closes with a depth-hierarchy reference table built around contrast rather than a fixed hierarchy.
+
+## Chasing Nirvana's Sound: The Nevermind Sonic Constraints
+URL: https://thefreq.in/blogs/how-to-sound-like-nirvana
+Published: 2026-08-14 | Updated: 2026-08-14 | ID: FREQ-114
+Summary: How to chase Nirvana's Nevermind-era sound without claiming to recreate it exactly. A mixing framework built on real double-tracked guitars, a stable centre, powerful drums and preserved quiet-to-loud dynamics.
+Detail: Anchors to the released 1991 Andy Wallace mixes of Nevermind, recorded at Sound City through a Neve console onto 24-track analog tape, as raw performance inside a highly controlled mix rather than either untreated lo-fi or modern-flattened rock. Argues the record's width comes from genuine double-tracked guitar and vocal performances, documented through Butch Vig's account of persuading Kurt Cobain to double-track by invoking John Lennon, rather than stereo widening, and that drum size came partly from Wallace triggering samples into a reverb unit for room ambience. Frames substantial, source-specific compression as appropriate here in a way it wasn't for the Beatles or RHCP profiles, provided the quiet-verse-to-loud-chorus macro-dynamic survives, and closes with a depth-hierarchy reference table centred on a vocal/drums/guitar front wall over a bass foundation.
+
+## Chasing Led Zeppelin's Sound: The Led Zeppelin IV Sonic Constraints
+URL: https://thefreq.in/blogs/how-to-sound-like-led-zeppelin
+Published: 2026-08-14 | Updated: 2026-08-14 | ID: FREQ-115
+Summary: How to chase Led Zeppelin's IV-era sound without claiming to recreate it exactly. A mixing framework built on room-as-instrument recording, a mono-first mindset and restraint instead of processing.
+Detail: Closes out FREQ's initial Sound Like a Band cluster by anchoring to 1970-71, especially Led Zeppelin IV, as a fingerprint built on restraint rather than processing: scale comes from performance, room, microphone placement and analog tape rather than dense layering or heavy mix treatment. Grounds the room-as-instrument argument in the documented recording of 'When the Levee Breaks' at Headley Grange, where engineer Andy Johns captured John Bonham's kit from microphones down a stairwell using the Rolling Stones Mobile Studio. Argues for a mono-first mindset where stereo comes from mic placement and natural room information rather than modern widening, for allowing instrument bleed and interaction rather than surgical isolation, and for treating tape and analog signal-path coloration as legitimate dynamics processing distinct from modern digital architecture. Closes with a depth-hierarchy reference table organized around one physical event rather than isolated studio objects.
 
 ## Get Started with FREQ
 URL: https://thefreq.in/blogs/get-started

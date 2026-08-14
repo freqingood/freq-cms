@@ -762,6 +762,54 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://thefreq.in/topics/sound-like-a-band.html</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://thefreq.in/blogs/how-to-sound-like-the-beatles</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thefreq.in/blogs/how-to-sound-like-pink-floyd</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thefreq.in/blogs/how-to-sound-like-michael-jackson</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thefreq.in/blogs/how-to-sound-like-red-hot-chili-peppers</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thefreq.in/blogs/how-to-sound-like-radiohead</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thefreq.in/blogs/how-to-sound-like-nirvana</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thefreq.in/blogs/how-to-sound-like-led-zeppelin</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://thefreq.in/faq.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

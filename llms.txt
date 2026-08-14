@@ -8,7 +8,7 @@
 - [About / Author](https://thefreq.in/about.html) — Kushal Jaju, mixing & mastering engineer
 - [FAQ](https://thefreq.in/faq.html) — pricing/trial status, file formats, privacy, collaboration, export
 - [Full article index](https://thefreq.in/sitemap.html)
-- [Full content summaries](https://thefreq.in/llms-full.txt) — condensed content for all 109 articles, one file
+- [Full content summaries](https://thefreq.in/llms-full.txt) — condensed content for all 116 articles, one file
 
 ## Arrange for the Ear (arrangement series, read in order)
 
@@ -166,3 +166,13 @@ Hub: https://thefreq.in/topics/mindset-and-practice.html
 - [Why Songs From Before Modern Mixing Tools Still Sound Great](https://thefreq.in/blogs/pre-modern-mixing-records): What can modern mixing engineers learn from records made before today's editing and processing tools? Discover why older recordings remain valuable references for balance, performance, arrangement and feel.
 - [Should You Work in Teams as a Mixing Engineer?](https://thefreq.in/blogs/should-you-work-in-teams): Should mixing engineers work alone or in teams? Explore the advantages of collaboration, when specialists help, and how to build a team without losing your creative identity.
 - [What Should You Do on Days When You Have No Mixing Work?](https://thefreq.in/blogs/slow-days-as-training): Slow days are an opportunity to train as a mixer. Learn how to use time without client work to experiment with plugins, techniques, workflows, and new approaches.
+
+### Sound Like a Band
+Hub: https://thefreq.in/topics/sound-like-a-band.html
+- [Chasing The Beatles' Sound: Recreating the 1966-67 Mixing Constraints](https://thefreq.in/blogs/how-to-sound-like-the-beatles): How to chase The Beatles' 1966-67 sound without claiming to recreate it exactly. Opens FREQ's Sound Like a Band cluster with a mixing framework built on mono-derived sources, decisive panning, simple dynamics and removing modern stereo tools.
+- [Chasing Pink Floyd's Sound: Recreating the 1972-75 Sonic Constraints](https://thefreq.in/blogs/how-to-sound-like-pink-floyd): How to chase Pink Floyd's 1972-75 sound without claiming to recreate it exactly. Continues FREQ's Sound Like a Band cluster with a mixing framework built on deliberate depth, strategic stereo, tape delay, plate reverb and restrained, non-modern dynamics.
+- [Chasing Michael Jackson's Sound: Recreating the Thriller-Era Sonic Constraints](https://thefreq.in/blogs/how-to-sound-like-michael-jackson): How to chase Michael Jackson's Off the Wall / Thriller-era sound without claiming to recreate it exactly. Continues FREQ's Sound Like a Band cluster with a mixing framework built on transient preservation, fader rides over compression, a centred low end and forward vocal hierarchy.
+- [Chasing Red Hot Chili Peppers' Sound: The Blood Sugar Sex Magik Constraints](https://thefreq.in/blogs/how-to-sound-like-red-hot-chili-peppers): How to chase Red Hot Chili Peppers' early-90s sound without claiming to recreate it exactly. Continues FREQ's Sound Like a Band cluster with a mixing framework built on mono-centric placement, a forward bass, dry ambience and performance over processing.
+- [Chasing Radiohead's Sound: The OK Computer Sonic Constraints](https://thefreq.in/blogs/how-to-sound-like-radiohead): How to chase Radiohead's OK Computer-era sound without claiming to recreate it exactly. Continues FREQ's Sound Like a Band cluster with a mixing framework built on an analog-first signal path, early digital experimentation and deliberate depth contrast.
+- [Chasing Nirvana's Sound: The Nevermind Sonic Constraints](https://thefreq.in/blogs/how-to-sound-like-nirvana): How to chase Nirvana's Nevermind-era sound without claiming to recreate it exactly. Continues FREQ's Sound Like a Band cluster with a mixing framework built on real double-tracked guitars, a stable centre, powerful drums and preserved quiet-to-loud dynamics.
+- [Chasing Led Zeppelin's Sound: The Led Zeppelin IV Sonic Constraints](https://thefreq.in/blogs/how-to-sound-like-led-zeppelin): How to chase Led Zeppelin's IV-era sound without claiming to recreate it exactly. Continues FREQ's Sound Like a Band cluster with a mixing framework built on room-as-instrument recording, a mono-first mindset and restraint instead of processing.
