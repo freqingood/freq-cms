@@ -2232,7 +2232,21 @@
         </div>
     </section>
 
-    <!-- FG-GAL START -->
+<!--
+  Freq Mix Gallery — paste-in section for https://thefreq.in (freq-cms/index.html)
+
+  Copy everything from FG-GAL START to FG-GAL END.
+  Insert it in the <body>, after the #game section and before the "pain" section.
+
+  Uses fonts already on that page (Cormorant Garamond, Space Mono, DM Sans).
+  All CSS is scoped to #fg-gal so it will not restyle the rest of the landing page.
+
+  Live mixes: public Firestore collection `showcase_mixes` on project `medusa-aws`.
+  If that fetch fails, the fallback cards still render (audio URLs may 404 until
+  real files are published). Override by setting window.FREQ_SHOWCASE_MIXES
+  to an array of mix objects before this script runs.
+-->
+<!-- FG-GAL START -->
 <style>
   #fg-gal {
     --fg-pink: var(--pink, #F50CA0);
@@ -2245,7 +2259,10 @@
     --fg-dim: var(--dim, rgba(240, 234, 223, .22));
     --fg-line: rgba(255, 255, 255, .1);
     position: relative;
+    z-index: 0;
+    isolation: isolate;
     overflow: hidden;
+    overflow: clip;
     background: var(--fg-bg);
     color: var(--fg-text);
     padding: 88px 24px 80px;
@@ -2329,7 +2346,8 @@
     flex: 1 1 auto;
     width: 100%;
     max-width: 920px;
-    touch-action: none;
+    overflow: hidden;
+    touch-action: pan-y;
     user-select: none;
     cursor: grab;
     perspective: 1100px;
@@ -2341,11 +2359,13 @@
     left: 50%; top: 50%;
     transform-style: preserve-3d;
     will-change: transform;
+    pointer-events: none;
   }
   .fg-disc {
     position: absolute;
     left: 50%; top: 50%;
     transform-style: preserve-3d;
+    pointer-events: none;
   }
   .fg-card {
     display: block;
@@ -2954,8 +2974,10 @@
   var dims = { w: 168, h: 215, r: 230 };
   var inView = false;
   var dragging = false;
+  var pendingDrag = false;
   var moved = false;
   var dragStartX = 0;
+  var dragStartY = 0;
   var dragStartRot = 0;
   var wheelLock = 0;
   var animId = 0;
@@ -2989,7 +3011,8 @@
       blur = (abs / 90) * 5;
       bright = 1 - (abs / 90) * 0.5;
       el.style.opacity = String(clamp(1 - Math.abs(rel) / 110, 0, 1));
-      el.style.zIndex = String(Math.round(400 - Math.abs(rel)));
+      el.style.zIndex = String(Math.round(20 - Math.abs(rel) / 20));
+      el.style.pointerEvents = Math.abs(rel) < 55 ? 'auto' : 'none';
       card = el.querySelector('.fg-card');
       if (card) {
         card.style.transform = 'scale(' + scale.toFixed(4) + ')';
@@ -3323,7 +3346,7 @@
         '<div class="fg-scene" id="fgScene"></div>' +
         '<button type="button" class="fg-navbtn" id="fgNext" aria-label="Next mix">›</button>' +
       '</div>' +
-      '<p class="fg-hint"><span>Drag</span><b>/</b><span>Scroll</span><b>/</b><span>← →</span><b>/</b><span>Tap a card</span></p>' +
+      '<p class="fg-hint"><span>Drag sideways</span><b>/</b><span>← →</span><b>/</b><span>Tap a card</span></p>' +
       '<div class="fg-player" id="fgPlayer"></div>';
 
     scene = document.getElementById('fgScene');
@@ -3367,20 +3390,35 @@
     document.getElementById('fgNext').addEventListener('click', function () { setIndex(index + 1); });
 
     scene.addEventListener('pointerdown', function (e) {
-      dragging = true; moved = false;
-      dragStartX = e.clientX; dragStartRot = rot;
-      stopAnim();
-      scene.classList.add('is-drag');
-      scene.setPointerCapture(e.pointerId);
+      pendingDrag = true;
+      dragging = false;
+      moved = false;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      dragStartRot = rot;
     });
     scene.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
+      if (!pendingDrag && !dragging) return;
       var dx = e.clientX - dragStartX;
+      var dy = e.clientY - dragStartY;
+      if (!dragging) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        if (Math.abs(dy) >= Math.abs(dx)) {
+          pendingDrag = false;
+          return;
+        }
+        dragging = true;
+        pendingDrag = false;
+        stopAnim();
+        scene.classList.add('is-drag');
+        if (scene.setPointerCapture) scene.setPointerCapture(e.pointerId);
+      }
       if (Math.abs(dx) > 4) moved = true;
       rot = dragStartRot + dx * (step / 120);
       applyRot();
     });
     function endDrag() {
+      pendingDrag = false;
       if (!dragging) return;
       dragging = false;
       scene.classList.remove('is-drag');
@@ -3391,12 +3429,13 @@
     scene.addEventListener('pointerup', endDrag);
     scene.addEventListener('pointercancel', endDrag);
     scene.addEventListener('wheel', function (e) {
+      var absX = Math.abs(e.deltaX), absY = Math.abs(e.deltaY);
+      if (absX <= absY) return;
       e.preventDefault();
       var now = Date.now();
-      var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) < 4 || now - wheelLock < 110) return;
+      if (absX < 4 || now - wheelLock < 110) return;
       wheelLock = now;
-      setIndex(index + (delta > 0 ? 1 : -1));
+      setIndex(index + (e.deltaX > 0 ? 1 : -1));
     }, { passive: false });
   }
 
@@ -3406,8 +3445,8 @@
     if (!inView) return;
     var t = e.target;
     if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return;
-    if (e.key === 'ArrowLeft') { e.preventDefault(); setIndex(index - 1); }
-    else if (e.key === 'ArrowRight') { e.preventDefault(); setIndex(index + 1); }
+    if (e.key === 'ArrowLeft' && document.activeElement === root) { e.preventDefault(); setIndex(index - 1); }
+    else if (e.key === 'ArrowRight' && document.activeElement === root) { e.preventDefault(); setIndex(index + 1); }
     else if (e.code === 'Space' && document.activeElement === root) {
       e.preventDefault();
       if (player && player.togglePlay) player.togglePlay();
@@ -3437,6 +3476,7 @@
 })();
 </script>
 <!-- FG-GAL END -->
+
 
     <!-- PAIN -->
     <section class="pain">
