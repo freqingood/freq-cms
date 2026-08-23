@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Kushal Jaju — thefreq.in</title>
-<meta name="description" content="Kushal Jaju built FREQ, an algorithm-based, depth-first mixing and mastering architecture, to close the gap between loving a craft and being able to afford to practice it.">
+<meta name="description" content="Someone who has actually mixed music, built studios, and lived the problem. The story behind Kushal Jaju and FREQ.">
 <link rel="canonical" href="https://thefreq.in/about.html">
 <!-- freq-og-tags -->
 <meta property="og:type" content="profile">
 <meta property="og:title" content="About Kushal Jaju — thefreq.in">
-<meta property="og:description" content="Kushal Jaju built FREQ, an algorithm-based, depth-first mixing and mastering architecture, to close the gap between loving a craft and being able to afford to practice it.">
+<meta property="og:description" content="Someone who has actually mixed music, built studios, and lived the problem. The story behind Kushal Jaju and FREQ.">
 <meta property="og:url" content="https://thefreq.in/about.html">
 <meta property="og:site_name" content="thefreq.in">
 <meta property="og:image" content="https://thefreq.in/og-image.png">
@@ -17,57 +17,205 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="About Kushal Jaju — thefreq.in">
-<meta name="twitter:description" content="Kushal Jaju built FREQ, an algorithm-based, depth-first mixing and mastering architecture, to close the gap between loving a craft and being able to afford to practice it.">
+<meta name="twitter:description" content="Someone who has actually mixed music, built studios, and lived the problem. The story behind Kushal Jaju and FREQ.">
 <meta name="twitter:image" content="https://thefreq.in/og-image.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "mainEntity": {"@type": "Person", "name": "Kushal Jaju", "jobTitle": "Mixing & Mastering Engineer", "worksFor": {"@type": "Organization", "name": "FREQ", "url": "https://thefreq.in"}, "url": "https://thefreq.in/about.html", "sameAs": ["https://www.linkedin.com/in/kushal-jaju-5ba001200", "https://soundbetter.com/profiles/65153-artist-with-side-effects"], "address": {"@type": "PostalAddress", "addressLocality": "Satara", "addressRegion": "Maharashtra", "addressCountry": "IN"}}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "mainEntity": {"@type": "Person", "name": "Kushal Jaju", "jobTitle": "Founder, Mixing & Mastering Engineer", "worksFor": {"@type": "Organization", "name": "FREQ", "url": "https://thefreq.in"}, "url": "https://thefreq.in/about.html", "sameAs": ["https://www.linkedin.com/in/kushal-jaju-5ba001200", "https://soundbetter.com/profiles/65153-artist-with-side-effects"], "address": {"@type": "PostalAddress", "addressLocality": "Satara", "addressRegion": "Maharashtra", "addressCountry": "IN"}}}</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<style>
+/* Page-local dark reskin: same custom properties the shared stylesheet
+   reads from, just repointed to the landing page's palette. Everything
+   downstream (header, footer, links, blockquote, cta box) inherits it
+   automatically, nothing else on the site is touched. */
+:root {
+  --paper: #050505;
+  --paper-2: #0c0c0c;
+  --ink: #f0eadf;
+  --ink-2: rgba(240,234,223,.78);
+  --ink-3: rgba(240,234,223,.55);
+  --rule: rgba(240,234,223,.14);
+}
+
+.ab-label { display: block; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
+.ab-statement { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(22px, 3.4vw, 30px); line-height: 1.28; margin: 0 0 16px; }
+
+.ab-hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: start; margin: 8px 0 60px; }
+.ab-photo { aspect-ratio: 3 / 4; border: 1px solid var(--rule); border-radius: 16px; background: linear-gradient(160deg, var(--paper-2), rgba(245,12,160,.08)); display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.ab-name { margin-top: 24px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--ink-3); line-height: 1.9; }
+.ab-name strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: 0; text-transform: none; }
+
+.ab-transition { text-align: center; margin: 64px 0; padding: 44px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.ab-transition .ab-statement { max-width: 640px; margin: 0 auto 20px; }
+.ab-steps { display: flex; flex-direction: column; gap: 3px; color: var(--ink-3); font-size: 14.5px; max-width: 420px; margin: 0 auto; }
+
+.ab-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: clamp(22px, 3.6vw, 32px); color: var(--pink); line-height: 1.35; margin: 18px 0 26px; }
+
+.ab-proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 22px 0 8px; }
+.ab-proof-card { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 14px; padding: 24px; }
+.ab-proof-card p { margin-bottom: .9em; font-size: 14.5px; }
+.ab-proof-card .q { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 21px; color: var(--teal); margin: 12px 0 0; }
+
+.ab-fragments { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 18px 0 24px; }
+.ab-fragments span { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; padding: 7px 14px; border: 1px solid var(--rule); border-radius: 20px; color: var(--ink-3); }
+
+.ab-highlight { margin: 28px 0; padding: 22px 24px; border-left: 2px solid var(--teal); background: var(--paper-2); border-radius: 0 12px 12px 0; }
+.ab-highlight p:first-child { margin: 0 0 6px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 19px; color: var(--ink); }
+.ab-highlight p:last-child { margin: 0; color: var(--ink-3); font-size: 15px; }
+
+.ab-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 26px 0 44px; }
+.ab-card { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 14px; padding: 26px 22px; }
+.ab-card .num { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .1em; color: var(--teal); }
+.ab-card h3 { margin: 10px 0 8px; font-size: 19px; }
+.ab-card p { color: var(--ink-3); font-size: 14.5px; margin: 0; }
+
+.ab-note { margin: 44px 0; padding: 32px 28px; border: 1px dashed var(--rule); border-radius: 16px; background: var(--paper-2); }
+.ab-note h2 { margin-top: 0; }
+.ab-note p { font-size: 16px; }
+.ab-note .sig { margin-top: 18px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .04em; color: var(--ink-3); }
+
+.ab-try { text-align: center; margin: 8px 0 4px; }
+.ab-try .btn { display: inline-block; padding: 15px 34px; background: var(--pink); color: #050505; border: none; border-radius: 30px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.ab-try .btn:hover { background: var(--teal); }
+
+@media (max-width: 720px) {
+  .ab-hero { grid-template-columns: 1fr; gap: 28px; }
+  .ab-photo { aspect-ratio: 4 / 3; }
+  .ab-proof-grid { grid-template-columns: 1fr; }
+  .ab-cards { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 <div class="rp-bar" aria-hidden="true"></div>
 <header class="site-header">
   <div class="sh-inner">
-    <a class="sh-logo" href="index.html" aria-label="The Freq, home"><img src="freq-logo-ink.png" alt="The Freq" width="75" height="22"></a>
+    <a class="sh-logo" href="index.html" aria-label="The Freq, home"><img src="freq-logo.png" alt="The Freq" width="75" height="22"></a>
     <button class="sh-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="shNav"><span></span></button>
     <nav class="sh-nav" id="shNav" aria-label="Main">
       <a href="sitemap.html">Library</a>
       <a href="faq.html">FAQ</a>
-      <a href="about.html">About</a>
+      <a href="about.html" aria-current="page">About Us</a>
       <a class="sh-cta" href="https://app.thefreq.in/login">Shape your mix</a>
     </nav>
   </div>
 </header>
 <main>
 <p class="crumb"><a href="https://thefreq.in/">thefreq.in</a> &rsaquo; About</p>
-<p class="kicker">The Person Behind thefreq.in</p>
-<h1>Kushal Jaju</h1>
 
-<p>Kushal Jaju is a mixing and mastering engineer based in Satara, India, and the person behind FREQ. He trained in piano, orchestral writing, and jazz, and cleared his auditions at the Abbey Road Institute before building out his own studio: custom hardware, custom compressors, custom EQs, and a proprietary DAW built around one problem, making a mix hit the same whether someone hears it on AirPods, a car stereo, or a mastering-grade monitor.</p>
+<section class="ab-hero">
+  <div>
+    <span class="ab-label">Who is behind this?</span>
+    <p class="ab-statement">Someone who has actually mixed music, built studios, and lived the problem.</p>
+    <div class="ab-photo" role="img" aria-label="Portrait of Kushal Jaju, placeholder">Portrait, coming soon</div>
+    <div class="ab-name">
+      <strong>Kushal Jaju</strong>
+      Founder, FREQ<br>
+      Mixing &amp; Mastering Engineer &middot; Satara, India
+    </div>
+  </div>
+  <div>
+    <span class="ab-label">Why does FREQ exist?</span>
+    <p class="ab-statement">Because mixing shouldn't have to be slow, expensive, and exhausting.</p>
+    <p>Kushal is a mixing and mastering engineer who has spent years working hands-on with music, studios, hardware, and software. His background spans piano, orchestral writing, jazz, production, mixing, and mastering; he built his own studio and spent years experimenting with the tools, workflows, and systems behind great mixes.</p>
+    <p>He had spent years seeing the same problem from both sides of the glass: mixing takes years to master, and hours to execute. The better the work gets, the more time it can take. So instead of accepting that as the price of making great music, he started looking for another way.</p>
+  </div>
+</section>
 
-<p>His production and mixing credits range from jazz and pop records to large-scale orchestral work, including a 200-plus-track orchestral-to-Latin-jazz recreation of the Game of Thrones theme, and placements such as Atlanta Jazz Radio Station. Clients and collaborators tend to point to the same thing when they work with him: he listens first, and lets that shape the mix, rather than starting from a preset or a plugin chain.</p>
+<div class="ab-transition">
+  <p class="ab-statement">What started as a frustration became a five-year project.</p>
+  <div class="ab-steps">
+    <span>An idea became an experiment.</span>
+    <span>The experiment became a working system.</span>
+    <span>And the system became FREQ.</span>
+  </div>
+</div>
 
-<p>The idea for FREQ came from a simple frustration: engineers shouldn't have to choose between doing the work they love and being able to afford to keep doing it. Mixing and mastering take years to learn and hours per song to execute well, and that cost gets passed straight to the artist. Kushal wanted a smarter workflow instead, one that could carry the reasoning of a trained ear without the time or price tag attached to it. He called it FREQ.</p>
+<section>
+  <h2>It started with a simple question.</h2>
+  <p class="ab-quote">What if mixing could take less time without taking the human out of it?</p>
+  <p>The goal was never to replace the engineer. It was to remove the unnecessary friction around the work: to give an experienced mixer a faster way to make decisions, and to give an artist a better chance of getting a great-sounding record without spending weeks waiting for the next revision. To make the process feel closer to creating music, and further away from fighting the clock.</p>
+</section>
 
-<p>By 2022, an early working version was ready. The validation came fast: an orchestrator with a PhD in music asked to keep a copy instead of taking his usual fee, and a mixer who sent over an unreleased track to test it asked when it was launching, the moment he heard the result. The idea worked. What followed was years of building, alongside a small team, through problems nobody had solved before because nobody had tried to build this exact thing. The people closest to Kushal became the first testers and helped shape everything from the business model to the brand itself, built brick by brick.</p>
+<section>
+  <h2>Then people started hearing it.</h2>
+  <div class="ab-proof-grid">
+    <div class="ab-proof-card">
+      <p>An early version of FREQ was already working by 2022. One of the first people to experience it was an orchestrator with a PhD in music. Instead of taking his usual fee, he wanted to keep a copy.</p>
+    </div>
+    <div class="ab-proof-card">
+      <p>Another mixer sent over an unreleased track to test it. After hearing the result, his first question wasn't how it worked.</p>
+      <p class="q">"When are you launching?"</p>
+    </div>
+  </div>
+</section>
 
-<blockquote><p>When someone I've never met uploads their track and gets a professional mix in half an hour, it changes something. A singer-songwriter can spend on better recording instead of worrying about a mixing budget. An arranger doesn't have to wait on someone else's timeline for a revision.</p></blockquote>
+<section>
+  <h2>Five years of building, breaking, refining, and listening.</h2>
+  <p>There was no existing blueprint for exactly what was being built. So it came together piece by piece.</p>
+  <div class="ab-fragments">
+    <span>Algorithms</span>
+    <span>Audio processing</span>
+    <span>Workflow</span>
+    <span>Testing</span>
+    <span>More testing</span>
+  </div>
+  <p>And a lot of decisions about what to keep, what to remove, and what simply wasn't good enough. The product evolved through people actually using it: early testers became collaborators, feedback shaped the workflow, and FREQ slowly became what it is today.</p>
+</section>
 
-<h2>What FREQ Is</h2>
+<section>
+  <h2>So, what exactly is FREQ?</h2>
+  <p class="ab-statement" style="font-size:clamp(18px,2.4vw,22px)">A different, one-of-a-kind way to approach mixing.</p>
+  <p>FREQ is a browser-based mixing and mastering platform built around a new way of thinking about space, balance, and sound. Instead of treating every track as another channel in a crowded session, FREQ gives the mix another dimension to work with. You still make the decisions. You still trust your ears. FREQ simply gives you a different set of tools to get there faster.</p>
+  <div class="ab-highlight">
+    <p>No AI deciding what your music should sound like.</p>
+    <p>Just algorithms built to respond to your music and your decisions.</p>
+  </div>
+</section>
 
-<p>FREQ is an algorithm-based DSP mixing and mastering platform, built around a depth-first architecture rather than a flat channel strip. Every track is assigned to one of eight Depth lanes, and that placement, not just its level, is what determines how close or far it sits in the finished mix. Moving a vocal or a drum bus to a different Depth genuinely changes how the song feels, because Depth reshapes compression, saturation, reverb, and mastering character across everything assigned to that lane at once.</p>
+<section>
+  <div class="ab-cards">
+    <div class="ab-card">
+      <span class="num">01 &middot; Depth</span>
+      <h3>Music isn't only left and right.</h3>
+      <p>FREQ introduces a front-to-back way of thinking about the mix, letting sounds occupy different depths and creating a more intentional sense of space.</p>
+    </div>
+    <div class="ab-card">
+      <span class="num">02 &middot; Control</span>
+      <h3>FREQ does the heavy lifting. You make the call.</h3>
+      <p>The system gives you a strong starting point while keeping the important creative decisions open to you, at every stage.</p>
+    </div>
+    <div class="ab-card">
+      <span class="num">03 &middot; Speed</span>
+      <h3>The goal is simple: get to the finished mix sooner.</h3>
+      <p>FREQ is built to reduce the hours spent chasing balance, space, and clarity, so more of your time can go back into making music.</p>
+    </div>
+  </div>
+</section>
 
-<p>Two controls reach even deeper than Depth. Console assigns one of ten distinct tonal characters, spanning reference, tape, tube, and silk families, to any Depth lane. Era is a single slider spanning the 1940s to the 2020s that shapes headroom, panning behavior, and overall fidelity to match the sound of that decade. Together, Console and Era let a mix carry a specific sonic era from the ground up, instead of being bolted on at the end.</p>
+<section>
+  <h2>Because time is part of the music too.</h2>
+  <p>When someone uploads a song they've spent months creating and gets to a finished mix in minutes, something bigger happens. An independent artist can put more into recording. A producer can finish more ideas. A mixer can take on more work without giving every project the same long night. And maybe, just maybe, someone gets to shut the laptop a little earlier. That matters.</p>
+</section>
 
-<p>For a starting point, FREQ's artist-based sonic profiles give a mix a reference point drawn from a specific sound, and every profile can be adjusted rather than applied as a fixed setting. Optimize Balance, FREQ's one-click controller, runs its engine across an uploaded multitrack and sets levels, effects, console, and mastering automatically, typically getting a mix most of the way there, with everything left open for manual refinement afterward.</p>
+<div class="ab-note">
+  <h2>A note from Kushal</h2>
+  <p>I didn't start FREQ because I wanted to build another piece of music software. I started it because I'd spent enough time mixing to know how much of the process was about listening, deciding, and second-guessing.</p>
+  <p>I kept wondering whether technology could take away some of the friction without taking away the person. FREQ is my answer to that question.</p>
+  <div class="sig">Kushal Jaju, Founder, FREQ</div>
+</div>
+
+<div class="ab-try">
+  <a class="btn" href="https://app.thefreq.in/login">Try FREQ &rarr;</a>
+</div>
 
 <div class="cta">
 <h2>Read the Work</h2>
 <p>Start with the <a href="https://thefreq.in/sitemap.html">full article index</a>, or jump into the <a href="https://thefreq.in/topics/fusion-independence-and-density.html">Arrange for the Ear series</a> from the beginning.</p>
-<p>If you'd rather hand your song to someone who'll treat it like their own, book a session on <a href="https://soundbetter.com/profiles/65153-artist-with-side-effects">SoundBetter</a>. If you'd rather learn the process and stay hands-on, try <a href="https://app.thefreq.in/login">FREQ</a> yourself.</p>
+<p>If you'd rather hand your song to someone who'll treat it like their own, book a session on <a href="https://soundbetter.com/profiles/65153-artist-with-side-effects">SoundBetter</a>.</p>
 </div>
 
 <div class="links">
@@ -78,7 +226,7 @@
 </main>
 <footer class="site-footer">
   <div class="sf-inner">
-    <img src="freq-logo-ink.png" alt="The Freq" width="61" height="18">
+    <img src="freq-logo.png" alt="The Freq" width="61" height="18">
     <div class="sf-links">
       <a href="sitemap.html">Library</a>
       <a href="faq.html">FAQ</a>
