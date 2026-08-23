@@ -44,7 +44,7 @@
 .ab-statement { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(22px, 3.4vw, 30px); line-height: 1.28; margin: 0 0 16px; }
 
 .ab-hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: start; margin: 8px 0 60px; }
-.ab-photo { aspect-ratio: 3 / 4; border: 1px solid var(--rule); border-radius: 16px; background: linear-gradient(160deg, var(--paper-2), rgba(245,12,160,.08)); display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.ab-photo { aspect-ratio: 3 / 4; border: 1px solid var(--rule); border-radius: 16px; background: var(--paper-2); display: block; width: 100%; object-fit: cover; }
 .ab-name { margin-top: 24px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--ink-3); line-height: 1.9; }
 .ab-name strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: 0; text-transform: none; }
 
@@ -52,6 +52,8 @@
 .ab-social a { width: 38px; height: 38px; border: 1px solid var(--rule); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--ink-3); border-bottom-width: 1px; }
 .ab-social a svg { width: 16px; height: 16px; display: block; }
 .ab-social a:hover { border-color: var(--pink); color: var(--pink); }
+.ab-social-cap { display: flex; gap: 8px 14px; flex-wrap: wrap; margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .04em; color: var(--ink-3); }
+.ab-social-cap span { opacity: .85; }
 
 .ab-transition { text-align: center; margin: 64px 0; padding: 44px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .ab-transition .ab-statement { max-width: 640px; margin: 0 auto 20px; }
@@ -115,7 +117,7 @@
   <div>
     <span class="ab-label">Who is behind this?</span>
     <p class="ab-statement">Someone who has actually mixed music, built studios, and lived the problem.</p>
-    <div class="ab-photo" role="img" aria-label="Portrait of Kushal Jaju, placeholder">Portrait, coming soon</div>
+    <img class="ab-photo" src="kushal-portrait.jpg" alt="Kushal Jaju, founder of FREQ" width="1086" height="1448" loading="lazy">
     <div class="ab-name">
       <strong>Kushal Jaju</strong>
       Founder, FREQ<br>
@@ -125,7 +127,9 @@
       <a href="https://www.linkedin.com/in/kushal-jaju-5ba001200" target="_blank" rel="noopener" aria-label="Kushal Jaju on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
       <a href="https://www.instagram.com/artist.with.sideeffects" target="_blank" rel="noopener" aria-label="Kushal Jaju on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
       <a href="https://soundbetter.com/profiles/65153-artist-with-side-effects" target="_blank" rel="noopener" aria-label="Kushal Jaju on SoundBetter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 15V9M8 18V6M12 20V4M16 18V6M20 15V9"/></svg></a>
+      <a href="https://www.instagram.com/thefreq.in" target="_blank" rel="noopener" aria-label="FREQ on Instagram" style="border-color: rgba(0,206,209,.35)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
     </div>
+    <div class="ab-social-cap"><span>Kushal &middot; LinkedIn, Instagram, SoundBetter</span><span>FREQ &middot; Instagram</span></div>
   </div>
   <div>
     <span class="ab-label">Why does FREQ exist?</span>
@@ -183,9 +187,6 @@
   <div class="ab-highlight">
     <p>No AI deciding what your music should sound like.</p>
     <p>Just algorithms built to respond to your music and your decisions.</p>
-  </div>
-  <div class="ab-social">
-    <a href="https://www.instagram.com/thefreq.in" target="_blank" rel="noopener" aria-label="FREQ on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
   </div>
 </section>
 
