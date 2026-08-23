@@ -2111,12 +2111,14 @@
   There is no content in here. Only the markup shell and its CSS.
 
   Behaviour  → /showcase.js
-  Content    → /showcase.json, generated from the audio files in
-               /profiles by tools/build-showcase.mjs, which runs on
-               every deploy. Adding a profile means committing a file.
+  Content    → /showcase-data.js (window.FREQ_SHOWCASE_PROFILES)
 
   So: to change how it looks, edit the CSS below. To change what it
-  shows, add or retag a file in /profiles. Neither touches the other.
+  shows, edit showcase-data.js. Neither touches the other.
+
+  Layout: a single horizontally-scrolling row of cards, each with its
+  own play/stop/seek. No 3D ring, no separate "now playing" panel —
+  every card is self-contained, so there is nothing else to open.
 
   Uses fonts already on that page (Cormorant Garamond, Space Mono, DM Sans).
   All CSS is scoped to #fg-gal so it will not restyle the rest of the landing page.
@@ -2190,75 +2192,145 @@
     max-width: 440px;
     margin: 0 auto 28px;
   }
-  .fg-stage-wrap {
-    position: relative;
+
+  /* --- filters: mood chips never wrap, so this row can never grow
+     taller than one line no matter how many moods exist --- */
+  .fg-filters {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 8px 14px;
+    max-width: 820px;
+    margin: 0 auto 22px;
+  }
+  .fg-filters[hidden] { display: none; }
+  .fg-moods {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .fg-moods::-webkit-scrollbar { display: none; }
+  .fg-moods button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    background: transparent;
+    border: .5px solid var(--fg-line);
+    border-radius: 99px;
+    padding: 6px 13px;
+    min-height: 30px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    cursor: pointer;
+    transition: color .25s, border-color .25s, background .25s;
+  }
+  .fg-moods button:hover { color: var(--fg-text); border-color: rgba(255, 255, 255, .25); }
+  .fg-moods button.is-on {
+    color: var(--fg-pink);
+    border-color: var(--fg-pink);
+    background: rgba(245, 12, 160, .08);
+  }
+  .fg-search {
+    flex: 0 1 180px;
+    min-width: 0;
+    background: rgba(255, 255, 255, .03);
+    border: .5px solid var(--fg-line);
+    border-radius: 99px;
+    padding: 6px 14px;
+    min-height: 30px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .06em;
+    color: var(--fg-text);
+    outline: none;
+    transition: border-color .25s, background .25s;
+  }
+  .fg-search::placeholder { color: var(--fg-dim); }
+  .fg-search:focus { border-color: var(--fg-pink); background: rgba(255, 255, 255, .05); }
+  .fg-search[hidden] { display: none; }
+  .fg-search::-webkit-search-cancel-button { filter: invert(1); opacity: .4; }
+  .fg-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    white-space: nowrap;
+  }
+  .fg-empty {
+    margin: 32px auto 40px;
+    font-size: 14px;
+    color: var(--fg-muted);
+  }
+  .fg-empty[hidden] { display: none; }
+  .fg-empty button {
+    background: none;
+    border: 0;
+    padding: 0 0 1px;
+    font: inherit;
+    color: var(--fg-pink);
+    border-bottom: .5px solid currentColor;
+    cursor: pointer;
+  }
+
+  /* --- card row: native horizontal scroll + snap, no custom drag
+     physics. Prev/next buttons are a click alternative to swiping. --- */
+  #fgRowWrap[hidden] { display: none; }
+  .fg-row-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
   .fg-navbtn {
     flex: 0 0 auto;
-    width: 36px; height: 36px;
+    width: 34px; height: 34px;
     border: .5px solid var(--fg-line);
     background: rgba(12, 12, 12, .55);
     color: var(--fg-cream);
     border-radius: 2px;
     cursor: pointer;
     font-family: 'Space Mono', monospace;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1;
     transition: border-color .2s, color .2s, transform .2s;
-    z-index: 4;
   }
-  .fg-navbtn:hover {
-    border-color: var(--fg-pink);
-    color: var(--fg-pink);
-    transform: translateY(-1px);
-  }
-  .fg-scene {
-    position: relative;
+  .fg-navbtn:hover { border-color: var(--fg-pink); color: var(--fg-pink); }
+  .fg-row {
     flex: 1 1 auto;
-    width: 100%;
-    max-width: 920px;
-    overflow: hidden;
-    touch-action: pan-y;
-    user-select: none;
-    cursor: grab;
-    perspective: 1100px;
-    -webkit-user-select: none;
+    min-width: 0;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  .fg-scene.is-drag { cursor: grabbing; }
-  .fg-ring {
-    position: absolute;
-    left: 50%; top: 50%;
-    transform-style: preserve-3d;
-    will-change: transform;
-    pointer-events: none;
+  .fg-row::-webkit-scrollbar { display: none; }
+  .fg-track {
+    display: flex;
+    gap: 14px;
+    padding: 4px 4px 12px;
+    width: max-content;
   }
-  .fg-disc {
-    position: absolute;
-    left: 50%; top: 50%;
-    transform-style: preserve-3d;
-    pointer-events: none;
-  }
+
+  /* --- card: same cover / chip / title / inspiration language as
+     before, plus play, stop and seek live on the card itself --- */
   .fg-card {
-    display: block;
-    width: 100%; height: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
+    flex: 0 0 auto;
+    width: clamp(140px, 40vw, 184px);
     border-radius: 14px;
-    text-align: left;
-    transform-origin: center center;
-    will-change: transform, filter;
   }
   .fg-card-inner {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%; height: 100%;
+    width: 100%;
     overflow: hidden;
     border-radius: 14px;
     border: .5px solid var(--fg-line);
@@ -2266,7 +2338,7 @@
     box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .9);
     transition: border-color .35s, box-shadow .35s;
   }
-  .fg-card.is-on .fg-card-inner {
+  .fg-card.is-playing .fg-card-inner {
     border-color: var(--fg-accent, var(--fg-pink));
     box-shadow:
       0 24px 56px -18px var(--fg-accent, var(--fg-pink)),
@@ -2285,9 +2357,7 @@
     display: block;
     pointer-events: none;
   }
-  .fg-cover-gen {
-    position: absolute; inset: 0;
-  }
+  .fg-cover-gen { position: absolute; inset: 0; }
   .fg-cover-gen i {
     position: absolute; inset: 0;
     opacity: .4;
@@ -2312,11 +2382,28 @@
     color: var(--fg-accent, var(--fg-pink));
     background: rgba(5, 5, 5, .55);
   }
+  .fg-cardplay {
+    position: absolute;
+    right: 8px; bottom: 8px;
+    width: 40px; height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--fg-accent, var(--fg-pink));
+    color: #111;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 22px -6px var(--fg-accent, var(--fg-pink));
+    transition: transform .15s;
+  }
+  .fg-cardplay:hover { transform: scale(1.06); }
+  .fg-cardplay[disabled] { opacity: .35; cursor: not-allowed; }
+  .fg-cardplay[disabled]:hover { transform: none; }
+  .fg-cardplay svg { display: block; margin-left: 1px; }
   .fg-meta {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 6px;
     padding: 8px 10px 10px;
   }
@@ -2336,7 +2423,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: 2px;
+  }
+  .fg-bars-wrap {
+    padding: 5px 0;
+    cursor: pointer;
+    touch-action: none;
   }
   .fg-bars {
     display: flex;
@@ -2350,277 +2441,41 @@
     border-radius: 1px;
     background: rgba(255, 255, 255, .22);
     opacity: .5;
+    transition: background .15s, opacity .15s;
   }
-  .fg-card.is-on .fg-bars span {
+  .fg-bars span.is-played {
     background: var(--fg-accent, var(--fg-pink));
-    opacity: .9;
+    opacity: .95;
   }
-  .fg-hint {
-    margin: 10px 0 28px;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--fg-dim);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px 12px;
-  }
-  .fg-hint b { color: rgba(240, 234, 223, .32); font-weight: 400; }
-  .fg-player {
-    display: grid;
-    grid-template-columns: 148px 1fr;
-    gap: 28px 36px;
-    align-items: center;
-    text-align: left;
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 22px 22px 20px;
-    border: .5px solid var(--fg-line);
-    border-radius: 10px;
-    background: rgba(12, 12, 12, .6);
-    backdrop-filter: blur(10px);
-  }
-  .fg-flip-wrap { perspective: 1200px; }
-  .fg-flip {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 12px;
-    transform-style: preserve-3d;
-    transition: transform .7s cubic-bezier(.22, 1, .36, 1);
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    background: none;
-  }
-  .fg-flip.is-after { transform: rotateY(180deg); }
-  .fg-face {
-    position: absolute; inset: 0;
-    overflow: hidden;
-    border-radius: 12px;
-    border: .5px solid var(--fg-line);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-  .fg-face.after {
-    transform: rotateY(180deg);
-    border-color: var(--fg-accent, var(--fg-pink));
-    box-shadow: 0 28px 60px -28px var(--fg-accent, var(--fg-pink));
-  }
-  .fg-face img, .fg-face .fg-cover-gen {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-  }
-  .fg-face.before img { filter: grayscale(1) brightness(.55); }
-  .fg-face-shade {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(5,5,5,.92) 8%, transparent 60%);
-  }
-  .fg-face-copy {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    padding: 12px 14px 13px;
-    text-align: left;
-  }
-  .fg-face-copy span {
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: rgba(240, 234, 223, .45);
-  }
-  .fg-face.after .fg-face-copy span { color: var(--fg-accent, var(--fg-pink)); }
-  .fg-face-copy p {
-    margin: 4px 0 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.2;
-    color: #fff;
-  }
-  .fg-tap {
-    margin-top: 8px;
-    text-align: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--fg-dim);
-  }
-  .fg-info { min-width: 0; }
-  .fg-info-top {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-  .fg-genre {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 99px;
-    border: .5px solid var(--fg-accent, var(--fg-pink));
-    color: var(--fg-accent, var(--fg-pink));
-  }
-  .fg-eng {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--fg-dim);
-  }
-  .fg-song {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 700;
-    line-height: .95;
-    color: #fff;
-    margin: 0;
-  }
-  .fg-by {
-    margin: 6px 0 14px;
-    font-size: 15px;
-    color: var(--fg-muted);
-  }
-  .fg-ab {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: .5px solid var(--fg-line);
-    border-radius: 8px;
-    padding: 3px;
-    margin-bottom: 10px;
-  }
-  .fg-ab-pill {
-    position: absolute;
-    top: 3px; bottom: 3px;
-    width: calc(50% - 3px);
-    left: 3px;
-    border-radius: 6px;
-    background: #6a6a72;
-    transition: transform .35s cubic-bezier(.22, 1, .36, 1), background .35s;
-    pointer-events: none;
-  }
-  .fg-ab.is-after .fg-ab-pill {
-    transform: translateX(100%);
-    background: var(--fg-accent, var(--fg-pink));
-  }
-  .fg-ab button {
-    position: relative;
-    z-index: 1;
-    border: 0;
-    background: none;
-    padding: 8px 0;
-    cursor: pointer;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--fg-muted);
-    transition: color .2s;
-  }
-  .fg-ab button:hover { color: #fff; }
-  .fg-ab button.is-on { color: #111; }
-  .fg-wave {
-    position: relative;
-    width: 100%;
-    height: 64px;
-    cursor: pointer;
-    touch-action: none;
-    margin-bottom: 12px;
-  }
-  .fg-wave canvas {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    display: block;
-    transition: opacity .45s;
-  }
-  .fg-transport {
+  .fg-cardfoot {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 8px;
   }
-  .fg-play {
-    width: 46px; height: 46px;
-    border: 0;
+  .fg-mini-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg-dim);
+  }
+  .fg-mini-stop {
+    flex: 0 0 auto;
+    width: 26px; height: 26px;
+    border: .5px solid var(--fg-line);
     border-radius: 50%;
-    background: var(--fg-accent, var(--fg-pink));
-    color: #111;
+    background: transparent;
+    color: var(--fg-muted);
     cursor: pointer;
     display: grid;
     place-items: center;
-    flex: 0 0 auto;
-    box-shadow: 0 0 28px -6px var(--fg-accent, var(--fg-pink));
-    transition: transform .15s;
+    transition: color .2s, border-color .2s;
   }
-  .fg-play:hover { transform: scale(1.05); }
-  .fg-play svg { display: block; }
-  .fg-time {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-variant-numeric: tabular-nums;
-    color: var(--fg-muted);
-  }
-  .fg-time em { font-style: normal; color: #fff; }
-  .fg-vol {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 110px;
-    color: var(--fg-muted);
-  }
-  .fg-vol input[type=range] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 3px;
-    background: rgba(255,255,255,.16);
-    border-radius: 99px;
-    outline: none;
-  }
-  .fg-vol input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: #fff;
-    cursor: pointer;
-  }
-  .fg-note {
-    margin: 12px 0 0;
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--fg-muted);
-  }
-  .fg-note b {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    font-weight: 400;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: #fff;
-    margin-right: 8px;
-  }
-  .fg-more {
-    display: inline-block;
-    margin-top: 28px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--fg-pink);
-    text-decoration: none;
-    border-bottom: .5px solid transparent;
-    transition: border-color .2s, color .2s;
-  }
-  .fg-more:hover { border-bottom-color: var(--fg-pink); color: #fff; }
+  .fg-mini-stop:hover { color: #fff; border-color: var(--fg-accent, var(--fg-pink)); }
+  .fg-mini-stop[disabled] { opacity: .35; cursor: not-allowed; }
+
   .fg-load {
-    min-height: 240px;
+    min-height: 200px;
     display: grid;
     place-items: center;
     color: var(--fg-dim);
@@ -2638,167 +2493,16 @@
     margin-bottom: 10px;
   }
   @keyframes fgspin { to { transform: rotate(360deg); } }
-  @media (max-width: 720px) {
-    #fg-gal { padding: 64px 18px 56px; }
-    .fg-navbtn { display: none; }
-    .fg-player {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      padding: 18px 16px 16px;
-    }
-    .fg-flip-wrap { max-width: 180px; margin: 0 auto; }
-    .fg-vol { display: none; }
-    .fg-info { text-align: center; }
-    .fg-info-top { justify-content: center; }
-  }
 
-  /* --- showcase additions --- */
-  .fg-art {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 12px;
-    overflow: hidden;
-    border: .5px solid var(--fg-accent, var(--fg-pink));
-    box-shadow: 0 28px 60px -28px var(--fg-accent, var(--fg-pink));
-  }
-  .fg-art img, .fg-art .fg-cover-gen {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-  }
-  .fg-art .fg-face-copy span { color: var(--fg-accent, var(--fg-pink)); }
-  .fg-insp {
-    margin: 6px 0 14px;
-    font-size: 15px;
-    color: var(--fg-muted);
-  }
-  .fg-insp em { font-style: italic; color: var(--fg-accent, var(--fg-pink)); }
-  /* self-titled profiles drop the "Inspired by" line, so the heading
-     needs to carry that spacing itself */
-  .fg-song + .fg-wave { margin-top: 16px; }
-  .fg-stop {
-    background: transparent;
-    border: .5px solid var(--fg-line);
-    color: var(--fg-muted);
-  }
-  .fg-stop:hover { color: #fff; border-color: var(--fg-accent, var(--fg-pink)); }
-  .fg-play[disabled] { opacity: .35; cursor: not-allowed; }
-  .fg-play[disabled]:hover { transform: none; }
-  .fg-strip {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    max-width: 780px;
-    margin: 0 auto 22px;
-  }
-  .fg-strip button {
-    background: transparent;
-    border: .5px solid var(--fg-line);
-    border-radius: 99px;
-    padding: 5px 12px;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--fg-dim);
-    cursor: pointer;
-    transition: color .25s, border-color .25s, background .25s;
-  }
-  .fg-strip button:hover { color: var(--fg-text); border-color: rgba(255, 255, 255, .25); }
-  .fg-strip button.is-on {
-    color: #111;
-    background: var(--fg-strip-accent, var(--fg-pink));
-    border-color: var(--fg-strip-accent, var(--fg-pink));
-  }
+  /* --- mobile: trim every margin so the section fits in one
+     viewport without needing to scroll to reach the controls --- */
   @media (max-width: 720px) {
-    .fg-strip { max-width: 92vw; }
-  }
-
-  /* --- filters, search, empty state --- */
-  .fg-filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 10px 14px;
-    max-width: 820px;
-    margin: 0 auto 26px;
-  }
-  .fg-filters[hidden] { display: none; }
-  .fg-moods {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-  }
-  .fg-moods button {
-    background: transparent;
-    border: .5px solid var(--fg-line);
-    border-radius: 99px;
-    padding: 5px 13px;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--fg-dim);
-    cursor: pointer;
-    transition: color .25s, border-color .25s, background .25s;
-  }
-  .fg-moods button:hover { color: var(--fg-text); border-color: rgba(255, 255, 255, .25); }
-  .fg-moods button.is-on {
-    color: var(--fg-pink);
-    border-color: var(--fg-pink);
-    background: rgba(245, 12, 160, .08);
-  }
-  .fg-search {
-    flex: 0 1 220px;
-    min-width: 0;
-    background: rgba(255, 255, 255, .03);
-    border: .5px solid var(--fg-line);
-    border-radius: 99px;
-    padding: 7px 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .06em;
-    color: var(--fg-text);
-    outline: none;
-    transition: border-color .25s, background .25s;
-  }
-  .fg-search::placeholder { color: var(--fg-dim); }
-  .fg-search:focus { border-color: var(--fg-pink); background: rgba(255, 255, 255, .05); }
-  .fg-search[hidden] { display: none; }
-  .fg-search::-webkit-search-cancel-button { filter: invert(1); opacity: .4; }
-  .fg-count {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--fg-dim);
-    white-space: nowrap;
-  }
-  .fg-empty {
-    margin: 40px auto 48px;
-    font-size: 14px;
-    color: var(--fg-muted);
-  }
-  .fg-empty[hidden] { display: none; }
-  .fg-empty button {
-    background: none;
-    border: 0;
-    padding: 0 0 1px;
-    font: inherit;
-    color: var(--fg-pink);
-    border-bottom: .5px solid currentColor;
-    cursor: pointer;
-  }
-  #fgStage[hidden] { display: none; }
-  .fg-player[hidden] { display: none; }
-  .fg-strip[hidden] { display: none; }
-  @media (max-width: 720px) {
-    .fg-filters { gap: 8px 10px; margin-bottom: 20px; }
-    .fg-search { flex-basis: 100%; }
+    #fg-gal { padding: 44px 16px 36px; }
+    .fg-kicker { margin-bottom: 10px; }
+    .fg-h { font-size: clamp(28px, 7.5vw, 40px); margin-bottom: 8px; }
+    .fg-sub { font-size: 13px; margin-bottom: 18px; }
+    .fg-filters { margin-bottom: 14px; }
+    .fg-card { width: clamp(128px, 40vw, 168px); }
   }
 </style>
 
@@ -2807,9 +2511,8 @@
   <div class="fg-inner">
     <div class="fg-kicker rv">The Freq Showcase</div>
     <h2 class="fg-h rv d1">Every record has an <em>ancestor.</em></h2>
-    <p class="fg-sub rv d2">Nine mixes, nine sonic reference points. Pick a name, press play, hear where the sound came from.</p>
+    <p class="fg-sub rv d2">Nine sonic reference points. Tap play, hear where the sound came from.</p>
     <div id="fgBody" class="fg-load"><div class="fg-spin"></div>Loading showcase</div>
-    <a class="fg-more" href="https://app.thefreq.in/mixes">Open the full gallery →</a>
   </div>
 </section>
 <script src="showcase-data.js"></script>
