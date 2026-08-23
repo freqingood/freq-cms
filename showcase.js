@@ -37,7 +37,9 @@
     if (!u || typeof u !== 'string') return '';
     try {
       var p = new URL(u, location.href);
-      if (p.protocol === 'http:' || p.protocol === 'https:') return p.href;
+      // file: is allowed so the page works when opened straight off
+      // disk. Everything else stays blocked.
+      if (p.protocol === 'http:' || p.protocol === 'https:' || p.protocol === 'file:') return p.href;
     } catch (e) {}
     return '';
   }
