@@ -1,6 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Freq">
   <rect width="64" height="64" rx="14" fill="#050505"/>
-  <circle cx="32" cy="32" r="24" fill="none" stroke="#00CED1" stroke-opacity="0.35" stroke-width="2.5"/>
-  <circle cx="32" cy="32" r="16" fill="none" stroke="#00CED1" stroke-opacity="0.6" stroke-width="2.5"/>
-  <circle cx="32" cy="32" r="8" fill="#F50CA0"/>
+  <!-- simplified from the fader glyph in the wordmark: two faders
+       instead of three, thicker, so it survives a 16px browser tab -->
+  <g>
+    <rect x="9" y="20" width="46" height="7" rx="3.5" fill="#F50CA0"/>
+    <rect x="36" y="12" width="13" height="23" rx="4.5" fill="#F50CA0"/>
+  </g>
+  <g>
+    <rect x="9" y="37" width="46" height="7" rx="3.5" fill="#00CED1"/>
+    <rect x="15" y="29" width="13" height="23" rx="4.5" fill="#00CED1"/>
+  </g>
 </svg>
