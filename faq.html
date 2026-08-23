@@ -49,6 +49,27 @@ main { max-width:840px; margin:0 auto; padding:44px 44px 100px }
 .cta { background:var(--card); padding:28px; border-radius:10px; margin-top:20px; border:.5px solid var(--dim) }
 .cta h2 { font-family:'Cormorant Garamond',serif; font-size:22px; margin-bottom:10px; color:#f7efe2 }
 footer { padding:32px 44px 64px; color:rgba(240,234,223,.3); font-family:'Space Mono',monospace; font-size:12px; text-align:center }
+
+  /* ── MOBILE PASS ── */
+  html { -webkit-text-size-adjust: 100%; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { overflow-wrap: break-word; }
+  img { max-width: 100%; height: auto; }
+  a, button, input { min-height: 44px; }
+  :focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+
+  @media (max-width: 720px) {
+    header { padding: 34px 18px 22px !important; }
+    main   { padding: 26px 18px 40px !important; }
+    footer { padding: 26px 18px 44px !important; }
+    .toc   { grid-template-columns: 1fr !important; }
+    .start { margin-left: 0 !important; width: 100%; justify-content: center; }
+    .ad    { font-size: 14px !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: .001ms !important; animation-duration: .001ms !important; }
+  }
 </style>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
