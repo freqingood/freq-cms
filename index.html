@@ -309,111 +309,7 @@
             color: var(--dim);
             text-transform: uppercase
         }
-
-        /* ── GAME ── */
-        .game {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 24px;
-            position: relative;
-            overflow: hidden;
-            background: var(--bg)
-        }
-
-        .game-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            pointer-events: none
-        }
-
-        .game-orb.g1 {
-            width: 560px;
-            height: 340px;
-            background: radial-gradient(ellipse, rgba(245, 12, 160, .1), transparent 65%);
-            top: 8%;
-            left: -10%;
-            animation: orbp 7s ease-in-out infinite
-        }
-
-        .game-orb.g2 {
-            width: 440px;
-            height: 300px;
-            background: radial-gradient(ellipse, rgba(0, 206, 209, .07), transparent 65%);
-            bottom: 6%;
-            right: -8%;
-            animation: orbp 10s ease-in-out infinite reverse
-        }
-
-        .game-inner {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 620px;
-            text-align: center
-        }
-
-        .game-h {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(40px, 6.5vw, 80px);
-            font-weight: 700;
-            line-height: 1;
-            letter-spacing: -.02em;
-            color: #f7efe2;
-            margin-bottom: 22px
-        }
-
-        .game-h em {
-            font-style: italic;
-            color: var(--pink)
-        }
-
-        .game-sub {
-            font-size: 15px;
-            color: var(--muted);
-            font-weight: 300;
-            max-width: 420px;
-            margin: 0 auto 48px;
-            line-height: 1.8
-        }
-
-        .game-sub b {
-            color: #f7efe2;
-            font-weight: 500;
-            letter-spacing: .04em
-        }
-
-        .game-stage {
-            position: relative;
-            border: .5px solid rgba(255, 255, 255, .1);
-            border-radius: 10px;
-            background: rgba(12, 12, 12, .6);
-            backdrop-filter: blur(10px);
-            padding: 48px 40px;
-            min-height: 340px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden
-        }
-
-        /* play button */
-        .game-play {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform .3s
-        }
-
-        .game-play:hover {
-            transform: scale(1.04)
-        }
+/* play button */
 
         .gp-icon {
             width: 80px;
@@ -451,17 +347,7 @@
             color: var(--muted);
             text-transform: uppercase
         }
-
-        /* live */
-        .game-live {
-            display: none;
-            width: 100%
-        }
-
-        .game-live.on {
-            display: block;
-            animation: fadeIn .5s
-        }
+/* live */
 
         @keyframes fadeIn {
             from {
@@ -587,20 +473,7 @@
             border-radius: 2px;
             transition: width .15s linear
         }
-
-        /* win */
-        .game-win {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 100%
-        }
-
-        .game-win.on {
-            display: flex;
-            animation: winIn .7s cubic-bezier(.16, 1, .3, 1)
-        }
+/* win */
 
         @keyframes winIn {
             from {
@@ -699,16 +572,6 @@
 
         .gw-replay:hover {
             color: var(--text)
-        }
-
-        .game-hint {
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            letter-spacing: .12em;
-            color: rgba(240, 234, 223, .3);
-            text-transform: uppercase;
-            margin-top: 26px;
-            transition: opacity .4s
         }
 
         /* MARQUEE */
@@ -2149,7 +2012,64 @@
                 padding: 80px 24px 60px
             }
         }
-    </style>
+
+        /* ── MOBILE PASS ──────────────────────────────────────
+           The nav was overflowing below ~430px: logo, two links and
+           a 14-character button do not fit. Tighten the gaps, swap
+           the button label for a short one, and give every control a
+           44px touch target. */
+
+        .nbtn-tight { display: none; }
+
+        .nlink,
+        .nbtn {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 700px) {
+            nav { padding: 10px 16px; }
+            .nr { gap: 10px; }
+            .nlink { padding: 0 6px; }
+            .nbtn { padding: 0 16px; }
+        }
+
+        @media (max-width: 430px) {
+            .nbtn-full { display: none; }
+            .nbtn-tight { display: inline; }
+            .nr { gap: 6px; }
+            .nlink { font-size: 9px; letter-spacing: .1em; padding: 0 4px; }
+        }
+
+        /* notched phones: keep the fixed nav clear of the status bar */
+        @supports (padding: env(safe-area-inset-left)) {
+            nav {
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+            }
+        }
+
+        /* on touch, :hover sticks after a tap; stop the transforms
+           from leaving elements visibly stuck mid-animation */
+        @media (hover: none) {
+            .nbtn:hover,
+            .sgb:hover,
+            .fg-card:hover,
+            .fg-play:hover { transform: none; }
+        }
+
+        /* nothing may push the page sideways */
+        html, body { max-width: 100%; overflow-x: hidden; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .001ms !important;
+                transition-duration: .001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }</style>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 
@@ -2161,7 +2081,7 @@
         <div class="nr">
             <a class="nlink" href="/sitemap.html">Learn</a>
             <a class="nlink" href="/about.html">About</a>
-            <button class="nbtn" onclick="window.location.href='https://app.thefreq.in/login'">Shape your mix</button>
+            <button class="nbtn" onclick="window.location.href='https://app.thefreq.in/login'"><span class="nbtn-full">Shape your mix</span><span class="nbtn-tight">Start</span></button>
         </div>
     </nav>
 
