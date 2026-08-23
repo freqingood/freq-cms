@@ -33,6 +33,25 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # Rebuilds showcase.json from the audio files in /profiles on every
+      # deploy, so adding a profile is just committing the file.
+      # showcase.json is committed, so a failure here is not fatal: the
+      # site just publishes the manifest as it was last generated.
+      - name: Build showcase manifest
+        run: |
+          if npm i --no-save --no-audit --no-fund music-metadata \
+             && node tools/build-showcase.mjs; then
+            echo "manifest rebuilt from /profiles"
+          else
+            echo "::warning::generator failed, publishing the committed showcase.json"
+          fi
+          # keep the build dependency, and any masters/working files kept
+          # under profiles/, out of the published artifact
+          rm -rf node_modules package-lock.json profiles/masters
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
