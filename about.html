@@ -43,8 +43,8 @@
 .ab-label { display: block; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
 .ab-statement { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(22px, 3.4vw, 30px); line-height: 1.28; margin: 0 0 16px; }
 
-.ab-hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: start; margin: 8px 0 60px; }
-.ab-photo { aspect-ratio: 3 / 4; border: 1px solid var(--rule); border-radius: 16px; background: var(--paper-2); display: block; width: 100%; object-fit: cover; }
+.ab-hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: end; margin: 8px 0 60px; }
+.ab-photo { aspect-ratio: 3 / 4; border: 1px solid var(--rule); border-radius: 16px; background: var(--paper-2); display: block; width: 100%; object-fit: cover; margin-bottom: 26px; }
 .ab-name { margin-top: 24px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--ink-3); line-height: 1.9; }
 .ab-name strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: 0; text-transform: none; }
 
@@ -66,8 +66,23 @@
 .ab-proof-card p { margin-bottom: .9em; font-size: 14.5px; }
 .ab-proof-card .q { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 21px; color: var(--teal); margin: 12px 0 0; }
 
-.ab-fragments { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 18px 0 24px; }
-.ab-fragments span { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; padding: 7px 14px; border: 1px solid var(--rule); border-radius: 20px; color: var(--ink-3); }
+.ab-dev-trail { position: relative; margin: 30px 0 32px; padding: 50px 6px 46px; }
+.ab-dev-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: linear-gradient(90deg, var(--teal), var(--pink)); opacity: .35; }
+.ab-dev-row { position: relative; display: flex; justify-content: space-between; gap: 6px; }
+.ab-dev-node { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; }
+.ab-dev-node .tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .12em; color: var(--teal); }
+.ab-dev-node .lbl { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 15.5px; color: var(--ink); line-height: 1.2; }
+.ab-dev-node .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 0 5px var(--paper); flex-shrink: 0; }
+
+@media (max-width: 720px) {
+  .ab-dev-trail { padding: 4px 0; }
+  .ab-dev-line { display: none; }
+  .ab-dev-row { flex-direction: column; gap: 0; }
+  .ab-dev-node, .ab-dev-node.is-down { flex-direction: row; justify-content: flex-start; align-items: center; gap: 14px; text-align: left; padding: 13px 0 13px 18px; border-left: 1px solid var(--rule); position: relative; }
+  .ab-dev-node .dot { position: absolute; left: -4px; top: 50%; transform: translateY(-50%); box-shadow: 0 0 0 4px var(--paper-2); }
+  .ab-dev-node .tag { order: 0; }
+  .ab-dev-node .lbl { order: 1; }
+}
 
 .ab-highlight { margin: 28px 0; padding: 22px 24px; border-left: 2px solid var(--teal); background: var(--paper-2); border-radius: 0 12px 12px 0; }
 .ab-highlight p:first-child { margin: 0 0 6px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 19px; color: var(--ink); }
@@ -88,9 +103,13 @@
 .ab-try .btn { display: inline-block; padding: 15px 34px; background: var(--pink); color: #050505; border: none; border-radius: 30px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .ab-try .btn:hover { background: var(--teal); }
 
+@media (max-width: 980px) and (min-width: 721px) {
+  .ab-hero { grid-template-columns: 1fr 1fr; gap: 30px; }
+}
+
 @media (max-width: 720px) {
-  .ab-hero { grid-template-columns: 1fr; gap: 28px; }
-  .ab-photo { aspect-ratio: 4 / 3; }
+  .ab-hero { grid-template-columns: 1fr; align-items: stretch; gap: 36px; margin: 4px 0 48px; }
+  .ab-photo { aspect-ratio: 3 / 4; margin-bottom: 22px; }
   .ab-proof-grid { grid-template-columns: 1fr; }
   .ab-cards { grid-template-columns: 1fr; }
 }
@@ -115,14 +134,15 @@
 
 <section class="ab-hero">
   <div>
+    <img class="ab-photo" src="kushal-portrait.jpg" alt="Kushal Jaju, founder of FREQ" width="1086" height="1448" loading="lazy">
     <span class="ab-label">Who is behind this?</span>
     <p class="ab-statement">Someone who has actually mixed music, built studios, and lived the problem.</p>
-    <img class="ab-photo" src="kushal-portrait.jpg" alt="Kushal Jaju, founder of FREQ" width="1086" height="1448" loading="lazy">
     <div class="ab-name">
       <strong>Kushal Jaju</strong>
       Founder, FREQ<br>
       Mixing &amp; Mastering Engineer &middot; Satara, India
     </div>
+    <p>Kushal is a mixing and mastering engineer who has spent years working hands-on with music, studios, hardware, and software. His background spans piano, orchestral writing, jazz, production, mixing, and mastering; he built his own studio and spent years experimenting with the tools, workflows, and systems behind great mixes.</p>
     <div class="ab-social">
       <a href="https://www.linkedin.com/in/kushal-jaju-5ba001200" target="_blank" rel="noopener" aria-label="Kushal Jaju on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
       <a href="https://www.instagram.com/artist.with.sideeffects" target="_blank" rel="noopener" aria-label="Kushal Jaju on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
@@ -134,13 +154,12 @@
   <div>
     <span class="ab-label">Why does FREQ exist?</span>
     <p class="ab-statement">Because mixing shouldn't have to be slow, expensive, and exhausting.</p>
-    <p>Kushal is a mixing and mastering engineer who has spent years working hands-on with music, studios, hardware, and software. His background spans piano, orchestral writing, jazz, production, mixing, and mastering; he built his own studio and spent years experimenting with the tools, workflows, and systems behind great mixes.</p>
     <p>He had spent years seeing the same problem from both sides of the glass: mixing takes years to master, and hours to execute. The better the work gets, the more time it can take. So instead of accepting that as the price of making great music, he started looking for another way.</p>
   </div>
 </section>
 
 <div class="ab-transition">
-  <p class="ab-statement">What started as a frustration became a five-year project.</p>
+  <p class="ab-statement">What started as a frustration became a 5-year project.</p>
   <div class="ab-steps">
     <span>An idea became an experiment.</span>
     <span>The experiment became a working system.</span>
@@ -158,24 +177,27 @@
   <h2>Then people started hearing it.</h2>
   <div class="ab-proof-grid">
     <div class="ab-proof-card">
-      <p>An early version of FREQ was already working by 2022. One of the first people to experience it was an orchestrator with a PhD in music. Instead of taking his usual fee, he wanted to keep a copy.</p>
+      <p>An early version of FREQ was already working by 2022. 1 of the first people to experience it was an orchestrator with a PhD in music. Instead of taking his usual fee, he wanted to keep a copy.</p>
     </div>
     <div class="ab-proof-card">
-      <p>Another mixer sent over an unreleased track to test it. After hearing the result, his first question wasn't how it worked.</p>
+      <p>Another mixer sent over an unreleased track to test it. After hearing the result, his 1st question wasn't how it worked.</p>
       <p class="q">"When are you launching?"</p>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>Five years of building, breaking, refining, and listening.</h2>
+  <h2>5 years of building, breaking, refining, and listening.</h2>
   <p>There was no existing blueprint for exactly what was being built. So it came together piece by piece.</p>
-  <div class="ab-fragments">
-    <span>Algorithms</span>
-    <span>Audio processing</span>
-    <span>Workflow</span>
-    <span>Testing</span>
-    <span>More testing</span>
+  <div class="ab-dev-trail">
+    <div class="ab-dev-line" aria-hidden="true"></div>
+    <div class="ab-dev-row">
+      <div class="ab-dev-node"><span class="tag">01</span><span class="lbl">Algorithms</span><span class="dot" aria-hidden="true"></span></div>
+      <div class="ab-dev-node is-down"><span class="dot" aria-hidden="true"></span><span class="tag">02</span><span class="lbl">Audio Processing</span></div>
+      <div class="ab-dev-node"><span class="tag">03</span><span class="lbl">Workflow</span><span class="dot" aria-hidden="true"></span></div>
+      <div class="ab-dev-node is-down"><span class="dot" aria-hidden="true"></span><span class="tag">04</span><span class="lbl">Testing</span></div>
+      <div class="ab-dev-node"><span class="tag">05</span><span class="lbl">More Testing</span><span class="dot" aria-hidden="true"></span></div>
+    </div>
   </div>
   <p>And a lot of decisions about what to keep, what to remove, and what simply wasn't good enough. The product evolved through people actually using it: early testers became collaborators, feedback shaped the workflow, and FREQ slowly became what it is today.</p>
 </section>
