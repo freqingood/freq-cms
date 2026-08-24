@@ -2919,22 +2919,39 @@
 
         bindHover();
 
-        /* ── SCROLL ── */
+        /* ── SCROLL (pinned progress animations only) ── */
         function onScroll() {
             updateTransform();
             const dw = document.getElementById('dpinWrap');
             if (dw) { const r = dw.getBoundingClientRect(), tot = dw.offsetHeight - window.innerHeight, sc = Math.max(0, -r.top), prog = Math.min(1, sc / tot); setD(Math.min(7, Math.floor(prog * 8.4))) }
-            document.querySelectorAll('.rv,.rl,.rr').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight * .9) el.classList.add('in') });
-            // pain lines stagger + light up
-            document.querySelectorAll('.pline').forEach((el, i) => { if (el.getBoundingClientRect().top < window.innerHeight * .82) setTimeout(() => el.classList.add('in'), i * 90) });
-            const pf = document.getElementById('painFoot'); if (pf.getBoundingClientRect().top < window.innerHeight * .9) pf.classList.add('in');
-            // cloud bubbles
-            document.querySelectorAll('.qbub').forEach(b => { if (b.getBoundingClientRect().top < window.innerHeight * .92) b.classList.add('in') });
-            // collab
-            document.querySelectorAll('.cnote,.typing').forEach((el, i) => { if (el.getBoundingClientRect().top < window.innerHeight * .85) setTimeout(() => el.classList.add('in'), i * 220) });
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         setTimeout(onScroll, 100);
+
+        /* ── REVEAL ON SCROLL (IntersectionObserver) ──────────────
+           Was previously a manual getBoundingClientRect() poll inside
+           onScroll. That approach silently stops revealing anything
+           the moment a single call throws (e.g. one missing element),
+           and can miss fast/short scroll events on mobile. An observer
+           per element is immune to both: each element reveals itself
+           independently the moment it crosses the viewport, once,
+           regardless of scroll speed or unrelated errors elsewhere. */
+        (function () {
+            var revealEls = document.querySelectorAll('.rv,.rl,.rr,.pline,#painFoot,.qbub,.cnote,.typing');
+            if (!('IntersectionObserver' in window)) {
+                revealEls.forEach(el => el.classList.add('in'));
+                return;
+            }
+            var io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+            revealEls.forEach(el => io.observe(el));
+        })();
 
 
 
