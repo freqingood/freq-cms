@@ -40,13 +40,18 @@
   --rule: rgba(240,234,223,.16);
 }
 
+/* the shared header's background is a hardcoded light rgba in
+   assets/site.css (it's built for the light content pages), so it
+   ignores the --paper override above; repoint it here to match. */
+.site-header { background: rgba(5,5,5,.88); }
+
 .ab-eyebrow { display: block; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
 .ab-statement { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(22px, 3.4vw, 30px); line-height: 1.28; margin: 0 0 16px; }
 .ab-rule { border: 0; border-top: 1px solid var(--rule); margin: 56px 0; }
 
 /* hero */
 .ab-hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: end; margin: 8px 0 0; }
-.ab-photo { aspect-ratio: 3 / 4; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper-2); display: block; width: 100%; max-width: 300px; object-fit: cover; margin-bottom: 26px; }
+.ab-photo { aspect-ratio: 3 / 4; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper-2); display: block; width: 100%; max-width: 300px; object-fit: cover; margin: 6px 0 26px; }
 .ab-name { margin-top: 22px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--ink-3); line-height: 1.9; }
 .ab-name strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: 0; text-transform: none; }
 
@@ -64,6 +69,10 @@
 .ab-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: clamp(22px, 3.6vw, 32px); color: var(--pink); line-height: 1.35; margin: 18px 0 22px; }
 .ab-quote.is-teal { color: var(--teal); }
 .ab-frag { font-family: 'Space Mono', monospace; font-size: 12.5px; letter-spacing: .03em; color: var(--ink-3); line-height: 2.1; margin: 18px 0; }
+.ab-frag-line { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .03em; color: var(--ink-3); line-height: 1.9; margin: 22px 0; }
+.ab-frag-line .mid { color: var(--rule); padding: 0 8px; }
+.ab-frag-line .pk { color: var(--pink); }
+.ab-frag-line .tl { color: var(--teal); font-weight: 600; }
 
 /* development trail (dotted connected sequence) */
 .ab-dev-trail { position: relative; margin: 30px 0 32px; padding: 50px 6px 46px; }
@@ -158,9 +167,9 @@
 
 <section class="ab-hero">
   <div>
-    <img class="ab-photo" src="kushal-portrait.jpg" alt="Kushal Jaju, founder of FREQ" width="1086" height="1448" loading="lazy">
     <span class="ab-eyebrow">Who is behind this?</span>
     <p class="ab-statement">Someone who has actually mixed music, built studios, and lived the problem.</p>
+    <img class="ab-photo" src="kushal-portrait.jpg" alt="Kushal Jaju, founder of FREQ" width="1086" height="1448" loading="lazy">
     <div class="ab-name">
       <strong>Kushal Jaju</strong>
       Founder, FREQ<br>
@@ -203,8 +212,7 @@
   <p>At the heart of FREQ is its audio engine, built through years of work on algorithms and processing systems designed around 1 fundamental idea:</p>
   <p class="ab-quote is-teal">Depth-first mixing.</p>
   <p>Instead of thinking about a mix only in terms of level, pan, and individual processing, FREQ introduces a front-to-back way of thinking about where sounds belong. That idea became the foundation for the algorithms behind the system.</p>
-  <p>The challenge was turning that idea into something that could actually respond musically, consistently, and intuitively to real music. That meant:</p>
-  <p class="ab-frag">Building.<br>Testing.<br>Listening.<br>Breaking things.<br>Rebuilding them.<br>And doing it all again.</p>
+  <p>The challenge was turning that idea into something that could actually respond musically, consistently, and intuitively to real music.</p>
 </section>
 
 <section>
@@ -283,7 +291,7 @@
 <section>
   <h2>5 years later, we're still building.</h2>
   <p>FREQ came from 5 years of asking whether there was a better way to approach something musicians spend countless hours doing.</p>
-  <p class="ab-frag">We've built it.<br>Broken it.<br>Refined it.<br>Listened.<br>Then built some more.</p>
+  <p class="ab-frag-line"><span class="pk">We've built it.</span><span class="mid">&middot;</span>Broken it.<span class="mid">&middot;</span>Refined it.<span class="mid">&middot;</span>Listened.<span class="mid">&middot;</span><span class="tl">Then built some more.</span></p>
   <p>There is still more to build, more to test, and more to learn. But the idea is no longer just an idea. It's something people can hear.</p>
   <p class="ab-quote is-teal">And now, we're ready for the FREQ beta.</p>
   <p>If you're a musician, producer, mixer, or simply curious about a different way of approaching a mix, we'd love for you to try it.</p>
