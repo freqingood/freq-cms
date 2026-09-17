@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREQ Mix — Mixes in hours, not weeks</title>
+    <meta name="description" content="FREQ Mix places every stem on a three-dimensional stage, finds a starting balance with Optimize Balance, and hands you the controls — in the browser. WAV, FLAC, MP3. 48 kHz.">
+    <link rel="canonical" href="https://thefreq.in/b2b/mix">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <meta name="theme-color" content="#050505">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FREQ Mix — Mixes in hours, not weeks">
+    <meta property="og:description" content="Three-dimensional stereo mixes with clarity you haven't heard before — from your multitrack, in the browser.">
+    <meta property="og:url" content="https://thefreq.in/b2b/mix">
+    <meta property="og:image" content="https://thefreq.in/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"FREQ Mix","url":"https://thefreq.in/b2b/mix","brand":{"@type":"Brand","name":"FREQ"},"description":"Browser-based three-dimensional mixing. Upload a multitrack, get a psychoacoustic starting balance, shape depth and export.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free during the trial period","url":"https://app.thefreq.in/signup"}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="b2b.css">
+</head>
+
+<body data-scene="mix">
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="aura" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><i class="spot"></i></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="nav">
+        <a class="brand" href="v2.html" aria-label="FREQ for labels">
+            <svg viewBox="0 0 350 330" aria-hidden="true"><g fill="#F50CA0"><path d="M26 30h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/><path d="M226 10h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V26a16 16 0 0 1 16-16z"/><path d="M296 30h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/></g><g fill="#00CED1"><path d="M166 240h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H166a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/><path d="M96 220h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16H96a16 16 0 0 1-16-16v-68a16 16 0 0 1 16-16z"/><path d="M26 240h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/></g><path fill="#fff" d="M26 140h298a16 16 0 0 1 16 16v8a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-8a16 16 0 0 1 16-16z"/></svg>
+            <b>FREQ</b><span>for labels</span>
+        </a>
+        <nav class="links" aria-label="Products">
+            <a href="mix.html" aria-current="page">Mix</a>
+            <a href="id.html">ID</a>
+            <a href="rx.html">Rx</a>
+        </nav>
+        <a class="cta-mini" href="https://app.thefreq.in/signup">Sign up <i aria-hidden="true">↗</i></a>
+    </header>
+
+    <main id="main">
+        <section class="p-hero">
+            <div class="wrap">
+                <div class="grid">
+                    <div>
+                        <p class="eyebrow"><span class="prod">FREQ Mix</span> · 01 / 03</p>
+                        <h1 class="display">Mixes in hours,<span class="l2">not weeks.</span></h1>
+                        <p class="lede">Upload your multitrack. FREQ places every stem on a three-dimensional stage, finds a balance, and hands you the controls — in the browser.</p>
+                        <div class="btn-row">
+                            <a class="btn" href="https://app.thefreq.in/signup">Start mixing <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
+                            <a class="btn ghost" href="https://app.thefreq.in/contact?intent=demo">Book a demo <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+                        </div>
+                        <p class="status live">Available now · free during the trial period</p>
+                    </div>
+                    <div class="visual" aria-hidden="true">
+                        <svg class="stage-svg" viewBox="-60 -60 120 120">
+                            <ellipse class="plane" cx="0" cy="8" rx="56" ry="20"></ellipse>
+                            <ellipse class="plane" cx="0" cy="4" rx="42" ry="14"></ellipse>
+                            <ellipse class="plane" cx="0" cy="0" rx="28" ry="9"></ellipse>
+                            <ellipse class="plane" cx="0" cy="-3" rx="14" ry="4.5"></ellipse>
+                            <g class="stem vox" data-flat="0,30" data-deep="0,20"><circle r="2.2"></circle><text y="-5" text-anchor="middle">Vocal</text></g>
+                            <g class="stem" data-flat="-38,30" data-deep="-34,10"><circle r="1.6"></circle><text y="-4" text-anchor="middle">Guitar</text></g>
+                            <g class="stem" data-flat="38,30" data-deep="34,10"><circle r="1.6"></circle><text y="-4" text-anchor="middle">Keys</text></g>
+                            <g class="stem" data-flat="-14,30" data-deep="-10,-2"><circle r="1.4"></circle><text y="-4" text-anchor="middle">Bass</text></g>
+                            <g class="stem" data-flat="14,30" data-deep="8,-5"><circle r="1.4"></circle><text y="-4" text-anchor="middle">Drums</text></g>
+                            <g class="stem" data-flat="-26,30" data-deep="-16,-8"><circle r="1.1"></circle><text y="-4" text-anchor="middle">Pad</text></g>
+                            <g class="stem" data-flat="26,30" data-deep="18,-9"><circle r="1.1"></circle><text y="-4" text-anchor="middle">Room</text></g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="whatTitle">
+            <div class="wrap">
+                <p class="eyebrow" data-rv>What you get</p>
+                <h2 class="display" id="whatTitle" data-rv>Clarity comes from depth.</h2>
+                <div class="cards">
+                    <div class="bezel" data-rv><div class="core">
+                        <p class="k">Depth</p>
+                        <h3>Front to back, not just left to right.</h3>
+                        <p>Every stem gets a position on the stage as well as a pan. Instruments stop fighting for the same slice of space.</p>
+                    </div></div>
+                    <div class="bezel" data-rv="90"><div class="core">
+                        <p class="k">Optimize Balance</p>
+                        <h3>A starting point, not a preset.</h3>
+                        <p>One pass reads the multitrack and returns a balance built on psychoacoustics. You shape from there.</p>
+                    </div></div>
+                    <div class="bezel" data-rv="180"><div class="core">
+                        <p class="k">Translation</p>
+                        <h3>Heard the way listeners hear it.</h3>
+                        <p>Check the mix on headphones, laptop, car and phone before it leaves the room.</p>
+                    </div></div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="howTitle">
+            <div class="wrap">
+                <p class="eyebrow" data-rv>How it works</p>
+                <h2 class="display" id="howTitle" data-rv>Three moves.</h2>
+                <div class="steps">
+                    <div class="step" data-rv><span class="num">01</span><span class="t">Upload</span><span class="d">Export stems from your DAW — WAV, FLAC or MP3 — and drop them in the browser. Nothing to install.</span></div>
+                    <div class="step" data-rv><span class="num">02</span><span class="t">Optimize</span><span class="d">Run Optimize Balance. Minutes later every stem has a level, a pan and a depth.</span></div>
+                    <div class="step" data-rv><span class="num">03</span><span class="t">Shape &amp; export</span><span class="d">Adjust depth, EQ, dynamics and mastering. Export at the true peak and bit depth you choose.</span></div>
+                </div>
+                <div class="spec" data-rv>
+                    <div><b>Formats</b>WAV · FLAC · MP3<br>AIFF coming soon</div>
+                    <div><b>Sample rate</b>48 kHz<br>higher rates coming</div>
+                    <div><b>Where</b>Any modern browser<br>desktop or laptop</div>
+                    <div><b>Experts</b>Invite a FREQ engineer to review a project — only after you approve it</div>
+                    <div><b>Price</b>Free during the trial period<br>tiered free / pro to follow</div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="othersTitle">
+            <div class="wrap">
+                <p class="eyebrow" data-rv>Also in FREQ</p>
+                <h2 class="display" id="othersTitle" data-rv>Make it yours. Then check it.</h2>
+                <div class="others">
+                    <a href="id.html" data-rv><span class="k">02 · FREQ ID</span><span class="t">Mixes that belong to you.</span><span class="d">The engine, tuned to your sonic fingerprint.</span></a>
+                    <a href="rx.html" data-rv="90"><span class="k">03 · FREQ Rx</span><span class="t">Know where a mix stands.</span><span class="d">Any mix, read against your fingerprint.</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-cta" aria-labelledby="ctaTitle">
+            <div class="wrap">
+                <h2 class="display" id="ctaTitle" data-rv>Drop a multitrack in.</h2>
+                <p class="lede" data-rv>Hear a three-dimensional balance of your own song before you decide anything.</p>
+                <div class="btn-row" data-rv>
+                    <a class="btn" href="https://app.thefreq.in/signup">Sign up free <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
+                    <a class="btn ghost" href="https://app.thefreq.in/contact?intent=demo">Book a demo <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="v2.html"><b>FREQ</b><span>— The architecture of better sound.</span></a>
+            <nav aria-label="Footer">
+                <a href="mix.html">FREQ Mix</a><a href="id.html">FREQ ID</a><a href="rx.html">FREQ Rx</a>
+                <a href="https://thefreq.in">thefreq.in</a>
+                <a href="https://www.linkedin.com/in/kushal-jaju-5ba001200" rel="noopener">LinkedIn</a>
+                <a href="https://www.instagram.com/thefreq.in" rel="noopener">Instagram</a>
+            </nav>
+            <span>Alias Analogue Music Studio</span>
+        </div>
+    </footer>
+    <script src="b2b.js" defer></script>
+</body>
+
+</html>
