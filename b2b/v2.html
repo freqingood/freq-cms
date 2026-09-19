@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FREQ for Labels — One engine. Three ways in.</title>
-    <meta name="description" content="FREQ Mix, FREQ ID and FREQ Rx: three-dimensional mixes in hours, a mixing engine tuned to your label's sonic fingerprint, and a way to read every mix against it.">
+    <title>FREQ for Labels — Your sound, written down.</title>
+    <meta name="description" content="FREQ is an algorithm-based mixing platform built on a Depth First Mixing Architecture. Deep stereo mixes in hours, moulded to your label's Sonic Fingerprint, and checked against it before every release.">
     <link rel="canonical" href="https://thefreq.in/b2b/v2">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <meta name="theme-color" content="#050505">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="FREQ for Labels — Your sound lives in someone's ears. So we wrote it down.">
-    <meta property="og:description" content="FREQ Mix · FREQ ID · FREQ Rx. Mixes in hours, tuned to your sonic fingerprint, checked against it before release.">
+    <meta property="og:title" content="FREQ for Labels — Every catalogue has a sound. Almost no one can describe it.">
+    <meta property="og:description" content="FREQ Mix · FREQ ID · FREQ Rx. Deep stereo mixes in hours, moulded to your Sonic Fingerprint, checked against it before release.">
     <meta property="og:url" content="https://thefreq.in/b2b/v2">
     <meta property="og:site_name" content="thefreq.in">
     <meta property="og:image" content="https://thefreq.in/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FREQ for Labels">
-    <meta name="twitter:description" content="One engine. Three ways in.">
+    <meta name="twitter:description" content="Mix it. Mould it. Make sure it sticks.">
     <meta name="twitter:image" content="https://thefreq.in/og-image.png">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"FREQ for Labels","url":"https://thefreq.in/b2b/v2","publisher":{"@type":"Organization","name":"FREQ","url":"https://thefreq.in"},"hasPart":[{"@type":"Product","name":"FREQ Mix","url":"https://thefreq.in/b2b/mix"},{"@type":"Product","name":"FREQ ID","url":"https://thefreq.in/b2b/id"},{"@type":"Product","name":"FREQ Rx","url":"https://thefreq.in/b2b/rx"}]}</script>
 
@@ -232,7 +232,20 @@
             .progress { display: none; }
         }
 
-        /* ---- 03 cta / footer -------------------------------------------- */
+        /* ---- 04 what FREQ isn't ------------------------------------------ */
+        #isnt { padding-block: clamp(96px, 16vh, 200px) clamp(40px, 8vh, 96px); }
+        #isnt .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+        #isnt .display { font-size: clamp(1.8rem, 3vw + .4rem, 3.4rem); }
+        #isnt .facts { display: grid; gap: 22px; padding-top: 6px; }
+        #isnt .facts p { color: var(--muted); max-width: 30em; }
+        #isnt .facts p b { font-weight: 400; color: var(--cream); }
+        #isnt .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; padding-top: 22px; border-top: 1px solid var(--line); }
+        #isnt .stats div { display: grid; gap: 4px; }
+        #isnt .stats b { font-family: var(--display); font-weight: 600; font-size: clamp(1.15rem, 1vw + .7rem, 1.5rem); letter-spacing: -.02em; color: var(--cream); }
+        #isnt .stats span { font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+        @media (max-width: 899px) { #isnt .grid { grid-template-columns: 1fr; gap: 28px; } #isnt .stats { grid-template-columns: 1fr; gap: 16px; } }
+
+        /* ---- 05 cta / footer -------------------------------------------- */
         #cta { min-height: 100dvh; display: grid; align-content: center; text-align: center; padding-block: 120px; }
         #cta .display { margin-inline: auto; max-width: 11em; }
         #cta .lede { margin-inline: auto; }
@@ -272,7 +285,7 @@
                     <text x="52" y="1" text-anchor="start">Low-end</text>
                     <text x="37" y="38" text-anchor="start">Vocal</text>
                     <text x="0" y="53" text-anchor="middle">Stereo</text>
-                    <text x="-37" y="38" text-anchor="end">Transients</text>
+                    <text x="-37" y="38" text-anchor="end">Harmonics</text>
                     <text x="-52" y="1" text-anchor="end">Loudness</text>
                     <text x="-37" y="-36" text-anchor="end">Depth</text>
                 </g>
@@ -286,7 +299,7 @@
             <b>FREQ</b><span>for labels</span>
         </a>
         <nav class="links" aria-label="Products">
-            <a href="#offerings">Offerings</a>
+            <a href="#offerings">Workflow</a>
             <a href="mix.html">Mix</a>
             <a href="id.html">ID</a>
             <a href="rx.html">Rx</a>
@@ -302,19 +315,18 @@
                 <div class="hero-inner">
                     <p class="eyebrow" data-rv>For labels, studios &amp; production teams</p>
                     <h1 class="display" id="heroTitle">
-                        <span class="line"><span class="w">Every label has a sound.</span></span>
-                        <span class="line l2"><span class="w">Almost none can put it in writing.</span></span>
+                        <span class="line"><span class="w">Every catalogue has a sound.</span></span>
+                        <span class="line l2"><span class="w">Almost no one can describe it.</span></span>
                     </h1>
-                    <p class="lede" data-rv>FREQ reads your approved catalog, turns the sound inside it into a measurable fingerprint — and gives your team three ways to use it.</p>
                     <div class="btn-row" data-rv>
                         <a class="btn" href="https://app.thefreq.in/contact?intent=demo">Book a demo <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
-                        <a class="btn ghost" href="#offerings">See the offerings <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3 8l5 5 5-5"/></svg></span></a>
+                        <a class="btn ghost" href="#offerings">See the workflow <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3 8l5 5 5-5"/></svg></span></a>
                     </div>
                     <div class="bundle-strip" data-rv aria-label="The FREQ bundle">
-                        <span class="bs-k">The FREQ bundle</span>
-                        <a href="#offer-mix"><b>Mix</b><span>3D mixes in hours</span></a>
-                        <a href="#offer-id"><b>ID</b><span>your sonic fingerprint</span></a>
-                        <a href="#offer-rx"><b>Rx</b><span>read any mix against it</span></a>
+                        <span class="bs-k">The workflow</span>
+                        <a href="#offer-mix"><b>Mix</b><span>deep stereo mixes in hours</span></a>
+                        <a href="#offer-id"><b>ID</b><span>moulded to your identity</span></a>
+                        <a href="#offer-rx"><b>Rx</b><span>checked, every release</span></a>
                     </div>
                     <div class="hero-foot" data-rv>
                         <span class="scroll"><i aria-hidden="true"></i> Scroll</span>
@@ -328,15 +340,15 @@
         <section id="problem" aria-labelledby="problemTitle">
             <div class="sticky">
                 <div class="wrap">
-                    <p class="eyebrow">The problem</p>
-                    <h2 class="display" id="problemTitle">Your sound lives in someone's ears.<span class="l2">That's the whole problem.</span></h2>
+                    <p class="eyebrow">01 · The problem</p>
+                    <h2 class="display" id="problemTitle">Your sound lives in someone's ears.<span class="l2">Nobody can say what it is.</span></h2>
                     <div class="lines">
+                        <p class="pl">Ten producers. Five mixing engineers. Three studios. Every record passes. <em>Together, they don't sound like one label.</em></p>
                         <p class="pl">A record comes back from a freelance engineer. It's good. <em>It just isn't you.</em></p>
-                        <p class="pl">The one person who could hear the difference instantly <em>doesn't work here anymore.</em></p>
                         <p class="pl">“Make it sound more like us” goes back in the notes. <em>Nobody on the thread can define us.</em></p>
                     </div>
                     <div class="closer">
-                        <p class="quote">Your sound is the most valuable thing your label owns — and the only asset you have never written down.</p>
+                        <p class="quote">Your sound is the most valuable thing your label owns — and the only asset you have never written down. It needs a fingerprint.</p>
                     </div>
                 </div>
             </div>
@@ -346,13 +358,13 @@
         <section id="fingerprint" aria-labelledby="fpTitle">
             <div class="sticky">
                 <div class="wrap">
-                    <p class="eyebrow" style="justify-content:center">The sonic fingerprint</p>
+                    <p class="eyebrow" style="justify-content:center">02 · The solution</p>
                     <h2 class="display" id="fpTitle">So we wrote it down.</h2>
                 </div>
                 <div aria-hidden="true"></div>
                 <div class="wrap" id="fpCaption">
-                    <p class="caption"><b>Eight dimensions, one signature</b> — measured from the releases you already approved. Not an average. The parts that make you recognisable, kept.</p>
-                    <div class="dims"><span>Tonal balance</span><span>Dynamics</span><span>Low-end</span><span>Vocal presence</span><span>Stereo</span><span>Transients</span><span>Loudness</span><span>Depth</span></div>
+                    <p class="caption"><b>Your sonic identity, in numbers.</b> FREQ analyses the masters you already approved — dynamics, tonal balance, harmonics, density — and draws the boundaries your sound lives within. Not a template. Not an average. Room to create, inside a shape that is unmistakably yours.</p>
+                    <div class="dims"><span>Tonal balance</span><span>Dynamics</span><span>Low-end</span><span>Vocal presence</span><span>Stereo</span><span>Harmonics</span><span>Loudness</span><span>Depth</span></div>
                 </div>
             </div>
         </section>
@@ -361,32 +373,32 @@
         <section id="offerings" aria-labelledby="offTitle">
             <div class="head">
                 <div class="wrap">
-                    <p class="eyebrow" data-rv>The FREQ bundle</p>
-                    <h2 class="display" id="offTitle" data-rv>One engine.<span class="l2">Three offerings.</span></h2>
-                    <p class="lede" data-rv>Start with Mix today. Add ID and Rx as your catalog becomes your standard.</p>
+                    <p class="eyebrow" data-rv>03 · The workflow</p>
+                    <h2 class="display" id="offTitle" data-rv>Mix it. Mould it.<span class="l2">Make sure it sticks.</span></h2>
+                    <p class="lede" data-rv>Three offerings, one workflow. Deep stereo mixes in hours, shaped to your identity, and checked against it before every release.</p>
                     <div class="offers" data-rv>
                         <article class="bezel offer" id="offer-mix">
                             <div class="core">
                                 <div class="of-top"><span class="of-name">FREQ Mix</span><span class="of-status live">Available now</span></div>
-                                <h3>Mixes in hours, not weeks.</h3>
-                                <p>Three-dimensional stereo mixes from your multitrack, in the browser.</p>
-                                <div class="of-links"><a class="link" href="mix.html">Explore <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="0">See it in action ↓</button></div>
+                                <h3>Deep stereo mixes in hours.</h3>
+                                <p>A Depth First Mixing Architecture. From multitrack to a three-dimensional mix, in the browser.</p>
+                                <div class="of-links"><a class="link" href="mix.html">Know more <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="0">See it in action ↓</button></div>
                             </div>
                         </article>
                         <article class="bezel offer" id="offer-id">
                             <div class="core">
                                 <div class="of-top"><span class="of-name">FREQ ID</span><span class="of-status">Early access</span></div>
-                                <h3>Mixes that belong to you.</h3>
-                                <p>Your sonic fingerprint, measured from your catalog. The engine, tuned to it.</p>
-                                <div class="of-links"><a class="link" href="id.html">Explore <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="1">See it in action ↓</button></div>
+                                <h3>Mould them to your identity.</h3>
+                                <p>Your Sonic Fingerprint, measured from your catalogue. The engine, tuned to it.</p>
+                                <div class="of-links"><a class="link" href="id.html">Know more <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="1">See it in action ↓</button></div>
                             </div>
                         </article>
                         <article class="bezel offer" id="offer-rx">
                             <div class="core">
                                 <div class="of-top"><span class="of-name">FREQ Rx</span><span class="of-status">In development</span></div>
-                                <h3>Know where a mix stands.</h3>
-                                <p>Any mix, read against your fingerprint before anyone says yes.</p>
-                                <div class="of-links"><a class="link" href="rx.html">Explore <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="2">See it in action ↓</button></div>
+                                <h3>Make sure it sticks.</h3>
+                                <p>Every incoming mix, read against your fingerprint before anyone says yes.</p>
+                                <div class="of-links"><a class="link" href="rx.html">Know more <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="2">See it in action ↓</button></div>
                             </div>
                         </article>
                     </div>
@@ -401,9 +413,9 @@
                             <div>
                                 <p class="n">01 / 03</p>
                                 <p class="name">FREQ Mix</p>
-                                <h3>Mixes in hours, not weeks.</h3>
-                                <p>Three-dimensional stereo mixes with clarity you haven't heard before — from your multitrack, in the browser.</p>
-                                <a class="link" href="mix.html">Explore FREQ Mix <i aria-hidden="true">→</i></a>
+                                <h3>Deep stereo mixes in hours, not weeks.</h3>
+                                <p>FREQ places every element front-to-back, not just left-to-right. Millions of lines of mathematics and a possibility space of over 35 trillion outcomes, so each mix becomes the best version of itself.</p>
+                                <a class="link" href="mix.html">Know more about FREQ Mix <i aria-hidden="true">→</i></a>
                             </div>
                             <div class="slot">
                                 <svg class="stage-svg" id="stageSvg" viewBox="-60 -60 120 120" aria-hidden="true">
@@ -428,9 +440,9 @@
                             <div>
                                 <p class="n">02 / 03</p>
                                 <p class="name">FREQ ID</p>
-                                <h3>Mixes that belong to you.</h3>
-                                <p>The FREQ engine, tuned to your sonic fingerprint. Every mix arrives already sounding like your label.</p>
-                                <a class="link" href="id.html">Explore FREQ ID <i aria-hidden="true">→</i></a>
+                                <h3>Mould them to your identity.</h3>
+                                <p>Think brand colours: the same palette in different proportions, and you still know whose it is. FREQ ID tunes the engine to your fingerprint, so different producers, engineers and songs still arrive sounding like one label. Consistency without uniformity.</p>
+                                <a class="link" href="id.html">Know more about FREQ ID <i aria-hidden="true">→</i></a>
                             </div>
                             <div class="slot" data-fp="a"></div>
                         </div>
@@ -441,14 +453,14 @@
                             <div>
                                 <p class="n">03 / 03</p>
                                 <p class="name">FREQ Rx</p>
-                                <h3>Know where a mix stands.</h3>
-                                <p>See any mix against your fingerprint — what's inside your range, what isn't, and by how much.</p>
+                                <h3>Make sure it sticks.</h3>
+                                <p>Your fingerprint doubles as your QA/QC reference. Any mix or master, from any engineer, read against it: what sits inside your range, what doesn't, and by how much.</p>
                                 <div class="readout" aria-label="Example readout">
                                     <div><span>Low-end</span><span class="out">+1.8 dB · 60–110 Hz</span></div>
                                     <div><span>Stereo</span><span class="out">−14% width · chorus</span></div>
                                     <div><span>Tonal · Dynamics · Vocal · Depth</span><span class="in">in range</span></div>
                                 </div>
-                                <a class="link" href="rx.html">Explore FREQ Rx <i aria-hidden="true">→</i></a>
+                                <a class="link" href="rx.html">Know more about FREQ Rx <i aria-hidden="true">→</i></a>
                             </div>
                             <div class="slot" data-fp="ab"></div>
                         </div>
@@ -458,12 +470,33 @@
             </div>
         </section>
 
-        <!-- 03 · CTA -->
+        <!-- 04 · WHAT FREQ ISN'T -->
+        <section id="isnt" aria-labelledby="isntTitle">
+            <div class="wrap">
+                <div class="grid">
+                    <div>
+                        <p class="eyebrow" data-rv>04 · What FREQ isn't</p>
+                        <h2 class="display" id="isntTitle" data-rv>Not an AI model.<span class="l2">Not trained on your IP.</span></h2>
+                    </div>
+                    <div class="facts">
+                        <p data-rv><b>FREQ is an algorithm-based mixing platform.</b> Millions of lines of mathematics and a sonic possibility space of over 35 trillion outcomes, built to work on your music — not to learn it.</p>
+                        <p data-rv>Your catalogue is never turned into a general-purpose model. It sets the boundaries of your fingerprint, and that is all it does.</p>
+                        <div class="stats" data-rv aria-label="Key facts">
+                            <div><b>Algorithmic</b><span>not generative</span></div>
+                            <div><b>35 trillion+</b><span>possible outcomes</span></div>
+                            <div><b>Zero</b><span>models trained on your IP</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 · CTA -->
         <section id="cta" aria-labelledby="ctaTitle">
             <div class="wrap">
                 <p class="eyebrow" data-rv style="justify-content:center">Start</p>
-                <h2 class="display" id="ctaTitle" data-rv>Hear what your catalog already knows.</h2>
-                <p class="lede" data-rv>A demo takes thirty minutes. Bring a few releases you'd stand behind.</p>
+                <h2 class="display" id="ctaTitle" data-rv>Leave an impression.<span class="l2">Leave an imprint.</span></h2>
+                <p class="lede" data-rv>Your producers can change. Your engineers can change. Your music can change. Your sonic identity doesn't have to. A demo takes thirty minutes — bring a few releases you'd stand behind.</p>
                 <div class="btn-row" data-rv>
                     <a class="btn" href="https://app.thefreq.in/contact?intent=demo">Book a demo <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
                     <a class="btn ghost" href="https://app.thefreq.in/signup">Sign up free <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
@@ -777,7 +810,8 @@
                 });
             }
 
-            // 02 -> 03: settles large and slow behind the close
+            // 03 -> 04: recedes behind "what FREQ isn't", then settles large and slow behind the close
+            stage('#isnt', 'top bottom', 'top 30%', { op: .14, x: 0, y: 6, s: 1.35, bOp: 0, grid: 0, rot: 24 });
             stage('#cta', 'top bottom', 'center center', { op: .2, x: 0, y: 6, s: 1.35, bOp: 0, grid: 0, rot: 40 });
 
             return function () {
