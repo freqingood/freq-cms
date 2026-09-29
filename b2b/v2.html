@@ -70,6 +70,10 @@
         body[data-scene="id"]    { --a1: .28; --a2: .85; --a3: .14; }
         body[data-scene="rx"]    { --a1: .32; --a2: .34; --a3: .62; }
         body[data-scene="cta"]   { --a1: .6;  --a2: .62; --a3: .24; }
+        /* a soft scrim between the fingerprint and the copy; lifted for the scene where the print IS the content */
+        .veil { position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: opacity 1.4s var(--ease);
+            background: radial-gradient(125% 95% at 50% 46%, oklch(0.05 0 0 / .52), oklch(0.05 0 0 / .22) 55%, transparent 84%); }
+        body[data-scene="print"] .veil { opacity: .28; }
         .grain { position: fixed; inset: -50%; z-index: 40; pointer-events: none; opacity: .045;
             background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
             background-size: 240px 240px; }
@@ -124,6 +128,12 @@
         p { margin: 0; }
         .muted { color: var(--muted); }
 
+        /* readability: the fingerprint moves behind the page, so copy carries its own dark halo */
+        .display, .lede, .eyebrow, #problem .pl, #problem .quote, #fingerprint .caption, #fingerprint .dims,
+        .offer h3, .offer p, .panel h3, .panel p, .panel .name, .panel .n, .readout,
+        #case .stats b, #case table, #isnt .facts p, #isnt .stats b, #cta .maker
+            { text-shadow: 0 1px 2px oklch(0.05 0 0 / .8), 0 6px 26px oklch(0.05 0 0 / .95); }
+
         .btn { --btn-bg: var(--pink); --btn-fg: #fff; position: relative; display: inline-flex; align-items: center; gap: 14px; padding: 6px 6px 6px 22px; border-radius: 999px;
             background: var(--btn-bg); color: var(--btn-fg); font-weight: 500; font-size: 15px; line-height: 1; border: 1px solid transparent; cursor: pointer; min-height: 48px;
             transition: transform .6s var(--ease), border-color .6s var(--ease); }
@@ -164,14 +174,18 @@
         .bundle-strip a:hover { border-color: var(--line-3); background: oklch(1 0 0 / .045); }
 
         /* ---- 01 the problem: sticky viewport, lines step in and dim ------ */
-        #problem { min-height: 280vh; }
+        #problem { min-height: 250vh; }
         #problem .sticky { position: sticky; top: 0; min-height: 100dvh; display: grid; align-items: center; padding-block: 120px; }
         #problem .display { font-size: clamp(1.8rem, 3vw + .4rem, 3.4rem); margin-bottom: .7em; }
-        #problem .pl { font-family: var(--display); font-weight: 600; letter-spacing: -.025em; line-height: 1.15; font-size: clamp(1.35rem, 2vw + .5rem, 2.6rem); color: var(--cream); max-width: 22em; margin: 0 0 .6em; text-wrap: balance; }
-        #problem .pl em { font-style: normal; font-weight: 600; color: var(--muted); }
-        #problem .pl .num { color: var(--teal); font-variant-numeric: tabular-nums; }
-        #problem .closer { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); max-width: 30em; }
-        #problem .quote { font-family: var(--sans); font-weight: 300; font-size: clamp(1.05rem, .8vw + .8rem, 1.45rem); line-height: 1.4; color: var(--ink); margin: 0; }
+        #problem .lines { display: grid; gap: clamp(20px, 3.2vh, 38px); max-width: 42em; }
+        #problem .pl { display: grid; grid-template-columns: clamp(112px, 13vw, 176px) minmax(0, 1fr); gap: 4px 26px; align-items: baseline; margin: 0; }
+        #problem .fig { font-family: var(--display); font-weight: 600; letter-spacing: -.04em; line-height: .95; font-size: clamp(1.4rem, 1.8vw + .45rem, 2.5rem); color: var(--teal); font-variant-numeric: tabular-nums; white-space: nowrap; }
+        #problem .fig small { font-size: .42em; letter-spacing: .12em; text-transform: uppercase; font-family: var(--mono); color: var(--dim); margin-left: .5em; }
+        #problem .txt { font-family: var(--display); font-weight: 600; letter-spacing: -.02em; line-height: 1.18; font-size: clamp(1.05rem, 1.1vw + .6rem, 1.65rem); color: var(--cream); text-wrap: balance; }
+        #problem .txt em { display: block; font-style: normal; font-weight: 400; font-family: var(--sans); font-size: .8em; line-height: 1.35; color: var(--muted); margin-top: .4em; }
+        #problem .closer { margin-top: clamp(30px, 5vh, 50px); padding-top: 26px; border-top: 1px solid var(--line); max-width: 26em; }
+        #problem .quote { font-family: var(--sans); font-weight: 300; font-size: clamp(1.05rem, .7vw + .8rem, 1.35rem); line-height: 1.4; color: var(--ink); margin: 0; }
+        @media (max-width: 599px) { #problem .pl { grid-template-columns: 1fr; gap: 2px; } }
 
         /* ---- offerings cards (the bundle) -------------------------------- */
         .offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 48px; }
@@ -193,7 +207,7 @@
         @media (max-width: 899px) { .offers { grid-template-columns: 1fr; } .jump { display: none; } }
 
         /* ---- 02 so we wrote it down (sticky; the shape is the content) --- */
-        #fingerprint { min-height: 260vh; }
+        #fingerprint { min-height: 225vh; }
         #fingerprint .sticky { position: sticky; top: 0; height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; padding-block: 110px 56px; text-align: center; }
         #fingerprint .display { margin-inline: auto; max-width: 12em; font-size: clamp(1.9rem, 3.5vw + .4rem, 3.9rem); }
         #fingerprint .caption { max-width: 34em; margin-inline: auto; color: var(--muted); }
@@ -227,7 +241,7 @@
         .stage-svg .stem text { font-family: var(--mono); font-size: 3px; letter-spacing: .3px; fill: var(--dim); text-transform: uppercase; }
         .stage-svg .stem.vox circle { fill: var(--teal); }
         /* readout (FREQ Rx) */
-        .readout { margin-top: 26px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .04em; max-width: 26em; }
+        .readout { margin-top: 26px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .04em; max-width: 32em; }
         .readout div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line-2); color: var(--muted); }
         .readout .out { color: var(--pink); }
         .readout .in { color: rgba(0, 206, 209, .85); }
@@ -298,6 +312,7 @@
 <body class="no-js">
     <a class="skip" href="#main">Skip to content</a>
     <div class="aura" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><i class="spot"></i></div>
+    <div class="veil" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
 
     <!-- The fingerprint: seven ridge paths that start as a stacked waveform
@@ -365,9 +380,9 @@
                     </div>
                     <div class="bundle-strip" data-rv aria-label="The FREQ bundle">
                         <span class="bs-k">The workflow</span>
-                        <a href="#offer-mix"><b>Mix</b><span>first mix in under 30 min</span></a>
-                        <a href="#offer-id"><b>ID</b><span>moulded to your identity</span></a>
-                        <a href="#offer-rx"><b>Rx</b><span>checked, every release</span></a>
+                        <a href="#offer-mix"><b>Mix</b><span>in 30 minutes</span></a>
+                        <a href="#offer-id"><b>ID</b><span>moulded to you</span></a>
+                        <a href="#offer-rx"><b>Rx</b><span>checked before release</span></a>
                     </div>
                     <div class="hero-foot" data-rv>
                         <span class="scroll"><i aria-hidden="true"></i> Scroll</span>
@@ -384,12 +399,12 @@
                     <p class="eyebrow">01 · The problem</p>
                     <h2 class="display" id="problemTitle">Your sound lives in someone's ears.<span class="l2">Every release pays for that.</span></h2>
                     <div class="lines">
-                        <p class="pl"><span class="num">10</span> producers. <span class="num">5</span> mixing engineers. <span class="num">3</span> studios. Every record passes. <em>Together, they don't sound like one label.</em></p>
-                        <p class="pl">Every mix starts from zero. The balance is built by hand. Production problems surface halfway through. <em><span class="num">40–80</span> hours of active mixing per <span class="num">10</span>-track release.</em></p>
-                        <p class="pl">“Make it sound more like us” goes back in the notes. <em>Nobody can define us, so round <span class="num">3</span> starts on Monday.</em></p>
+                        <p class="pl"><span class="fig">10·5·3</span><span class="txt">Producers, engineers, studios.<em>One catalogue. Three sounds.</em></span></p>
+                        <p class="pl"><span class="fig">40–80<small>hrs</small></span><span class="txt">Of mixing per 10-track release.<em>Every mix starts from zero.</em></span></p>
+                        <p class="pl"><span class="fig">Round 3</span><span class="txt">“Make it more like us.”<em>Nobody can define “us”.</em></span></p>
                     </div>
                     <div class="closer">
-                        <p class="quote">Both problems share a root. Your sound is the most valuable thing your label owns, and it has never been written down — so every release pays twice: once to mix it, once to make it yours. It needs a fingerprint.</p>
+                        <p class="quote">Your sound is the most valuable thing the label owns — and it has never been written down.</p>
                     </div>
                 </div>
             </div>
@@ -404,7 +419,7 @@
                 </div>
                 <div aria-hidden="true"></div>
                 <div class="wrap" id="fpCaption">
-                    <p class="caption"><b>Your sonic identity, in numbers.</b> FREQ analyses the masters you already approved — dynamics, tonal balance, harmonics, density — and draws the boundaries your sound lives within. Not a template. Not an average. Room to create, inside a shape that is unmistakably yours — and once it's in numbers, nobody has to guess, and nobody pays for the guessing.</p>
+                    <p class="caption"><b>Your sonic identity, in numbers.</b> FREQ reads the masters you already approved and draws the boundaries your sound lives within. Not a template — room to create, inside a shape that is unmistakably yours.</p>
                     <div class="dims"><span>Tonal balance</span><span>Dynamics</span><span>Low-end</span><span>Vocal presence</span><span>Stereo</span><span>Harmonics</span><span>Loudness</span><span>Depth</span></div>
                 </div>
             </div>
@@ -416,13 +431,13 @@
                 <div class="wrap">
                     <p class="eyebrow" data-rv>03 · The workflow</p>
                     <h2 class="display" id="offTitle" data-rv>Mix it. Mould it.<span class="l2">Make sure it sticks.</span></h2>
-                    <p class="lede" data-rv>FREQ solves the mixing problem end to end — from production fix to final QA. A first mix in under thirty minutes, shaped to your identity, and checked against it before every release.</p>
+                    <p class="lede" data-rv>One loop — production fix to final QA.</p>
                     <div class="offers" data-rv>
                         <article class="bezel offer" id="offer-mix">
                             <div class="core">
                                 <div class="of-top"><span class="of-name">FREQ Mix</span><span class="of-status live">Available now</span></div>
                                 <h3>Deep stereo mixes in hours.</h3>
-                                <p>A Depth First Mixing Architecture. Optimize Balance sets the starting balance, Production Fix catches problems early, and the first mix lands in under thirty minutes.</p>
+                                <p>Depth First architecture. The starting balance is computed, not built by hand.</p>
                                 <div class="of-links"><a class="link" href="mix.html">Know more <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="0">See it in action ↓</button></div>
                             </div>
                         </article>
@@ -438,7 +453,7 @@
                             <div class="core">
                                 <div class="of-top"><span class="of-name">FREQ Rx</span><span class="of-status">In development</span></div>
                                 <h3>Make sure it sticks.</h3>
-                                <p>Every incoming mix, read against your fingerprint before anyone says yes. A manual review becomes a readout.</p>
+                                <p>Every incoming mix, read against your fingerprint. The listening round becomes a readout.</p>
                                 <div class="of-links"><a class="link" href="rx.html">Know more <i aria-hidden="true">→</i></a><button class="jump" type="button" data-panel="2">See it in action ↓</button></div>
                             </div>
                         </article>
@@ -455,7 +470,7 @@
                                 <p class="n">01 / 03</p>
                                 <p class="name">FREQ Mix</p>
                                 <h3>Deep stereo mixes in hours, not weeks.</h3>
-                                <p>Every element placed front-to-back, not just left-to-right. Optimize Balance builds the starting balance, Production Fix flags recording problems before they cost mixing time, and a possibility space of over 35 trillion outcomes finds the best version of each mix. First pass: under thirty minutes.</p>
+                                <p>Every element placed front-to-back, not just left-to-right. A possibility space of 35 trillion outcomes, searched for the best version of the mix. First pass: under thirty minutes.</p>
                                 <a class="link" href="mix.html">Know more about FREQ Mix <i aria-hidden="true">→</i></a>
                             </div>
                             <div class="slot">
@@ -482,7 +497,7 @@
                                 <p class="n">02 / 03</p>
                                 <p class="name">FREQ ID</p>
                                 <h3>Mould them to your identity.</h3>
-                                <p>Think brand colours: the same palette in different proportions, and you still know whose it is. FREQ ID tunes the engine to your fingerprint, so different producers, engineers and songs still arrive sounding like one label. Consistency without uniformity.</p>
+                                <p>Brand colours, for sound. The same palette in different proportions — different producers, different songs, one label.</p>
                                 <a class="link" href="id.html">Know more about FREQ ID <i aria-hidden="true">→</i></a>
                             </div>
                             <div class="slot" data-fp="a"></div>
@@ -495,7 +510,7 @@
                                 <p class="n">03 / 03</p>
                                 <p class="name">FREQ Rx</p>
                                 <h3>Make sure it sticks.</h3>
-                                <p>Your fingerprint doubles as your QA/QC reference. Any mix or master, from any engineer, read against it: what sits inside your range, what doesn't, and by how much. The listening round becomes a readout.</p>
+                                <p>Your fingerprint doubles as the QA/QC reference. Any mix, any engineer: what sits inside your range, what doesn't, and by how much.</p>
                                 <div class="readout" aria-label="Example readout">
                                     <div><span>Low-end</span><span class="out">+1.8 dB · 60–110 Hz</span></div>
                                     <div><span>Stereo</span><span class="out">−14% width · chorus</span></div>
@@ -518,7 +533,7 @@
                     <div>
                         <p class="eyebrow" data-rv>04 · The business case</p>
                         <h2 class="display" id="caseTitle" data-rv>More output.<span class="l2">Less mixing capacity consumed.</span></h2>
-                        <p class="lede" data-rv>The identity problem and the hours problem have the same fix. Write the sound down once, and every mix after it starts closer to finished.</p>
+                        <p class="lede" data-rv>Write the sound down once. Every mix after it starts closer to finished.</p>
                         <div class="stats" data-rv aria-label="Headline numbers">
                             <div><b>≤30 min</b><span>first mix</span></div>
                             <div><b>8–16×</b><span>less active mixing time*</span></div>
@@ -537,7 +552,7 @@
                                 <tr class="sum"><th scope="row">10-track active mixing*</th><td>40–80 hrs</td><td>≤5 hrs</td></tr>
                             </tbody>
                         </table>
-                        <p class="fn">* Active engineer time on the mix itself. Based on FREQ sessions to date; your numbers depend on the catalogue and the team.</p>
+                        <p class="fn">* Active engineer time on the mix itself, from FREQ sessions to date.</p>
                     </div>
                 </div>
             </div>
@@ -552,8 +567,8 @@
                         <h2 class="display" id="isntTitle" data-rv>Not an AI model.<span class="l2">Not trained on your IP.</span></h2>
                     </div>
                     <div class="facts">
-                        <p data-rv><b>FREQ is an algorithm-based mixing platform.</b> Millions of lines of mathematics and a sonic possibility space of over 35 trillion outcomes, built to work on your music — not to learn it.</p>
-                        <p data-rv>Your catalogue is never turned into a general-purpose model. It sets the boundaries of your fingerprint, and that is all it does.</p>
+                        <p data-rv><b>An algorithm, not a model.</b> Millions of lines of mathematics, built to work on your music — not to learn it.</p>
+                        <p data-rv>Your catalogue sets the boundaries of your fingerprint. Nothing else.</p>
                         <div class="stats" data-rv aria-label="Key facts">
                             <div><b>Algorithmic</b><span>not generative</span></div>
                             <div><b>35 trillion+</b><span>possible outcomes</span></div>
@@ -569,7 +584,7 @@
             <div class="wrap">
                 <p class="eyebrow" data-rv style="justify-content:center">Start</p>
                 <h2 class="display" id="ctaTitle" data-rv>Leave an impression.<span class="l2">Leave an imprint.</span></h2>
-                <p class="lede" data-rv>Producers, engineers and songs will come and go. The sound they leave behind doesn't have to. A demo takes thirty minutes, about as long as your first mix — bring a few releases you'd stand behind.</p>
+                <p class="lede" data-rv>Bring a few releases you'd stand behind. Thirty minutes — about as long as your first mix.</p>
                 <div class="btn-row" data-rv>
                     <a class="btn" href="https://app.thefreq.in/contact?intent=demo">Book a demo <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
                     <a class="btn ghost" href="https://app.thefreq.in/signup">Sign up free <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
@@ -674,7 +689,7 @@
             PRINT.push(printPts(DIMS_A, f, k)); CLOCK.push(clockPts(k));
             var el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             el.setAttribute('stroke-width', (k === R - 1 ? .6 : .32).toString());
-            ringOp.push(.28 + .72 * k / (R - 1));
+            ringOp.push(.22 + .56 * k / (R - 1));
             el.style.opacity = ringOp[k].toFixed(2);
             if (k === R - 1) el.style.fill = 'rgba(0,206,209,.05)';
             else if (k === 3) el.style.fill = 'rgba(0,206,209,.045)';
@@ -687,7 +702,7 @@
            Pose — derived from stage triggers' progress every frame, then
            eased. (Deterministic under refresh, resize and scroll jumps.)
            ------------------------------------------------------------ */
-        var S = { m: 0, c: 0, ph: 0, op: .55, x: 16, y: 16, s: 1.2, grid: 0, bOp: 0, rot: 0, breathe: 1 };
+        var S = { m: 0, c: 0, ph: 0, op: .34, x: 16, y: 16, s: 1.2, grid: 0, bOp: 0, rot: 0, breathe: 1 };
         var KEYS = ['m', 'c', 'op', 'x', 'y', 's', 'grid', 'bOp', 'rot'];
         var poseBase = null, poseStages = [];
         function targetPose() {
@@ -746,7 +761,7 @@
             var html = '';
             for (var k = 0; k < R; k++) {
                 var f = .3 + .7 * k / (R - 1);
-                html += '<path d="' + toD(printPts(DIMS_A, f, k)) + '" fill="' + (k === R - 1 ? 'rgba(0,206,209,.05)' : k === 3 ? 'rgba(0,206,209,.045)' : 'none') + '" stroke="#ffffff" stroke-width="' + (k === R - 1 ? .6 : .32) + '" opacity="' + (.28 + .72 * k / (R - 1)).toFixed(2) + '" stroke-linejoin="round"/>';
+                html += '<path d="' + toD(printPts(DIMS_A, f, k)) + '" fill="' + (k === R - 1 ? 'rgba(0,206,209,.05)' : k === 3 ? 'rgba(0,206,209,.045)' : 'none') + '" stroke="#ffffff" stroke-width="' + (k === R - 1 ? .6 : .32) + '" opacity="' + (.22 + .56 * k / (R - 1)).toFixed(2) + '" stroke-linejoin="round"/>';
             }
             if (withB) html += '<path d="' + toD(printPts(DIMS_B, 1)) + '" fill="none" stroke="#F50CA0" stroke-width=".5" stroke-dasharray=".012 .009" pathLength="1"/>';
             svg.innerHTML = html;
@@ -754,7 +769,7 @@
         }
 
         if (reduce) {
-            Object.assign(S, { m: 1, op: .2, x: 0, y: 0, s: 1, grid: 1, breathe: 0 });
+            Object.assign(S, { m: 1, op: .14, x: 0, y: 0, s: 1, grid: 1, breathe: 0 });
             render();
             $$('.slot[data-fp]').forEach(function (sl) { staticPrint(sl, sl.getAttribute('data-fp') === 'ab'); });
             return;
@@ -808,18 +823,16 @@
             gsap.from(el, { y: 30, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
         });
 
-        /* 01: the problem — lines step in, previous dims (scrubbed over the sticky beat) */
+        /* 01: the problem — lines step in one by one and stay solid (scrubbed over the sticky beat) */
         var pl = $$('#problem .pl'), closer = $('#problem .closer');
         gsap.set(pl, { opacity: 0, y: 34 }); gsap.set(closer, { opacity: 0, y: 30 });
         var ptl = gsap.timeline({ scrollTrigger: { trigger: '#problem', start: 'top top', end: 'bottom bottom', scrub: .6 } });
         ptl.to({}, { duration: .4 });
-        pl.forEach(function (l, i) {
+        pl.forEach(function (l) {
             ptl.to(l, { opacity: 1, y: 0, duration: 1, ease: 'none' });
             ptl.to({}, { duration: .5 });
-            if (i < pl.length - 1) ptl.to(l, { opacity: .2, duration: .7, ease: 'none' });
         });
-        ptl.to(pl[pl.length - 1], { opacity: .45, duration: .6, ease: 'none' }, '+=.2')
-           .to(closer, { opacity: 1, y: 0, duration: 1, ease: 'none' }, '<')
+        ptl.to(closer, { opacity: 1, y: 0, duration: 1, ease: 'none' }, '+=.2')
            .to({}, { duration: .8 });
         ScrollTrigger.create({ trigger: '#problem', start: 'top 60%', end: 'bottom 60%', onToggle: function (st) { if (st.isActive) scene('hero'); } });
 
@@ -841,8 +854,8 @@
             var desk = ctx.conditions.desk;
             var track = $('#offTrack'), panels = $$('.panel'), bars = $$('#offProgress i'), stems = $$('#stageSvg .stem');
 
-            poseBase = desk ? { op: .55, x: 21, y: 18, s: 1.2, m: 0, c: 0, grid: 0, bOp: 0, rot: 0 }
-                            : { op: .5, x: 0, y: 32, s: 1.35, m: 0, c: 0, grid: 0, bOp: 0, rot: 0 };
+            poseBase = desk ? { op: .34, x: 21, y: 18, s: 1.2, m: 0, c: 0, grid: 0, bOp: 0, rot: 0 }
+                            : { op: .28, x: 0, y: 32, s: 1.35, m: 0, c: 0, grid: 0, bOp: 0, rot: 0 };
             Object.assign(S, poseBase);
             poseStages = [];
             function stage(trigger, start, end, to, a, b) {
@@ -873,9 +886,9 @@
             placeStems(0);
 
             // hero -> problem: the wave recedes to a faint centred stack
-            stage('#problem', 'top bottom', 'top top', { op: .16, s: 1.42, x: 0, y: 0 });
+            stage('#problem', 'top bottom', 'top top', { op: .1, s: 1.42, x: 0, y: 0 });
             // problem -> print: the stacked wave curls into the print, centred
-            stage('#fingerprint', 'top 85%', 'top top', { m: 1, op: 1, grid: 1, x: 0, y: desk ? 3 : -10, s: desk ? .9 : .96 });
+            stage('#fingerprint', 'top 85%', 'top top', { m: 1, op: .92, grid: 1, x: 0, y: desk ? 3 : -10, s: desk ? .86 : .92 });
             stage('#fingerprint', 'top -40%', 'bottom bottom', { rot: 14, s: desk ? .86 : .92 });
             // 01 -> 02: out of the way for the offerings
             stage('#offStage', 'top 80%', 'top top', { op: 0, grid: 0, rot: 0 });
@@ -894,8 +907,8 @@
                     }
                 });
                 // the print takes the slot as the FREQ ID panel slides in, gains the Rx overlay for the third
-                stage(pin, null, null, { op: .95, x: function () { return slotX; }, y: 0, s: desk ? .68 : .6, grid: .5, rot: 0 }, .24, .5);
-                stage(pin, null, null, { bOp: .95, grid: .3 }, .74, 1);
+                stage(pin, null, null, { op: .72, x: function () { return slotX; }, y: 0, s: desk ? .68 : .6, grid: .45, rot: 0 }, .24, .5);
+                stage(pin, null, null, { bOp: .85, grid: .28 }, .74, 1);
                 panels.forEach(function (p, i) {
                     if (i === 0) return;
                     gsap.from($$('.inner > div:first-child > *', p), { y: 30, opacity: 0, duration: 1, ease: 'expo.out', stagger: .08, scrollTrigger: { trigger: p, containerAnimation: pin.animation, start: 'left 70%', once: true } });
@@ -911,10 +924,10 @@
             }
 
             // 03 -> 04: the print rounds into a clock behind the business case (upright, ticking), sitting behind the left column
-            stage('#case', 'top bottom', 'top 25%', { c: 1, op: .24, x: desk ? -18 : 0, y: 4, s: desk ? 1.05 : 1.2, bOp: 0, grid: 0, rot: 0 });
+            stage('#case', 'top bottom', 'top 25%', { c: 1, op: .13, x: desk ? -18 : 0, y: 4, s: desk ? 1.05 : 1.2, bOp: 0, grid: 0, rot: 0 });
             // 04 -> 05: unwinds back into the print and recedes behind "what FREQ isn't", then settles large and slow behind the close
-            stage('#isnt', 'top bottom', 'top 30%', { c: 0, op: .12, x: 0, y: 6, s: 1.35, bOp: 0, grid: 0, rot: 28 });
-            stage('#cta', 'top bottom', 'center center', { op: .2, x: 0, y: 6, s: 1.35, bOp: 0, grid: 0, rot: 40 });
+            stage('#isnt', 'top bottom', 'top 30%', { c: 0, op: .07, x: 0, y: 6, s: 1.35, bOp: 0, grid: 0, rot: 28 });
+            stage('#cta', 'top bottom', 'center center', { op: .13, x: 0, y: 6, s: 1.35, bOp: 0, grid: 0, rot: 40 });
 
             return function () {
                 ScrollTrigger.removeEventListener('refresh', measureSlot);
