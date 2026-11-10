@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREQ for Labels — Your catalog is a specification</title>
+    <meta name="description" content="FREQ reads a label's approved catalog, extracts its sonic fingerprint, and turns it into a standard your team can mix toward and measure every incoming mix against. For labels, imprints, studios and production teams.">
+    <link rel="canonical" href="https://thefreq.in/b2b">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <meta name="theme-color" content="#050505">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FREQ for Labels — Every label has a sound. Almost none can put it in writing.">
+    <meta property="og:description" content="Your approved catalog becomes a measurable sonic standard. Mix to it. Check every incoming mix against it. Ship on evidence.">
+    <meta property="og:url" content="https://thefreq.in/b2b">
+    <meta property="og:site_name" content="thefreq.in">
+    <meta property="og:image" content="https://thefreq.in/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FREQ for Labels">
+    <meta name="twitter:description" content="Your approved catalog becomes a measurable sonic standard. Mix to it. Check every incoming mix against it.">
+    <meta name="twitter:image" content="https://thefreq.in/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"FREQ for Labels","url":"https://thefreq.in/b2b","description":"Sonic fingerprinting, fingerprint-guided mixing and sonic QA/QC for record labels, studios and production teams.","publisher":{"@type":"Organization","name":"FREQ","url":"https://thefreq.in"},"about":{"@type":"Service","name":"FREQ Sonic Audit","provider":{"@type":"Organization","name":"FREQ"},"audience":{"@type":"BusinessAudience","name":"Record labels, imprints, studios, production teams"}}}</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ------------------------------------------------------------------
+           Tokens — same brand system as thefreq.in, tuned for a B2B read
+           ------------------------------------------------------------------ */
+        :root {
+            --bg: #050505;
+            --bg-2: #0a0a0a;
+            --card: #0c0c0c;
+            --ink: #f0eadf;
+            --cream: #f7efe2;
+            --muted: rgba(240, 234, 223, .56);
+            --dim: rgba(240, 234, 223, .3);
+            --faint: rgba(240, 234, 223, .14);
+            --line: rgba(255, 255, 255, .09);
+            --line-2: rgba(255, 255, 255, .05);
+            --pink: #F50CA0;
+            --teal: #00CED1;
+            --yellow: #F5E663;
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'DM Sans', system-ui, sans-serif;
+            --mono: 'Space Mono', ui-monospace, monospace;
+            --ease: cubic-bezier(.32, .72, 0, 1);
+            --ease-out: cubic-bezier(.16, 1, .3, 1);
+            --gutter: clamp(20px, 5vw, 72px);
+            --measure: 34em;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-weight: 300;
+            font-size: clamp(16px, 1.05vw + 10px, 19px);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: rgba(0, 206, 209, .28); color: var(--cream); }
+
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
+
+        .skip {
+            position: absolute; left: -999px; top: 12px; z-index: 100;
+            background: var(--cream); color: #050505; padding: 8px 14px; border-radius: 999px;
+            font-family: var(--mono); font-size: 12px;
+        }
+        .skip:focus { left: 12px; }
+
+        :focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; border-radius: 4px; }
+
+        /* Ambient ground — two faint orbs + film grain, all fixed & inert */
+        .ground {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background:
+                radial-gradient(60vmax 40vmax at 78% 18%, rgba(0, 206, 209, .07), transparent 60%),
+                radial-gradient(48vmax 36vmax at 12% 88%, rgba(245, 12, 160, .045), transparent 60%);
+        }
+        .grain {
+            position: fixed; inset: -50%; z-index: 40; pointer-events: none; opacity: .045;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            background-size: 240px 240px;
+        }
+
+        /* ------------------------------------------------------------------
+           The fingerprint — one fixed SVG that lives behind the whole page
+           and is re-posed by scroll (wave → signature → corner ring → orbit)
+           ------------------------------------------------------------------ */
+        #fp {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            display: grid; place-items: center;
+        }
+        #fp .fp-wrap {
+            width: min(74vmin, 700px); aspect-ratio: 1;
+            will-change: transform, opacity;
+        }
+        #fp svg { width: 100%; height: 100%; overflow: visible; display: block; }
+        #fpA { fill: rgba(0, 206, 209, .07); stroke: var(--cream); stroke-width: .55; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+        #fpB { fill: none; stroke: var(--pink); stroke-width: .5; stroke-dasharray: .012 .009; stroke-linecap: round; opacity: 0; }
+        #fpGrid { opacity: 0; }
+        #fpGrid circle, #fpGrid line { fill: none; stroke: rgba(240, 234, 223, .16); stroke-width: .18; }
+        #fpLabels { opacity: 0; }
+        #fpLabels text { font-family: var(--mono); font-size: 2.9px; letter-spacing: .32px; fill: var(--dim); text-transform: uppercase; }
+
+        /* ------------------------------------------------------------------
+           Floating nav — detached glass pill
+           ------------------------------------------------------------------ */
+        .nav {
+            position: fixed; top: 18px; left: 50%; z-index: 50;
+            transform: translateX(-50%);
+            display: flex; align-items: center; gap: 6px;
+            padding: 7px 7px 7px 14px;
+            border-radius: 999px;
+            background: rgba(10, 10, 10, .55);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, .08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 24px 60px -28px rgba(0, 0, 0, .9);
+            transition: box-shadow .6s var(--ease), border-color .6s var(--ease), background .6s var(--ease);
+            white-space: nowrap;
+        }
+        .nav.is-scrolled {
+            background: rgba(10, 10, 10, .72);
+            border-color: rgba(255, 255, 255, .12);
+        }
+        .nav .brand { display: flex; align-items: center; gap: 10px; padding-right: 10px; }
+        .nav .brand svg { width: 18px; height: auto; display: block; }
+        .nav .brand b { font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .16em; }
+        .nav .brand span { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+        .nav .links { display: flex; gap: 2px; padding: 0 6px; border-left: 1px solid var(--line); }
+        .nav .links a {
+            font-size: 13px; color: var(--muted); padding: 8px 12px; border-radius: 999px;
+            transition: color .4s var(--ease), background .4s var(--ease);
+        }
+        .nav .links a:hover { color: var(--cream); background: rgba(255, 255, 255, .05); }
+        .nav .cta-mini {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--cream); color: #050505;
+            font-size: 13px; font-weight: 500; padding: 9px 8px 9px 16px; border-radius: 999px;
+            transition: transform .5s var(--ease);
+        }
+        .nav .cta-mini i { width: 22px; height: 22px; border-radius: 999px; background: rgba(0, 0, 0, .08); display: grid; place-items: center; font-style: normal; font-size: 12px; }
+        .nav .cta-mini:hover { transform: scale(1.02); }
+        @media (max-width: 899px) {
+            .nav .links { display: none; }
+            .nav .brand span { display: none; }
+        }
+
+        /* ------------------------------------------------------------------
+           Layout primitives
+           ------------------------------------------------------------------ */
+        main { position: relative; z-index: 1; }
+        .wrap { width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: var(--gutter); }
+        section { position: relative; padding-block: clamp(96px, 16vh, 200px); }
+
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: var(--mono); font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase;
+            color: var(--dim); margin: 0 0 28px;
+        }
+        .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--dim); }
+        .eyebrow.pill {
+            padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .02);
+        }
+        .eyebrow.pill::before { display: none; }
+
+        .display {
+            font-family: var(--serif); font-weight: 300; line-height: .98; letter-spacing: -.012em;
+            font-size: clamp(2.4rem, 5.4vw + .4rem, 5.6rem); margin: 0; color: var(--cream);
+            text-wrap: balance;
+        }
+        .display em { font-style: italic; font-weight: 300; color: var(--ink); }
+        .display .l2 { display: block; color: var(--muted); }
+        .lede { font-size: clamp(1.05rem, .55vw + .85rem, 1.3rem); color: var(--muted); max-width: var(--measure); margin: 28px 0 0; }
+        .quote {
+            font-family: var(--serif); font-weight: 300; font-style: italic;
+            font-size: clamp(1.5rem, 2.2vw + .6rem, 2.6rem); line-height: 1.15; color: var(--cream);
+            max-width: 26em; margin: 0; text-wrap: balance;
+        }
+        p { margin: 0; }
+        .stack > * + * { margin-top: 1.1em; }
+        .muted { color: var(--muted); }
+
+        /* Buttons — pill, with the trailing icon nested in its own disc */
+        .btn {
+            --btn-bg: var(--cream); --btn-fg: #050505;
+            position: relative; display: inline-flex; align-items: center; gap: 14px;
+            padding: 6px 6px 6px 22px; border-radius: 999px;
+            background: var(--btn-bg); color: var(--btn-fg);
+            font-weight: 500; font-size: 15px; letter-spacing: .01em; line-height: 1;
+            border: 1px solid transparent; cursor: pointer;
+            transition: transform .6s var(--ease), background .6s var(--ease), border-color .6s var(--ease);
+            min-height: 48px;
+        }
+        .btn .disc {
+            width: 36px; height: 36px; border-radius: 999px; display: grid; place-items: center;
+            background: rgba(0, 0, 0, .08);
+            transition: transform .6s var(--ease), background .6s var(--ease);
+        }
+        .btn .disc svg { width: 14px; height: 14px; display: block; transition: transform .6s var(--ease); }
+        .btn:hover { transform: translateY(-1px); }
+        .btn:hover .disc { transform: scale(1.06); }
+        .btn:hover .disc svg { transform: translate(1.5px, -1.5px); }
+        .btn:active { transform: scale(.98); }
+        .btn.ghost { --btn-bg: transparent; --btn-fg: var(--ink); border-color: var(--line); }
+        .btn.ghost .disc { background: rgba(255, 255, 255, .06); }
+        .btn.ghost:hover { border-color: rgba(255, 255, 255, .22); }
+        .btn-row { display: flex; flex-wrap: wrap; gap: 12px 14px; align-items: center; margin-top: 40px; }
+        .btn-note { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--dim); margin-top: 18px; }
+
+        /* Double-bezel card: machined shell + inner core, concentric radii */
+        .bezel {
+            padding: 6px; border-radius: 28px;
+            background: rgba(255, 255, 255, .035);
+            border: 1px solid rgba(255, 255, 255, .07);
+            box-shadow: 0 60px 120px -60px rgba(0, 0, 0, .9);
+        }
+        .bezel > .core {
+            border-radius: 22px; background: var(--card);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
+            overflow: hidden;
+        }
+
+        /* ------------------------------------------------------------------
+           00 · Hero
+           ------------------------------------------------------------------ */
+        #hero { min-height: 100dvh; display: grid; align-items: center; padding-block: 140px 80px; }
+        #hero .hero-inner { max-width: 980px; }
+        #hero .display { font-size: clamp(2.6rem, 6.6vw + .3rem, 7rem); }
+        #hero .display .line { display: block; overflow: hidden; }
+        #hero .display .line .w { display: inline-block; }
+        .hero-foot {
+            display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+            margin-top: clamp(56px, 9vh, 110px);
+            font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim);
+        }
+        .hero-foot .scroll { display: inline-flex; align-items: center; gap: 12px; }
+        .hero-foot .scroll i { display: block; width: 1px; height: 38px; background: linear-gradient(var(--dim), transparent); position: relative; overflow: hidden; }
+        .hero-foot .scroll i::after { content: ""; position: absolute; inset: 0; background: var(--cream); transform: translateY(-100%); animation: drop 2.2s var(--ease) infinite; }
+        @keyframes drop { 0% { transform: translateY(-100%); } 60% { transform: translateY(100%); } 100% { transform: translateY(100%); } }
+        @media (prefers-reduced-motion: reduce) { .hero-foot .scroll i::after { animation: none; } }
+
+        /* ------------------------------------------------------------------
+           01 · The problem — sticky viewport, lines step in and dim
+           ------------------------------------------------------------------ */
+        #problem { padding-block: 0; min-height: 280vh; }
+        #problem .sticky { position: sticky; top: 0; min-height: 100dvh; display: grid; align-items: center; padding-block: 120px; }
+        #problem .pl {
+            font-family: var(--serif); font-weight: 300; line-height: 1.12; letter-spacing: -.01em;
+            font-size: clamp(1.6rem, 2.6vw + .6rem, 3.3rem); color: var(--cream); max-width: 22em;
+            margin: 0 0 .55em; text-wrap: balance;
+        }
+        #problem .pl em { font-style: italic; color: var(--muted); }
+        #problem .closer { margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--line); max-width: 30em; }
+        #problem .closer .quote { font-size: clamp(1.25rem, 1.4vw + .7rem, 1.9rem); color: var(--ink); }
+
+        /* ------------------------------------------------------------------
+           02 · The fingerprint — sticky copy, the shape morphs beside it
+           ------------------------------------------------------------------ */
+        #fingerprint { padding-block: 0; min-height: 230vh; }
+        #fingerprint .sticky { position: sticky; top: 0; min-height: 100dvh; display: grid; align-items: center; padding-block: 120px 80px; }
+        #fingerprint .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+        #fingerprint .slot { aspect-ratio: 1; width: 100%; max-width: 560px; justify-self: end; }
+        .dims {
+            display: flex; flex-wrap: wrap; gap: 8px 6px; margin-top: 34px; max-width: 30em;
+            font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim);
+        }
+        .dims span { padding: 6px 10px; border: 1px solid var(--line-2); border-radius: 999px; }
+        .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); }
+        .legend i { display: inline-block; width: 22px; height: 0; border-top: 1.5px solid var(--cream); vertical-align: middle; margin-right: 10px; }
+        .legend .b i { border-top-style: dashed; border-color: var(--pink); }
+        .fp-caption { margin-top: 26px; }
+        .fp-caption .quote { font-size: clamp(1.25rem, 1.3vw + .7rem, 1.85rem); }
+        @media (max-width: 899px) {
+            #fingerprint .grid { grid-template-columns: 1fr; gap: 24px; }
+            #fingerprint .slot { display: none; }
+            #fingerprint .sticky { padding-top: 46vh; align-items: start; }
+        }
+
+        /* ------------------------------------------------------------------
+           03 · The loop — pinned horizontal on desktop, stacked on mobile
+           ------------------------------------------------------------------ */
+        #loop { padding-block: 0; }
+        #loop .loop-head { padding-block: clamp(96px, 16vh, 200px) 0; }
+        #loop .loop-stage { overflow: hidden; }
+        #loop .loop-track { display: flex; width: max-content; }
+        #loop .loop-panel {
+            width: 100vw; min-height: 100dvh; flex: 0 0 auto;
+            display: grid; align-content: center; padding: 120px var(--gutter);
+        }
+        #loop .loop-panel .inner { max-width: 1240px; margin-inline: auto; width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: end; }
+        #loop .num { font-family: var(--serif); font-weight: 300; font-size: clamp(6rem, 18vw, 17rem); line-height: .8; letter-spacing: -.04em; color: var(--cream); opacity: .9; }
+        #loop .num sup { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); margin: 0 0 22px 6px; line-height: 1; }
+        #loop .step h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.9rem, 2.8vw + .6rem, 3.6rem); line-height: 1.02; margin: 0 0 18px; color: var(--cream); letter-spacing: -.01em; }
+        #loop .step p { color: var(--muted); max-width: 28em; font-size: 1.05em; }
+        #loop .loop-tail { padding-block: clamp(80px, 12vh, 160px) clamp(96px, 16vh, 200px); }
+        .progress { display: flex; gap: 6px; margin-top: 28px; }
+        .progress i { width: 34px; height: 2px; background: var(--faint); border-radius: 2px; overflow: hidden; position: relative; }
+        .progress i::after { content: ""; position: absolute; inset: 0; background: var(--teal); transform: scaleX(var(--p, 0)); transform-origin: left; }
+        @media (max-width: 899px) {
+            #loop .loop-track { display: block; width: auto; }
+            #loop .loop-panel { width: auto; min-height: 0; padding-block: 56px; border-top: 1px solid var(--line-2); }
+            #loop .loop-panel .inner { grid-template-columns: 1fr; gap: 18px; align-items: start; }
+            #loop .num { font-size: 5rem; }
+            .progress { display: none; }
+        }
+
+        /* ------------------------------------------------------------------
+           04 · QA / QC — the report
+           ------------------------------------------------------------------ */
+        #qa .grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+        #qa .copy { position: sticky; top: 120px; }
+        .report { font-family: var(--mono); }
+        .report .rh {
+            display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+            padding: 18px 22px; border-bottom: 1px solid var(--line-2);
+            font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim);
+        }
+        .report .rh b { color: var(--muted); font-weight: 400; }
+        .report .rh .live { display: inline-flex; align-items: center; gap: 8px; }
+        .report .rh .live::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--teal); box-shadow: 0 0 0 4px rgba(0, 206, 209, .15); }
+        .report .rows { padding: 8px 22px 6px; }
+        .qrow {
+            display: grid; grid-template-columns: 138px minmax(0, 1fr) 156px; gap: 18px; align-items: center;
+            padding: 15px 0; border-bottom: 1px solid var(--line-2); font-size: 11.5px;
+        }
+        .qrow:last-child { border-bottom: 0; }
+        .qrow .k { color: var(--muted); letter-spacing: .04em; }
+        .qrow .v { text-align: right; letter-spacing: .04em; color: var(--dim); }
+        .qrow.out .v { color: var(--pink); }
+        .qrow.in .v { color: rgba(0, 206, 209, .85); }
+        .qbar { position: relative; height: 22px; }
+        .qbar::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--line); }
+        .qband {
+            position: absolute; top: 50%; height: 10px; transform: translateY(-50%) scaleX(0); transform-origin: center;
+            left: calc(var(--b0) * 1%); width: calc((var(--b1) - var(--b0)) * 1%);
+            background: rgba(0, 206, 209, .16); border: 1px solid rgba(0, 206, 209, .35); border-radius: 999px;
+        }
+        .qdot {
+            position: absolute; top: 50%; left: 0; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 999px;
+            background: var(--cream); box-shadow: 0 0 0 3px rgba(240, 234, 223, .12);
+            opacity: 0;
+        }
+        .qrow.out .qdot { background: var(--pink); box-shadow: 0 0 0 3px rgba(245, 12, 160, .18); }
+        .report .rf { padding: 20px 22px 22px; border-top: 1px solid var(--line-2); display: grid; gap: 14px; }
+        .report .rf .verdict { font-family: var(--sans); font-weight: 300; font-size: 15px; color: var(--ink); line-height: 1.5; }
+        .report .rf .note { font-size: 10.5px; letter-spacing: .06em; color: var(--dim); line-height: 1.6; }
+        .report .rf .note b { color: var(--muted); font-weight: 400; }
+        @media (max-width: 899px) {
+            #qa .grid { grid-template-columns: 1fr; }
+            #qa .copy { position: static; }
+            .qrow { grid-template-columns: 96px minmax(0, 1fr); gap: 12px 14px; }
+            .qrow .v { grid-column: 2; text-align: left; margin-top: -6px; }
+            .report .rh, .report .rows, .report .rf { padding-inline: 16px; }
+        }
+
+        /* ------------------------------------------------------------------
+           05 · Where the human stays — orbit converges on the signature
+           ------------------------------------------------------------------ */
+        #human { text-align: center; min-height: 100dvh; display: grid; align-content: center; }
+        #human .display { margin-inline: auto; max-width: 14em; }
+        #human .orbit { position: relative; height: min(66vmin, 720px); margin: 40px auto 0; width: 100%; }
+        #human .pill {
+            position: absolute; left: 50%; top: 50%;
+            font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+            padding: 10px 16px; border-radius: 999px; white-space: nowrap;
+            background: rgba(10, 10, 10, .7); border: 1px solid var(--line); color: var(--muted);
+            -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+        }
+        #human .lede { margin-inline: auto; text-align: center; }
+        @media (max-width: 899px) { #human .pill { font-size: 9.5px; padding: 8px 12px; } }
+
+        /* ------------------------------------------------------------------
+           06 · Who it's for — editorial rows
+           ------------------------------------------------------------------ */
+        .roles { margin-top: 56px; border-top: 1px solid var(--line); }
+        .role {
+            display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 24px; align-items: baseline;
+            padding: 30px 0; border-bottom: 1px solid var(--line);
+        }
+        .role .k { font-family: var(--mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+        .role .k::before { content: attr(data-n); color: var(--dim); margin-right: 18px; }
+        .role .d { font-family: var(--serif); font-weight: 300; font-size: clamp(1.35rem, 1.5vw + .6rem, 2.1rem); line-height: 1.15; color: var(--cream); letter-spacing: -.005em; }
+        @media (max-width: 899px) { .role { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; } }
+
+        /* ------------------------------------------------------------------
+           07 · Your catalog — plain, deliberately unanimated
+           ------------------------------------------------------------------ */
+        #trust .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+        .facts { display: grid; gap: 0; border-top: 1px solid var(--line); }
+        .facts li { list-style: none; padding: 22px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 26px 1fr; gap: 14px; color: var(--muted); }
+        .facts li::before { content: ""; width: 8px; height: 8px; border-radius: 999px; border: 1px solid var(--teal); margin-top: .5em; }
+        .facts ul, ul.facts { padding: 0; margin: 0; }
+        .private { margin-top: 34px; padding: 26px 28px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255, 255, 255, .02); }
+        .private .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
+        @media (max-width: 899px) { #trust .grid { grid-template-columns: 1fr; } }
+
+        /* ------------------------------------------------------------------
+           08 · Final CTA
+           ------------------------------------------------------------------ */
+        #cta { min-height: 100dvh; display: grid; align-content: center; text-align: center; }
+        #cta .display { margin-inline: auto; max-width: 12em; }
+        #cta .lede { margin-inline: auto; }
+        #cta .btn-row { justify-content: center; }
+        #cta .maker { margin-top: 72px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--dim); line-height: 1.8; }
+        #cta .maker b { color: var(--muted); font-weight: 400; }
+
+        footer {
+            position: relative; z-index: 1; border-top: 1px solid var(--line);
+            padding: 40px 0 56px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--dim);
+        }
+        footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; }
+        footer .brand { display: flex; align-items: center; gap: 12px; color: var(--muted); }
+        footer .brand svg { width: 16px; height: auto; }
+        footer .brand span { letter-spacing: .04em; text-transform: none; }
+        footer nav { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+        footer nav a { transition: color .4s var(--ease); }
+        footer nav a:hover { color: var(--cream); }
+
+        /* No-JS / reduced motion: everything visible, nothing pinned */
+        .no-js [data-rv], .no-js .qband, .no-js .qdot { opacity: 1 !important; transform: none !important; }
+        @media (prefers-reduced-motion: reduce) {
+            .qband { transform: translateY(-50%) scaleX(1); }
+            .qdot { opacity: 1; left: calc(var(--m) * 1%); }
+        }
+    </style>
+</head>
+
+<body class="no-js">
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="ground" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- The fingerprint: a single path that morphs between a waveform and a
+         radar signature, re-posed by scroll behind every section -->
+    <div id="fp" aria-hidden="true">
+        <div class="fp-wrap">
+            <svg viewBox="-60 -60 120 120">
+                <g id="fpGrid">
+                    <circle r="16"></circle>
+                    <circle r="30"></circle>
+                    <circle r="44"></circle>
+                    <line x1="0" y1="-46" x2="0" y2="46"></line>
+                    <line x1="-46" y1="0" x2="46" y2="0"></line>
+                    <line x1="-32.5" y1="-32.5" x2="32.5" y2="32.5"></line>
+                    <line x1="32.5" y1="-32.5" x2="-32.5" y2="32.5"></line>
+                </g>
+                <path id="fpB" pathLength="1" d=""></path>
+                <path id="fpA" pathLength="1" d=""></path>
+                <g id="fpLabels">
+                    <text x="0" y="-51" text-anchor="middle">Tonal</text>
+                    <text x="37" y="-36" text-anchor="start">Dynamics</text>
+                    <text x="52" y="1" text-anchor="start">Low-end</text>
+                    <text x="37" y="38" text-anchor="start">Vocal</text>
+                    <text x="0" y="53" text-anchor="middle">Stereo</text>
+                    <text x="-37" y="38" text-anchor="end">Transients</text>
+                    <text x="-52" y="1" text-anchor="end">Loudness</text>
+                    <text x="-37" y="-36" text-anchor="end">Depth</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <header class="nav" id="nav">
+        <a class="brand" href="../index.html" aria-label="FREQ home">
+            <svg viewBox="0 0 350 330" aria-hidden="true"><g fill="#F50CA0"><path d="M26 30h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/><path d="M226 10h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V26a16 16 0 0 1 16-16z"/><path d="M296 30h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/></g><g fill="#00CED1"><path d="M166 240h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H166a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/><path d="M96 220h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16H96a16 16 0 0 1-16-16v-68a16 16 0 0 1 16-16z"/><path d="M26 240h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/></g><path fill="#fff" d="M26 140h298a16 16 0 0 1 16 16v8a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-8a16 16 0 0 1 16-16z"/></svg>
+            <b>FREQ</b><span>for labels</span>
+        </a>
+        <nav class="links" aria-label="Sections">
+            <a href="#fingerprint">Fingerprint</a>
+            <a href="#qa">QA / QC</a>
+            <a href="#who">Who it's for</a>
+        </nav>
+        <a class="cta-mini" href="#cta">Request audit <i aria-hidden="true">↓</i></a>
+    </header>
+
+    <main id="main">
+
+        <!-- 00 · HERO -->
+        <section id="hero">
+            <div class="wrap">
+                <div class="hero-inner">
+                    <p class="eyebrow pill" data-rv>Labels · Imprints · Studios · Production teams</p>
+                    <h1 class="display" id="heroTitle">
+                        <span class="line"><span class="w">Every label has a sound.</span></span>
+                        <span class="line l2"><span class="w">Almost none can put it in writing.</span></span>
+                    </h1>
+                    <p class="lede" data-rv>FREQ reads your approved catalog, extracts the sonic signature inside it, and turns that signature into something your team can mix toward — and measure every incoming mix against. Across every artist, engineer and studio you work with.</p>
+                    <div class="btn-row" data-rv>
+                        <a class="btn" href="#cta">Request a sonic audit <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
+                        <a class="btn ghost" href="#problem">See how it works <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3 8l5 5 5-5"/></svg></span></a>
+                    </div>
+                    <!-- CONFIRM: audit offer terms (ten releases, no cost) -->
+                    <p class="btn-note" data-rv>Ten approved releases in. Your fingerprint back. No cost, no commitment.</p>
+                    <div class="hero-foot" data-rv>
+                        <span class="scroll"><i aria-hidden="true"></i> Scroll</span>
+                        <span>thefreq.in / b2b</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 01 · THE PROBLEM -->
+        <section id="problem" aria-labelledby="problemTitle">
+            <div class="sticky">
+                <div class="wrap">
+                    <p class="eyebrow">01 — The problem</p>
+                    <h2 class="display" id="problemTitle" style="font-size:clamp(2rem,3.6vw + .5rem,4rem);margin-bottom:.6em">Your sound lives in someone's ears.<span class="l2">That's the whole problem.</span></h2>
+                    <div class="lines">
+                        <p class="pl">A record comes back from a freelance engineer. It's good. <em>It just isn't you.</em></p>
+                        <p class="pl">The one person who could hear the difference instantly <em>doesn't work here anymore.</em></p>
+                        <p class="pl">“Make it sound more like us” goes back in the notes. <em>Nobody on the thread can define us.</em></p>
+                    </div>
+                    <div class="closer">
+                        <p class="quote">Your sound is the most valuable thing your label owns — and the only asset you have never written down.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 · THE FINGERPRINT -->
+        <section id="fingerprint" aria-labelledby="fpTitle">
+            <div class="sticky">
+                <div class="wrap">
+                    <div class="grid">
+                        <div>
+                            <p class="eyebrow" data-rv>02 — The fingerprint</p>
+                            <h2 class="display" id="fpTitle" data-rv>So we wrote <em>it</em> down.</h2>
+                            <p class="lede" data-rv>Feed FREQ the releases you would stand behind. It measures what they have in common — and what they deliberately don't.</p>
+                            <div class="dims" data-rv data-rv-kids>
+                                <span>Tonal balance</span><span>Dynamic range</span><span>Low-end weight</span><span>Vocal presence</span><span>Stereo character</span><span>Transient behaviour</span><span>Loudness</span><span>Depth</span>
+                            </div>
+                            <div class="fp-caption" id="fpCaption">
+                                <div class="legend"><span class="a"><i></i>Label A</span><span class="b"><i></i>Label B</span><span class="muted">same genre · same year</span></div>
+                                <p class="quote" style="margin-top:18px">Two labels. Same genre. Same year. Not remotely the same fingerprint.</p>
+                                <p class="muted" style="margin-top:18px;max-width:30em">Not an average of your catalog — a signature. Including the parts of your sound that are deliberately unusual, which is usually the part that makes you identifiable.</p>
+                            </div>
+                        </div>
+                        <div class="slot" id="fpSlot" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 · THE LOOP -->
+        <section id="loop" aria-labelledby="loopTitle">
+            <div class="loop-head">
+                <div class="wrap">
+                    <p class="eyebrow" data-rv>03 — The loop</p>
+                    <h2 class="display" id="loopTitle" data-rv>Define it. Mix to it.<span class="l2">Check against it. Ship it.</span></h2>
+                    <div class="progress" id="loopProgress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                </div>
+            </div>
+            <div class="loop-stage">
+                <div class="loop-track" id="loopTrack">
+                    <article class="loop-panel">
+                        <div class="inner">
+                            <div class="num">01<sup>Define</sup></div>
+                            <div class="step">
+                                <h3>Select the releases that represent you.</h3>
+                                <p>FREQ builds the fingerprint from the records you already approved — not from a genre preset, and not from a chart.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="loop-panel">
+                        <div class="inner">
+                            <div class="num">02<sup>Create</sup></div>
+                            <div class="step">
+                                <h3>Mix inside FREQ, with your fingerprint as the target.</h3>
+                                <p>Depth, balance and translation are placed against your own signature instead of a generic reference track.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="loop-panel">
+                        <div class="inner">
+                            <div class="num">03<sup>Check</sup></div>
+                            <div class="step">
+                                <h3>Run any mix against the profile.</h3>
+                                <p>Yours, a freelancer's, an outside studio's. Characteristic by characteristic, in or out of your range.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="loop-panel">
+                        <div class="inner">
+                            <div class="num">04<sup>Release</sup></div>
+                            <div class="step">
+                                <h3>Approve on evidence.</h3>
+                                <p>Rather than on whoever happens to be in the room that day.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="loop-tail">
+                <div class="wrap">
+                    <p class="quote" data-rv>Your sound stops depending on who mixed the record.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 · SONIC QA / QC -->
+        <section id="qa" aria-labelledby="qaTitle">
+            <div class="wrap">
+                <div class="grid">
+                    <div class="copy">
+                        <p class="eyebrow" data-rv>04 — Sonic QA / QC</p>
+                        <h2 class="display" id="qaTitle" data-rv>Read every mix before anyone says yes.</h2>
+                        <div class="stack" data-rv>
+                            <p class="lede">A mix can be technically clean and still not sound like your label. That gap is invisible until it's on the release — and by then it's a conversation, not a fix.</p>
+                            <p class="muted">FREQ reports every incoming mix against your profile, characteristic by characteristic: what sits inside your range, what sits outside it, and by how much.</p>
+                        </div>
+                        <p class="quote" data-rv style="margin-top:36px;font-size:clamp(1.25rem,1.3vw + .7rem,1.8rem)">No score out of 100. A score tells an engineer nothing and tells you less. You get the specific deviation, in language a producer can act on.</p>
+                    </div>
+
+                    <!-- Illustrative report. Values are placeholders shaped like real output. -->
+                    <div class="bezel" data-rv>
+                        <div class="core report" id="report" role="figure" aria-label="Example sonic alignment report comparing an incoming mix to a label profile">
+                            <div class="rh">
+                                <span><b>Sonic alignment</b> · incoming mix</span>
+                                <span class="live">Profile: Label A · 42 releases</span>
+                            </div>
+                            <div class="rows">
+                                <div class="qrow in" style="--b0:38;--b1:58;--m:50"><span class="k">Tonal balance</span><span class="qbar"><span class="qband"></span><span class="qdot"></span></span><span class="v">in range</span></div>
+                                <div class="qrow in" style="--b0:30;--b1:52;--m:44"><span class="k">Dynamics</span><span class="qbar"><span class="qband"></span><span class="qdot"></span></span><span class="v">in range</span></div>
+                                <div class="qrow out" style="--b0:44;--b1:62;--m:81"><span class="k">Low-end</span><span class="qbar"><span class="qband"></span><span class="qdot"></span></span><span class="v">+1.8 dB · 60–110 Hz</span></div>
+                                <div class="qrow in" style="--b0:48;--b1:66;--m:57"><span class="k">Vocal presence</span><span class="qbar"><span class="qband"></span><span class="qdot"></span></span><span class="v">in range</span></div>
+                                <div class="qrow out" style="--b0:36;--b1:56;--m:20"><span class="k">Stereo character</span><span class="qbar"><span class="qband"></span><span class="qdot"></span></span><span class="v">−14% width · chorus</span></div>
+                                <div class="qrow in" style="--b0:40;--b1:60;--m:55"><span class="k">High-frequency</span><span class="qbar"><span class="qband"></span><span class="qdot"></span></span><span class="v">in range</span></div>
+                            </div>
+                            <div class="rf">
+                                <p class="verdict">Four of six characteristics sit inside your range. The low-end is heavier and the stereo field narrower than anything in your approved catalog.</p>
+                                <p class="note"><b>Note to engineer</b> — pull 1.5–2 dB from 60–110 Hz on the bus; widen the chorus. Everything else is already yours.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 · WHERE THE HUMAN STAYS -->
+        <section id="human" aria-labelledby="humanTitle">
+            <div class="wrap">
+                <p class="eyebrow" data-rv style="justify-content:center">05 — Where the human stays</p>
+                <h2 class="display" id="humanTitle" data-rv>FREQ doesn't replace your engineers.<span class="l2">It tells them what you were never able to.</span></h2>
+                <div class="orbit" id="orbit" aria-hidden="true">
+                    <span class="pill">Artists</span>
+                    <span class="pill">Producers</span>
+                    <span class="pill">In-house teams</span>
+                    <span class="pill">Outside studios</span>
+                    <span class="pill">Freelance engineers</span>
+                </div>
+                <p class="lede" data-rv>Your creative process stays yours. What changes is that the brief arrives <em>before</em> the mix instead of as a revision note after it — and the same standard travels to everyone who touches a record, without a single meeting about what “our sound” means.</p>
+            </div>
+        </section>
+
+        <!-- 06 · WHO IT'S FOR -->
+        <section id="who" aria-labelledby="whoTitle">
+            <div class="wrap">
+                <p class="eyebrow" data-rv>06 — Who it's for</p>
+                <h2 class="display" id="whoTitle" data-rv>Built for teams where the sound <em>is</em> the product.</h2>
+                <div class="roles" data-rv data-rv-kids>
+                    <div class="role"><span class="k" data-n="a">Record labels</span><span class="d">One recognisable sound across a roster that keeps changing.</span></div>
+                    <div class="role"><span class="k" data-n="b">A&amp;R &amp; production</span><span class="d">Evaluate deliveries on evidence, not on the last listen.</span></div>
+                    <div class="role"><span class="k" data-n="c">Studios &amp; engineers</span><span class="d">Hit a client's house sound without three rounds of guessing.</span></div>
+                    <div class="role"><span class="k" data-n="d">Imprints &amp; groups</span><span class="d">Distinct, documented sonic identities per catalog.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 · YOUR CATALOG -->
+        <section id="trust" aria-labelledby="trustTitle">
+            <div class="wrap">
+                <div class="grid">
+                    <div>
+                        <p class="eyebrow">07 — Your catalog</p>
+                        <h2 class="display" id="trustTitle">Your masters stay yours.</h2>
+                        <p class="lede">A fingerprint is derived data. It describes your sound; it does not contain your music.</p>
+                    </div>
+                    <div>
+                        <!-- CONFIRM each line against the API's actual storage/retention behaviour before shipping -->
+                        <ul class="facts">
+                            <li>Uploads live in a private workspace tied to your account. Nobody outside your team can open them.</li>
+                            <li>Your catalog is never pooled, benchmarked against, or used to build anyone else's profile.</li>
+                            <li>Source audio can be removed on request once the fingerprint is built. The fingerprint stays; the files don't have to.</li>
+                        </ul>
+                        <div class="private">
+                            <p class="k">FREQ Private</p>
+                            <p class="muted">Dedicated environments and mixing services built around your fingerprint, for teams that need the sound handled entirely in-house.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 · FINAL CTA -->
+        <section id="cta" aria-labelledby="ctaTitle">
+            <div class="wrap">
+                <p class="eyebrow pill" data-rv>Sonic audit</p>
+                <h2 class="display" id="ctaTitle" data-rv>Find out what your label sounds like.<span class="l2">Your catalog already knows.</span></h2>
+                <p class="lede" data-rv>Send us ten approved releases. We send back your sonic fingerprint and a read on how consistent your catalog actually is. No cost, no commitment, nothing to install.</p>
+                <div class="btn-row" data-rv>
+                    <!-- CONFIRM destination: app contact form vs. dedicated intake -->
+                    <a class="btn" href="https://app.thefreq.in/contact?intent=sonic-audit">Request a sonic audit <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
+                    <a class="btn ghost" href="https://app.thefreq.in/login">Sign in to FREQ <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+                </div>
+                <p class="maker" data-rv>Built by <b>Alias Analogue Music Studio</b><br>a working mix studio, not a software company that discovered audio.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="../index.html">
+                <svg viewBox="0 0 350 330" aria-hidden="true"><g fill="#F50CA0"><path d="M26 30h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/><path d="M226 10h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V26a16 16 0 0 1 16-16z"/><path d="M296 30h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/></g><g fill="#00CED1"><path d="M166 240h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H166a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/><path d="M96 220h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16H96a16 16 0 0 1-16-16v-68a16 16 0 0 1 16-16z"/><path d="M26 240h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/></g><path fill="#fff" d="M26 140h298a16 16 0 0 1 16 16v8a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-8a16 16 0 0 1 16-16z"/></svg>
+                <b>FREQ</b><span>— The architecture of better sound.</span>
+            </a>
+            <nav aria-label="Footer">
+                <a href="https://thefreq.in">thefreq.in</a>
+                <a href="https://www.linkedin.com/in/kushal-jaju-5ba001200" rel="noopener">LinkedIn</a>
+                <a href="https://www.instagram.com/thefreq.in" rel="noopener">Instagram</a>
+                <a href="https://soundbetter.com/profiles/65153-artist-with-side-effects" rel="noopener">SoundBetter</a>
+            </nav>
+            <span>Alias Analogue Music Studio</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+    <script>
+    (function () {
+        document.body.classList.remove('no-js');
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+        if (window.SplitText) gsap.registerPlugin(SplitText);
+
+        var $ = function (s, r) { return (r || document).querySelector(s); };
+        var $$ = function (s, r) { return gsap.utils.toArray(s, r); };
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* ------------------------------------------------------------
+           Fingerprint geometry. Both poses are N+1 points so GSAP can
+           tween between them numerically; the last point repeats the
+           first so the radar closes without a Z command.
+           ------------------------------------------------------------ */
+        var N = 96;
+        var pathA = $('#fpA'), pathB = $('#fpB'), grid = $('#fpGrid'), labels = $('#fpLabels'), wrap = $('#fp .fp-wrap');
+
+        function radarPts(vals, r0, r1) {
+            var pts = [], K = vals.length;
+            for (var i = 0; i <= N; i++) {
+                var u = (i % N) / N, a = u * Math.PI * 2 - Math.PI / 2;
+                var p = u * K, k = Math.floor(p), f = p - k;
+                var ff = (1 - Math.cos(f * Math.PI)) / 2;
+                var v = vals[k % K] * (1 - ff) + vals[(k + 1) % K] * ff;
+                var r = r0 + (r1 - r0) * v;
+                pts.push([Math.cos(a) * r, Math.sin(a) * r]);
+            }
+            return pts;
+        }
+        function wavePts(ph) {
+            var pts = [];
+            for (var i = 0; i <= N; i++) {
+                var u = i / N, x = -58 + 116 * u;
+                var env = Math.sin(u * Math.PI);
+                var y = env * (4.2 * Math.sin(u * Math.PI * 6 + ph) + 2.4 * Math.sin(u * Math.PI * 13 - ph * 1.6) + 1.2 * Math.sin(u * Math.PI * 29 + ph * .7));
+                pts.push([x, y]);
+            }
+            return pts;
+        }
+        function toD(pts) {
+            var s = '';
+            for (var i = 0; i < pts.length; i++) s += (i ? 'L' : 'M') + pts[i][0].toFixed(2) + ' ' + pts[i][1].toFixed(2);
+            return s;
+        }
+        // Tonal · Dynamics · Low-end · Vocal · Stereo · Transients · Loudness · Depth
+        var A = radarPts([.62, .48, .74, .70, .44, .58, .52, .80], 14, 42);
+        var B = radarPts([.40, .80, .38, .52, .82, .36, .74, .34], 14, 42);
+        pathB.setAttribute('d', toD(B));
+
+        // The displayed pose. Scroll never tweens this object directly: each
+        // frame the target pose is derived from the stage triggers' progress
+        // (deterministic under refresh/jumps) and S eases toward it.
+        var S = { m: 0, ph: 0, op: .45, x: 0, y: 22, s: 1.5, grid: 0, bOp: 0, draw: 0, breathe: 1, rot: 0 };
+        var POSE_KEYS = ['m', 'op', 'x', 'y', 's', 'grid', 'bOp', 'draw', 'rot'];
+        var poseBase = null, poseStages = [];
+        function targetPose() {
+            var P = Object.assign({}, poseBase || S);
+            for (var i = 0; i < poseStages.length; i++) {
+                var sg = poseStages[i], p = sg.st.progress;
+                if (p <= 0) continue;
+                var e = p >= 1 ? 1 : p;
+                for (var k in sg.to) {
+                    var v = typeof sg.to[k] === 'function' ? sg.to[k]() : sg.to[k];
+                    P[k] = P[k] + (v - P[k]) * e;
+                }
+            }
+            return P;
+        }
+        var last = -1;
+        function render() {
+            if (poseBase) {
+                var P = targetPose(), k = 1 - Math.pow(.84, gsap.ticker.deltaRatio(60));
+                for (var i = 0; i < POSE_KEYS.length; i++) { var key = POSE_KEYS[i]; S[key] += (P[key] - S[key]) * k; }
+            }
+            if (S.op < .005) { if (last !== 0) { wrap.style.opacity = 0; last = 0; } return; }
+            last = 1;
+            S.ph += 0.011 * S.breathe;
+            var W = wavePts(S.ph), pts = new Array(N + 1), m = S.m, im = 1 - m;
+            for (var j = 0; j <= N; j++) {
+                var br = 1 + m * 0.014 * Math.sin(S.ph * .9 + j * .35);
+                pts[j] = [W[j][0] * im + A[j][0] * m * br, W[j][1] * im + A[j][1] * m * br];
+            }
+            pathA.setAttribute('d', toD(pts));
+            pathA.style.strokeDashoffset = S.draw;
+            grid.style.opacity = S.grid;
+            labels.style.opacity = S.grid;
+            pathB.style.opacity = S.bOp;
+            wrap.style.opacity = S.op;
+            wrap.style.transform = 'translate3d(' + S.x + 'vw,' + S.y + 'vh,0) scale(' + S.s + ') rotate(' + S.rot + 'deg)';
+        }
+        // Test hook: snap the eased pose straight to its target.
+        window.FREQ_FP = { snap: function () { if (!poseBase) return; var P = targetPose(); POSE_KEYS.forEach(function (k) { S[k] = P[k]; }); render(); } };
+
+        if (reduce) {
+            // Static, legible final state; no scroll choreography, no reveals.
+            Object.assign(S, { m: 1, op: .22, s: 1, y: 0, grid: 1, breathe: 0 });
+            render();
+            return;
+        }
+        gsap.ticker.add(render);
+
+        /* ------------------------------------------------------------
+           Anchors — native smooth scroll (CSS scroll-behavior is avoided:
+           it makes ScrollTrigger's refresh measurements asynchronous)
+           ------------------------------------------------------------ */
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="#"]');
+            if (!a) return;
+            var t = document.getElementById(a.getAttribute('href').slice(1));
+            if (!t) return;
+            e.preventDefault();
+            t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', a.getAttribute('href'));
+        });
+
+        /* ------------------------------------------------------------
+           Nav state
+           ------------------------------------------------------------ */
+        ScrollTrigger.create({ start: 80, onUpdate: function (st) { $('#nav').classList.toggle('is-scrolled', st.scroll() > 80); } });
+
+        /* ------------------------------------------------------------
+           Hero entrance — two lines land in sequence
+           ------------------------------------------------------------ */
+        var intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+        var lines = $$('#heroTitle .w');
+        if (window.SplitText) {
+            var split = new SplitText(lines, { type: 'chars,words' });
+            gsap.set(lines, { opacity: 1 });
+            intro.from(split.words.filter(function (w) { return lines[0].contains(w); }), { yPercent: 110, opacity: 0, duration: 1.3, stagger: .06 }, .25)
+                 .from(split.chars.filter(function (c) { return lines[1].contains(c); }), { y: 18, opacity: 0, rotateX: -50, duration: .9, stagger: .014 }, '-=.55');
+        } else {
+            intro.from(lines, { yPercent: 110, opacity: 0, duration: 1.3, stagger: .35 }, .25);
+        }
+        intro.from('#hero [data-rv]', { y: 24, opacity: 0, duration: 1.1, stagger: .09 }, '-=.9');
+        $$('#hero [data-rv]').forEach(function (el) { el.removeAttribute('data-rv'); });
+
+        // Hero copy lifts away as the wave comes forward
+        gsap.to('#hero .hero-inner', { y: -90, opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero', start: '35% top', end: 'bottom top', scrub: true } });
+
+        /* ------------------------------------------------------------
+           Generic reveals — heavy fade-up, once
+           ------------------------------------------------------------ */
+        $$('[data-rv]').forEach(function (el) {
+            var kids = el.hasAttribute('data-rv-kids') ? el.children : el;
+            gsap.from(kids, { y: 30, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .07, scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
+        });
+
+        /* ------------------------------------------------------------
+           01 · Problem — lines step in, previous dims
+           ------------------------------------------------------------ */
+        var pl = $$('#problem .pl'), closer = $('#problem .closer');
+        gsap.set(pl, { opacity: 0, y: 34 }); gsap.set(closer, { opacity: 0, y: 30 });
+        var ptl = gsap.timeline({ scrollTrigger: { trigger: '#problem', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+        ptl.to({}, { duration: .4 });
+        pl.forEach(function (l, i) {
+            ptl.to(l, { opacity: 1, y: 0, duration: 1, ease: 'none' });
+            ptl.to({}, { duration: .5 });
+            if (i < pl.length - 1) ptl.to(l, { opacity: .2, duration: .7, ease: 'none' });
+        });
+        ptl.to(pl[pl.length - 1], { opacity: .45, duration: .6, ease: 'none' }, '+=.2')
+           .to(closer, { opacity: 1, y: 0, duration: 1, ease: 'none' }, '<')
+           .to({}, { duration: .8 });
+
+        /* ------------------------------------------------------------
+           Scroll poses for the fingerprint — one chained set of tweens
+           on S. Each stage starts where the previous one ended.
+           ------------------------------------------------------------ */
+        var mm = gsap.matchMedia();
+        mm.add({ desk: '(min-width: 900px)', mob: '(max-width: 899px)' }, function (ctx) {
+            var desk = ctx.conditions.desk;
+
+            // Where the signature lands in beat 02 (cached per refresh)
+            var slotX = 0;
+            function measureSlot() {
+                if (!desk) { slotX = 0; return; }
+                var r = $('#fpSlot').getBoundingClientRect();
+                slotX = ((r.left + r.width / 2) - window.innerWidth / 2) / window.innerWidth * 100;
+            }
+            measureSlot();
+            ScrollTrigger.addEventListener('refresh', measureSlot);
+
+            poseBase = { op: .45, x: desk ? 24 : 0, y: desk ? 2 : 30, s: desk ? 1.05 : 1.4, m: 0, grid: 0, bOp: 0, draw: 0, rot: 0 };
+            Object.assign(S, poseBase);
+            poseStages = [];
+            function stage(trigger, start, end, to) {
+                poseStages.push({ st: ScrollTrigger.create({ trigger: trigger, start: start, end: end, invalidateOnRefresh: true }), to: to });
+            }
+
+            // hero -> problem: the wave recedes to centre and widens
+            stage('#problem', 'top bottom', 'top top', { op: .16, s: 1.42, x: 0, y: 0 });
+            // -> fingerprint: wave becomes the signature, moves into the slot
+            stage('#fingerprint', 'top 85%', 'top 10%', { m: 1, op: .95, grid: 1, x: function () { return slotX; }, y: desk ? 0 : -29, s: desk ? .74 : .8 });
+            // B overlays A while the copy is held
+            stage('#fingerprint', 'top -20%', 'top -70%', { bOp: .9 });
+            // -> loop: shrink to the corner (desktop: undrawn, redrawn over the pin)
+            stage('#loop', 'top 70%', 'top 5%', { bOp: 0, grid: 0, s: .22, x: desk ? 41 : 33, y: desk ? -36 : -39, op: .7, draw: desk ? 1 : 0 });
+
+            /* 02 caption arrives with B */
+            gsap.fromTo('#fpCaption', { opacity: 0, y: 20 }, { opacity: 1, y: 0, ease: 'none', immediateRender: true, scrollTrigger: { trigger: '#fingerprint', start: 'top -20%', end: 'top -60%', scrub: .6 } });
+
+            /* 03 loop */
+            var track = $('#loopTrack'), panels = $$('.loop-panel'), bars = $$('#loopProgress i');
+            if (desk) {
+                var dist = function () { return track.scrollWidth - window.innerWidth; };
+                var loopST = gsap.to(track, {
+                    x: function () { return -dist(); }, ease: 'none',
+                    scrollTrigger: {
+                        trigger: '#loop .loop-stage', pin: true, scrub: 1, start: 'top top', end: function () { return '+=' + dist(); },
+                        invalidateOnRefresh: true, anticipatePin: 1,
+                        onUpdate: function (st) {
+                            var p = st.progress * bars.length;
+                            bars.forEach(function (b, i) { b.style.setProperty('--p', gsap.utils.clamp(0, 1, p - i)); });
+                        }
+                    }
+                });
+                // the corner ring draws itself back in as the loop closes
+                stage('#loop .loop-stage', 'top top', function () { return '+=' + dist(); }, { draw: 0, op: .85 });
+                panels.forEach(function (p, i) {
+                    if (i === 0) return;
+                    gsap.from($$('.num, .step', p), { y: 40, opacity: 0, duration: 1, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: p, containerAnimation: loopST, start: 'left 70%', once: true } });
+                });
+            } else {
+                panels.forEach(function (p) {
+                    gsap.from($$('.num, .step', p), { y: 30, opacity: 0, duration: 1, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: p, start: 'top 85%', once: true } });
+                });
+            }
+
+            // -> qa: gone
+            stage('#qa', 'top bottom', 'top 55%', { op: 0, draw: 0 });
+            // -> human: back to centre with the grid; the orbit converges on it
+            stage('#human', 'top 70%', 'center center', { op: .6, s: desk ? .88 : .72, x: 0, y: desk ? 5 : 8, grid: .7 });
+            // -> who: out
+            stage('#who', 'top bottom', 'top 40%', { op: 0, s: .7 });
+            // -> cta: settles large and slow behind the close
+            stage('#cta', 'top bottom', 'center center', { op: .22, s: 1.5, y: 8, grid: 0, rot: 18 });
+
+            /* 05 orbit: five pills pull in and snap to the signature */
+            var pills = $$('#orbit .pill'), K = pills.length;
+            var vm = function () { return Math.min(window.innerWidth, window.innerHeight); };
+            pills.forEach(function (p, i) {
+                var a = (-90 + i * (360 / K)) * Math.PI / 180;
+                var far = desk ? .42 : .46, near = desk ? .26 : .27;
+                gsap.fromTo(p,
+                    { xPercent: -50, yPercent: -50, x: function () { return Math.cos(a) * vm() * far; }, y: function () { return Math.sin(a) * vm() * far; }, opacity: 0, borderColor: 'rgba(255,255,255,.09)', color: 'rgba(240,234,223,.56)' },
+                    { x: function () { return Math.cos(a) * vm() * near; }, y: function () { return Math.sin(a) * vm() * near; }, opacity: 1, borderColor: 'rgba(0,206,209,.55)', color: '#f7efe2', ease: 'none', immediateRender: true,
+                      scrollTrigger: { trigger: '#human', start: 'top 70%', end: 'center center', scrub: .7, invalidateOnRefresh: true } });
+            });
+
+            return function () {
+                ScrollTrigger.removeEventListener('refresh', measureSlot);
+                poseStages = []; poseBase = null;
+            };
+        });
+
+        /* ------------------------------------------------------------
+           04 · Report rows resolve one at a time
+           ------------------------------------------------------------ */
+        var rows = $$('#report .qrow');
+        var rtl = gsap.timeline({ scrollTrigger: { trigger: '#report', start: 'top 72%', once: true }, defaults: { ease: 'expo.out' } });
+        rows.forEach(function (r, i) {
+            var band = $('.qband', r), dot = $('.qdot', r), v = $('.v', r), m = parseFloat(r.style.getPropertyValue('--m'));
+            var t = i * .22;
+            rtl.to(band, { scaleX: 1, duration: .9 }, t)
+               .fromTo(dot, { left: '0%', opacity: 0 }, { left: m + '%', opacity: 1, duration: 1.1 }, t + .15)
+               .from(v, { opacity: 0, x: 8, duration: .7 }, t + .7);
+        });
+        rtl.from('#report .rf > *', { opacity: 0, y: 12, duration: .9, stagger: .12 }, '-=.5');
+
+        /* Recalculate after fonts settle */
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+        window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+    })();
+    </script>
+</body>
+
+</html>

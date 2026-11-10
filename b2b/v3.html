@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREQ — For people who don't compromise.</title>
+    <meta name="description" content="The best engineers hear what others miss. FREQ is a mixing system built from the ground up — and Sonic Fingerprinting learns the boundaries of your catalogue from your own masters, so scale never costs you the standard.">
+    <link rel="canonical" href="https://thefreq.in/b2b/v3">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <meta name="theme-color" content="#050505">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FREQ — For people who don't compromise.">
+    <meta property="og:description" content="You can have exceptional people. And still lose the standard. I built FREQ to solve that.">
+    <meta property="og:url" content="https://thefreq.in/b2b/v3">
+    <meta property="og:site_name" content="thefreq.in">
+    <meta property="og:image" content="https://thefreq.in/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FREQ — For people who don't compromise.">
+    <meta name="twitter:description" content="You be the story. I'll help you make it your music.">
+    <meta name="twitter:image" content="https://thefreq.in/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"FREQ — For people who don't compromise.","url":"https://thefreq.in/b2b/v3","publisher":{"@type":"Organization","name":"FREQ","url":"https://thefreq.in"}}</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* FREQ app palette (medusa-ui/src/index.css) */
+            --pink: oklch(0.65 0.25 330); --teal: oklch(0.75 0.15 200); --yellow: oklch(0.92 0.15 95);
+            --bg: oklch(0.05 0 0); --card: oklch(0.09 0.005 270);
+            --ink: oklch(0.96 0 0); --cream: oklch(1 0 0);
+            --muted: oklch(0.70 0.01 0); --dim: oklch(0.50 0.015 270); --faint: oklch(0.36 0.01 270);
+            --line: oklch(0.14 0.01 270); --line-2: oklch(0.115 0.008 270); --line-3: oklch(0.22 0.01 270);
+            --display: 'Sora', system-ui, sans-serif; --sans: 'DM Sans', system-ui, sans-serif; --mono: 'Space Mono', ui-monospace, monospace;
+            --ease: cubic-bezier(.32, .72, 0, 1);
+            --gutter: clamp(20px, 5vw, 76px);
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; }
+        body {
+            margin: 0; background: var(--bg) linear-gradient(180deg, oklch(0.072 0.006 250) 0%, oklch(0.05 0 0) 40%, oklch(0.062 0.012 320) 100%) fixed; color: var(--ink);
+            font-family: var(--sans); font-weight: 300; font-size: clamp(16px, 1.05vw + 10px, 19px); line-height: 1.58;
+            -webkit-font-smoothing: antialiased; overflow-x: hidden;
+        }
+        ::selection { background: rgba(0, 206, 209, .28); color: var(--cream); }
+        a { color: inherit; text-decoration: none; }
+        :focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; border-radius: 4px; }
+        .skip { position: absolute; left: -999px; top: 12px; z-index: 100; background: var(--cream); color: #050505; padding: 8px 14px; border-radius: 999px; font-family: var(--mono); font-size: 12px; }
+        .skip:focus { left: 12px; }
+
+        /* ---- ambient light ------------------------------------------------ */
+        .aura { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .aura .orb { position: absolute; width: 74vmax; height: 74vmax; border-radius: 50%; mix-blend-mode: screen; will-change: transform; opacity: var(--o, .5); transition: opacity 1.8s var(--ease); }
+        .aura .o1 { left: -20vmax; top: -22vmax; --o: var(--a1, .6); background: radial-gradient(closest-side, oklch(0.75 0.15 200 / .32), oklch(0.75 0.15 200 / .07) 45%, transparent 72%); animation: drift1 40s ease-in-out infinite alternate; }
+        .aura .o2 { right: -24vmax; top: 8vmax; --o: var(--a2, .34); background: radial-gradient(closest-side, oklch(0.65 0.25 330 / .30), oklch(0.65 0.25 330 / .07) 45%, transparent 72%); animation: drift2 48s ease-in-out infinite alternate; }
+        .aura .o3 { left: 14vmax; bottom: -34vmax; --o: var(--a3, .16); background: radial-gradient(closest-side, oklch(0.92 0.15 95 / .2), oklch(0.92 0.15 95 / .05) 45%, transparent 72%); animation: drift3 56s ease-in-out infinite alternate; }
+        .aura .spot { position: absolute; left: 0; top: 0; width: 56vmax; height: 56vmax; margin: -28vmax 0 0 -28vmax; border-radius: 50%; opacity: 0; mix-blend-mode: screen;
+            background: radial-gradient(closest-side, oklch(1 0 0 / .04), transparent 70%); transform: translate3d(var(--mx, 50vw), var(--my, 40vh), 0); transition: transform 1.1s var(--ease), opacity 1.2s var(--ease); }
+        body.has-pointer .aura .spot { opacity: 1; }
+        @keyframes drift1 { to { transform: translate3d(16vmax, 14vmax, 0) scale(1.18); } }
+        @keyframes drift2 { to { transform: translate3d(-14vmax, 18vmax, 0) scale(1.12); } }
+        @keyframes drift3 { to { transform: translate3d(22vmax, -12vmax, 0) scale(1.22); } }
+        @media (prefers-reduced-motion: reduce) { .aura .orb { animation: none; } .aura .spot { display: none; } }
+        /* scene tints */
+        body[data-scene="hero"]     { --a1: .62; --a2: .3;  --a3: .12; }
+        body[data-scene="hear"]     { --a1: .78; --a2: .16; --a3: .1; }
+        body[data-scene="grow"]     { --a1: .4;  --a2: .5;  --a3: .3; }
+        body[data-scene="drift"]    { --a1: .24; --a2: .7;  --a3: .34; }
+        body[data-scene="system"]   { --a1: .66; --a2: .26; --a3: .14; }
+        body[data-scene="sound"]    { --a1: .5;  --a2: .58; --a3: .2; }
+        body[data-scene="standard"] { --a1: .7;  --a2: .3;  --a3: .16; }
+        body[data-scene="close"]    { --a1: .58; --a2: .6;  --a3: .26; }
+
+        /* a soft scrim between the field and the copy; lifted where the field IS the content */
+        .veil { position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: opacity 1.4s var(--ease);
+            background: radial-gradient(125% 95% at 50% 46%, oklch(0.05 0 0 / .5), oklch(0.05 0 0 / .2) 55%, transparent 84%); }
+        body[data-scene="sound"] .veil { opacity: .3; }
+        body[data-scene="hear"] .veil { opacity: .55; }
+        .grain { position: fixed; inset: -50%; z-index: 40; pointer-events: none; opacity: .045;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            background-size: 240px 240px; }
+
+        /* ---- the field: fixed, re-posed by scroll -------------------------- */
+        #fld { position: fixed; inset: 0; z-index: 0; pointer-events: none; display: grid; place-items: center; }
+        #fld .fl-wrap { width: min(80vmin, 760px); aspect-ratio: 1; will-change: transform, opacity; }
+        #fld svg { width: 100%; height: 100%; overflow: visible; display: block; }
+        #dots, #dotEdge { fill: oklch(0.97 0.01 200); stroke: none; }
+        #dotEdge { opacity: 0; }
+        #bound { fill: oklch(0.75 0.15 200 / .045); stroke: var(--teal); stroke-width: .42; stroke-linejoin: round; opacity: 0; }
+        #rule { stroke: var(--pink); stroke-width: .5; opacity: 0; }
+        #scale { opacity: 0; }
+        #scale .axis { stroke: rgba(255, 255, 255, .22); stroke-width: .22; }
+        #scaleTicks line { stroke: rgba(255, 255, 255, .3); stroke-width: .2; }
+        #scaleTicks line.maj { stroke: rgba(255, 255, 255, .55); stroke-width: .3; }
+        #scaleHalf line { stroke: var(--pink); stroke-width: .3; }
+        #scaleHalf path { fill: none; stroke: var(--pink); stroke-width: .3; }
+        #scaleHalf text { font-family: var(--mono); font-size: 3.1px; letter-spacing: .3px; fill: var(--pink); }
+
+        /* ---- nav ----------------------------------------------------------- */
+        .nav { position: fixed; top: 18px; left: 50%; z-index: 50; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 6px; padding: 7px 7px 7px 14px; border-radius: 999px;
+            background: oklch(0.08 0.005 270 / .55); -webkit-backdrop-filter: blur(20px) saturate(140%); backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, .08); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 24px 60px -28px rgba(0, 0, 0, .9);
+            white-space: nowrap; transition: background .6s var(--ease), border-color .6s var(--ease); }
+        .nav.is-scrolled { background: oklch(0.08 0.005 270 / .78); border-color: rgba(255, 255, 255, .12); }
+        .nav .brand { display: flex; align-items: center; gap: 10px; padding-right: 10px; }
+        .nav .brand svg { width: 18px; height: auto; display: block; }
+        .nav .brand b { font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .16em; }
+        .nav .links { display: flex; gap: 2px; padding: 0 6px; border-left: 1px solid var(--line); }
+        .nav .links a { font-size: 13px; color: var(--muted); padding: 8px 12px; border-radius: 999px; transition: color .4s var(--ease), background .4s var(--ease); }
+        .nav .links a:hover { color: var(--cream); background: rgba(255, 255, 255, .05); }
+        .nav .cta-mini { display: inline-flex; align-items: center; gap: 8px; background: var(--pink); color: #fff; font-size: 13px; font-weight: 500; padding: 9px 8px 9px 16px; border-radius: 999px; transition: transform .5s var(--ease); }
+        .nav .cta-mini i { width: 22px; height: 22px; border-radius: 999px; background: rgba(255, 255, 255, .18); display: grid; place-items: center; font-style: normal; font-size: 12px; }
+        .nav .cta-mini:hover { transform: scale(1.02); }
+        @media (max-width: 899px) { .nav .links { display: none; } }
+
+        /* ---- primitives ----------------------------------------------------- */
+        main { position: relative; z-index: 1; }
+        .wrap { width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: var(--gutter); }
+        section { position: relative; }
+        .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); margin: 0 0 26px; }
+        .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--dim); }
+        .display { font-family: var(--display); font-weight: 600; line-height: 1.04; letter-spacing: -.035em; font-size: clamp(2rem, 4.2vw + .4rem, 4.5rem); margin: 0; color: var(--cream); text-wrap: balance; }
+        .display .l2 { display: block; color: var(--muted); }
+        .lede { font-size: clamp(1.05rem, .55vw + .85rem, 1.32rem); color: var(--muted); max-width: 30em; margin: 26px 0 0; }
+        p { margin: 0; }
+
+        /* readability: the field moves behind the page, so copy carries its own dark halo */
+        .display, .lede, .eyebrow, .step, .beat, .stat b, .stat span, .verb, .give p, .note, .btn, .foot-note
+            { text-shadow: 0 1px 2px oklch(0.05 0 0 / .8), 0 6px 26px oklch(0.05 0 0 / .95); }
+
+        .btn { --btn-bg: var(--pink); --btn-fg: #fff; position: relative; display: inline-flex; align-items: center; gap: 14px; padding: 6px 6px 6px 22px; border-radius: 999px;
+            background: var(--btn-bg); color: var(--btn-fg); font-weight: 500; font-size: 15px; line-height: 1; border: 1px solid transparent; cursor: pointer; min-height: 48px;
+            transition: transform .6s var(--ease), border-color .6s var(--ease); }
+        .btn .disc { width: 36px; height: 36px; border-radius: 999px; display: grid; place-items: center; background: rgba(255, 255, 255, .18); transition: transform .6s var(--ease); }
+        .btn .disc svg { width: 14px; height: 14px; display: block; transition: transform .6s var(--ease); }
+        .btn:hover { transform: translateY(-1px); }
+        .btn:hover .disc { transform: scale(1.06); }
+        .btn:hover .disc svg { transform: translate(1.5px, -1.5px); }
+        .btn:active { transform: scale(.98); }
+        .btn.ghost { --btn-bg: transparent; --btn-fg: var(--ink); border-color: var(--line-3); }
+        .btn.ghost .disc { background: rgba(255, 255, 255, .06); }
+        .btn.ghost:hover { border-color: var(--teal); }
+        .btn-row { display: flex; flex-wrap: wrap; gap: 12px 14px; align-items: center; margin-top: 42px; }
+
+        /* ---- 00 hero -------------------------------------------------------- */
+        #hero { min-height: 100dvh; display: grid; align-items: center; padding-block: 140px 80px; }
+        #hero .hero-inner { max-width: 940px; }
+        #hero .display { font-size: clamp(2.2rem, 5.2vw + .3rem, 5.6rem); }
+        #hero .display .line { display: block; overflow: hidden; }
+        #hero .display .line .w { display: inline-block; }
+        .hero-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-top: clamp(56px, 9vh, 110px);
+            font-family: var(--mono); font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); }
+        .hero-foot .scroll { display: inline-flex; align-items: center; gap: 12px; }
+        .hero-foot .scroll i { display: block; width: 1px; height: 38px; background: linear-gradient(var(--dim), transparent); position: relative; overflow: hidden; }
+        .hero-foot .scroll i::after { content: ""; position: absolute; inset: 0; background: var(--cream); transform: translateY(-100%); animation: drop 2.2s var(--ease) infinite; }
+        @keyframes drop { 0% { transform: translateY(-100%); } 60% { transform: translateY(100%); } 100% { transform: translateY(100%); } }
+        @media (prefers-reduced-motion: reduce) { .hero-foot .scroll i::after { animation: none; } }
+
+        /* ---- 01 what they hear (sticky; four notices step in and stay) ------ */
+        #hear { min-height: 250vh; }
+        #hear .sticky { position: sticky; top: 0; min-height: 100dvh; display: grid; align-items: center; padding-block: 120px; }
+        #hear .display { font-size: clamp(1.7rem, 2.8vw + .4rem, 3.2rem); margin-bottom: .85em; max-width: 16em; }
+        .notices { display: grid; gap: clamp(14px, 2.4vh, 26px); max-width: 24em; }
+        .step { font-family: var(--display); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; font-size: clamp(1.5rem, 2.3vw + .5rem, 3rem); color: var(--cream); margin: 0; display: flex; align-items: baseline; gap: 18px; }
+        .step i { font-style: normal; font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .2em; color: var(--faint); flex: none; width: 2.2em; }
+        #hear .closer { margin-top: clamp(34px, 5.5vh, 58px); padding-top: 28px; border-top: 1px solid var(--line); max-width: 28em; display: grid; gap: 14px; }
+        .beat { font-size: clamp(1.05rem, .7vw + .8rem, 1.35rem); line-height: 1.42; color: var(--ink); }
+        .beat.hi { font-family: var(--display); font-weight: 600; letter-spacing: -.02em; color: var(--cream); }
+
+        /* ---- 02 the numbers grow (sticky; scrubbed count) -------------------- */
+        #grow { min-height: 300vh; }
+        #grow .sticky { position: sticky; top: 0; min-height: 100dvh; display: grid; align-items: center; padding-block: 120px; }
+        #grow .display { font-size: clamp(1.7rem, 2.8vw + .4rem, 3.2rem); margin-bottom: .8em; }
+        .scale-rows { display: grid; gap: clamp(16px, 2.6vh, 30px); max-width: 34em; }
+        .srow { display: grid; grid-template-columns: clamp(96px, 11vw, 152px) minmax(0, 1fr); gap: 4px 26px; align-items: baseline; margin: 0; }
+        .srow b { font-family: var(--display); font-weight: 600; letter-spacing: -.04em; line-height: .95; font-size: clamp(1.5rem, 2vw + .5rem, 2.8rem); color: var(--teal); font-variant-numeric: tabular-nums; }
+        .srow span { font-family: var(--display); font-weight: 600; letter-spacing: -.02em; line-height: 1.2; font-size: clamp(1rem, 1vw + .6rem, 1.55rem); color: var(--cream); text-wrap: balance; }
+        #grow .closer { margin-top: clamp(30px, 5vh, 52px); padding-top: 26px; border-top: 1px solid var(--line); max-width: 28em; display: grid; gap: 10px; }
+        @media (max-width: 599px) { .srow { grid-template-columns: 1fr; gap: 2px; } .step { gap: 12px; } .step i { width: auto; } }
+
+        /* ---- 03 the drift ---------------------------------------------------- */
+        #drift { padding-block: clamp(96px, 16vh, 200px) clamp(60px, 10vh, 130px); }
+        #drift .grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+        #drift .display { font-size: clamp(1.7rem, 2.8vw + .4rem, 3.2rem); }
+        .ones { display: grid; gap: 0; border-top: 1px solid var(--line); }
+        .ones p { padding: 20px 0; border-bottom: 1px solid var(--line-2); color: var(--muted); font-size: clamp(1rem, .5vw + .85rem, 1.2rem); }
+        .ones p b { font-weight: 400; color: var(--cream); }
+        @media (max-width: 899px) { #drift .grid { grid-template-columns: 1fr; gap: 30px; } }
+
+        /* ---- 04 the system + numbers ----------------------------------------- */
+        #system { padding-block: clamp(80px, 13vh, 170px) clamp(60px, 10vh, 130px); }
+        #system .display { font-size: clamp(1.8rem, 3vw + .4rem, 3.4rem); max-width: 14em; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); gap: 2px; margin-top: clamp(44px, 7vh, 80px); border-top: 1px solid var(--line); }
+        .stat { padding: 26px 22px 26px 0; display: grid; gap: 10px; align-content: start; border-bottom: 1px solid var(--line-2); }
+        .stat b { font-family: var(--display); font-weight: 600; font-size: clamp(1.45rem, 1.5vw + .75rem, 2.3rem); letter-spacing: -.035em; line-height: 1; color: var(--cream); font-variant-numeric: tabular-nums; }
+        .stat span { color: var(--muted); font-size: .92em; line-height: 1.4; }
+        #system .closer { margin-top: clamp(36px, 6vh, 64px); display: grid; gap: 10px; max-width: 30em; }
+
+        /* ---- 05 your sound (sticky showpiece) -------------------------------- */
+        #sound .stage { min-height: 230vh; }
+        #sound .sticky { position: sticky; top: 0; height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; padding-block: 112px 56px; text-align: center; }
+        #sound .display { margin-inline: auto; max-width: 11em; font-size: clamp(2rem, 3.6vw + .4rem, 4.2rem); }
+        #sound .eyebrow { justify-content: center; }
+        #sound .caption { max-width: 34em; margin-inline: auto; color: var(--muted); }
+        #sound .caption b { font-weight: 400; color: var(--ink); }
+        .nots { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 6px; margin-top: 20px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+        .nots span { padding: 7px 12px; border: 1px solid var(--line-2); border-radius: 999px; }
+        .nots span.yes { color: var(--cream); border-color: rgba(0, 206, 209, .45); background: rgba(0, 206, 209, .07); }
+        #sound .tail { padding-block: clamp(70px, 12vh, 140px) 0; }
+        #sound .tail .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; max-width: 1000px; margin-inline: auto; }
+        #sound .tail p { color: var(--muted); }
+        #sound .tail p b { font-weight: 400; color: var(--cream); }
+        @media (max-width: 899px) { #sound .sticky { padding-top: 96px; } #sound .tail .grid { grid-template-columns: 1fr; gap: 24px; } }
+
+        /* ---- 06 one standard (sticky; the verbs travel) ----------------------- */
+        #standard { min-height: 220vh; }
+        #standard .sticky { position: sticky; top: 0; height: 100dvh; display: grid; grid-template-rows: auto 1fr; align-content: center; padding-block: 118px 70px; overflow: hidden; }
+        #standard .display { font-size: clamp(1.8rem, 3vw + .4rem, 3.4rem); }
+        #standard .lede { margin-bottom: 8px; }
+        .rail { align-self: center; overflow: hidden; }
+        .rail-track { display: flex; align-items: center; gap: clamp(40px, 7vw, 110px); width: max-content; padding-inline: clamp(24px, 26vw, 560px); will-change: transform; }
+        .verb { font-family: var(--display); font-weight: 600; letter-spacing: -.045em; line-height: 1; font-size: clamp(3rem, 9vw + .5rem, 8.5rem); color: var(--cream); flex: none; display: grid; gap: 14px; }
+        .verb em { font-style: normal; font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--teal); }
+        .progress { display: flex; gap: 6px; margin-top: 26px; }
+        .progress i { width: 34px; height: 2px; background: var(--faint); border-radius: 2px; overflow: hidden; position: relative; }
+        .progress i::after { content: ""; position: absolute; inset: 0; background: var(--teal); transform: scaleX(var(--p, 0)); transform-origin: left; }
+        @media (max-width: 899px) {
+            #standard { min-height: 0; }
+            #standard .sticky { position: static; height: auto; display: block; padding-block: clamp(80px, 13vh, 150px) clamp(50px, 8vh, 100px); overflow: visible; }
+            .rail { overflow: visible; margin-top: 44px; }
+            .rail-track { display: grid; width: auto; padding-inline: 0; gap: 30px; transform: none !important; }
+            .verb { font-size: clamp(2.6rem, 14vw, 4.4rem); }
+            .progress { display: none; }
+        }
+
+        /* ---- 07 what it gives ------------------------------------------------- */
+        #gives { padding-block: clamp(80px, 13vh, 170px) clamp(60px, 10vh, 120px); }
+        #gives .grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+        #gives .display { font-size: clamp(1.7rem, 2.6vw + .4rem, 3rem); }
+        .give { display: grid; gap: 0; border-top: 1px solid var(--line); }
+        .give p { padding: 22px 0; border-bottom: 1px solid var(--line-2); color: var(--muted); font-size: clamp(1rem, .5vw + .85rem, 1.22rem); }
+        .give p b { font-weight: 400; color: var(--cream); }
+        .note { margin-top: 30px; font-family: var(--display); font-weight: 600; letter-spacing: -.02em; line-height: 1.2; font-size: clamp(1.15rem, 1vw + .75rem, 1.7rem); color: var(--cream); max-width: 20em; }
+        @media (max-width: 899px) { #gives .grid { grid-template-columns: 1fr; gap: 30px; } }
+
+        /* ---- 08 close ---------------------------------------------------------- */
+        #close { min-height: 100dvh; display: grid; align-content: center; text-align: center; padding-block: 120px 100px; }
+        #close .display { margin-inline: auto; max-width: 12em; }
+        #close .lede { margin-inline: auto; }
+        #close .btn-row { justify-content: center; }
+        .sign { margin-top: clamp(46px, 8vh, 90px); display: grid; gap: 6px; justify-items: center; }
+        .sign p { font-family: var(--display); font-weight: 600; letter-spacing: -.025em; font-size: clamp(1.2rem, 1.2vw + .8rem, 1.9rem); line-height: 1.22; color: var(--cream); }
+        .sign p + p { color: var(--muted); }
+        .sign .mark { margin-top: 24px; font-family: var(--mono); font-weight: 700; font-size: 13px; letter-spacing: .4em; color: var(--teal); }
+        .foot-note { margin-top: 56px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--dim); }
+        footer { position: relative; z-index: 1; border-top: 1px solid var(--line); padding: 40px 0 56px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--dim); }
+        footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; }
+        footer .brand { display: flex; align-items: center; gap: 12px; color: var(--muted); }
+        footer .brand svg { width: 16px; height: auto; }
+        footer nav { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+        footer nav a:hover { color: var(--cream); }
+
+        .no-js [data-rv] { opacity: 1 !important; transform: none !important; }
+    </style>
+</head>
+
+<body class="no-js">
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="aura" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><i class="spot"></i></div>
+
+    <!-- The field: one mark held precisely, multiplied into a scattered catalogue,
+         gathered into a lattice, bounded by the fingerprint, aligned to one standard. -->
+    <div id="fld" aria-hidden="true">
+        <div class="fl-wrap">
+            <svg viewBox="-60 -60 120 120">
+                <line id="rule" x1="-56" y1="0" x2="56" y2="0"></line>
+                <path id="bound" d=""></path>
+                <g id="scale">
+                    <line class="axis" x1="-44" y1="0" x2="44" y2="0"></line>
+                    <g id="scaleTicks"></g>
+                    <g id="scaleHalf">
+                        <line x1="6" y1="-5.5" x2="6" y2="5.5"></line>
+                        <line x1="13" y1="-5.5" x2="13" y2="5.5"></line>
+                        <path d="M6 -9.5 H13"></path>
+                        <text x="15.5" y="-8.4">half a dB</text>
+                    </g>
+                </g>
+                <path id="dots" d=""></path>
+                <path id="dotEdge" d=""></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="veil" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="nav" id="nav">
+        <a class="brand" href="../index.html" aria-label="FREQ home">
+            <svg viewBox="0 0 350 330" aria-hidden="true"><g fill="#F50CA0"><path d="M26 30h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/><path d="M226 10h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V26a16 16 0 0 1 16-16z"/><path d="M296 30h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/></g><g fill="#00CED1"><path d="M166 240h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H166a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/><path d="M96 220h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16H96a16 16 0 0 1-16-16v-68a16 16 0 0 1 16-16z"/><path d="M26 240h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/></g><path fill="#fff" d="M26 140h298a16 16 0 0 1 16 16v8a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-8a16 16 0 0 1 16-16z"/></svg>
+            <b>FREQ</b>
+        </a>
+        <nav class="links" aria-label="Sections">
+            <a href="#hear">The ear</a>
+            <a href="#grow">Scale</a>
+            <a href="#system">The system</a>
+            <a href="#sound">Your sound</a>
+        </nav>
+        <a class="cta-mini" href="https://app.thefreq.in/contact?intent=demo">Talk to me <i aria-hidden="true">↗</i></a>
+    </header>
+
+    <main id="main">
+
+        <!-- 00 · HERO -->
+        <section id="hero">
+            <div class="wrap">
+                <div class="hero-inner">
+                    <p class="eyebrow" data-rv>FREQ · for labels, studios &amp; engineers</p>
+                    <h1 class="display" id="heroTitle">
+                        <span class="line"><span class="w">For people who don't compromise.</span></span>
+                    </h1>
+                    <p class="lede" data-rv>The best engineers hear what others miss.</p>
+                    <div class="btn-row" data-rv>
+                        <a class="btn" href="https://app.thefreq.in/signup">Explore FREQ <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+                        <a class="btn ghost" href="https://app.thefreq.in/contact?intent=demo">Talk to me <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
+                    </div>
+                    <div class="hero-foot" data-rv>
+                        <span class="scroll"><i aria-hidden="true"></i> Scroll</span>
+                        <span>thefreq.in</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 01 · WHAT THEY HEAR -->
+        <section id="hear" aria-labelledby="hearTitle">
+            <div class="sticky">
+                <div class="wrap">
+                    <p class="eyebrow">01 · The ear</p>
+                    <h2 class="display" id="hearTitle">The best engineers hear what others miss.</h2>
+                    <div class="notices">
+                        <p class="step"><i>01</i>A half-decibel.</p>
+                        <p class="step"><i>02</i>A transient.</p>
+                        <p class="step"><i>03</i>A depth decision.</p>
+                        <p class="step"><i>04</i>A space that feels wrong.</p>
+                    </div>
+                    <div class="closer">
+                        <p class="beat">They notice because they care.</p>
+                        <p class="beat hi">And when the record matters, good enough is not good enough.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 · THEN THE NUMBERS GROW -->
+        <section id="grow" aria-labelledby="growTitle">
+            <div class="sticky">
+                <div class="wrap">
+                    <p class="eyebrow">02 · Scale</p>
+                    <h2 class="display" id="growTitle">Then the numbers grow.</h2>
+                    <div class="scale-rows">
+                        <p class="srow"><b>1</b><span>record gets your full attention.</span></p>
+                        <p class="srow"><b>10</b><span>records start demanding systems.</span></p>
+                        <p class="srow"><b>50</b><span>records mean more engineers. More rooms. More decisions.</span></p>
+                        <p class="srow"><b>100</b><span>releases make consistency difficult.</span></p>
+                    </div>
+                    <div class="closer">
+                        <p class="beat">Not because people stopped caring.</p>
+                        <p class="beat hi">Because people can't be everywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 · THE DRIFT -->
+        <section id="drift" aria-labelledby="driftTitle">
+            <div class="wrap">
+                <div class="grid">
+                    <div>
+                        <p class="eyebrow" data-rv>03 · The drift</p>
+                        <h2 class="display" id="driftTitle" data-rv>You can have exceptional people.<span class="l2">And still lose the standard.</span></h2>
+                    </div>
+                    <div class="ones" data-rv>
+                        <p><b>One engineer</b> hears it differently.</p>
+                        <p><b>One room</b> translates differently.</p>
+                        <p><b>One revision</b> changes the balance.</p>
+                        <p><b>One outside mix</b> moves the sound away from your catalogue.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 · THE SYSTEM -->
+        <section id="system" aria-labelledby="systemTitle">
+            <div class="wrap">
+                <p class="eyebrow" data-rv>04 · The system</p>
+                <h2 class="display" id="systemTitle" data-rv>I built FREQ to solve that.<span class="l2">Not to replace the people who care. To give them more control.</span></h2>
+                <div class="stats" data-rv>
+                    <div class="stat"><b>30 min</b><span>Up to a first mix.</span></div>
+                    <div class="stat"><b>3–6 hrs</b><span>The conventional mixing process it can replace.</span></div>
+                    <div class="stat"><b>8</b><span>Depth levels designed around how we perceive distance and scale.</span></div>
+                    <div class="stat"><b>35 trillion+</b><span>Possible sonic outcomes.</span></div>
+                    <div class="stat"><b>100+</b><span>Psychoacoustic articles behind the thinking.</span></div>
+                </div>
+                <div class="closer" data-rv>
+                    <p class="beat">This is not one preset.</p>
+                    <p class="beat hi">It is a mixing system built from the ground up.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 · YOUR SOUND -->
+        <section id="sound" aria-labelledby="soundTitle">
+            <div class="stage">
+                <div class="sticky">
+                    <div class="wrap">
+                        <p class="eyebrow">05 · Sonic Fingerprinting</p>
+                        <h2 class="display" id="soundTitle">Your sound.</h2>
+                    </div>
+                    <div aria-hidden="true"></div>
+                    <div class="wrap" id="soundCaption">
+                        <p class="caption"><b>Then I gave it something most tools don't have.</b> Sonic Fingerprinting lets FREQ learn the boundaries of your catalogue from your own masters.</p>
+                        <div class="nots">
+                            <span>Not one song</span><span>Not one engineer</span><span>Not one person's taste</span><span class="yes">Your catalogue</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tail wrap">
+                <div class="grid">
+                    <p data-rv><b>So an engineer can make decisions freely</b> without losing the sonic world those decisions belong to.</p>
+                    <p data-rv><b>And a label can finally put a measurable standard</b> around something that has always been difficult to describe.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 · ONE STANDARD -->
+        <section id="standard" aria-labelledby="stdTitle">
+            <div class="sticky">
+                <div class="wrap">
+                    <p class="eyebrow" data-rv>06 · One standard</p>
+                    <h2 class="display" id="stdTitle" data-rv>One standard.<span class="l2">Across the work.</span></h2>
+                    <p class="lede" data-rv>Move between songs. Use a finished song as a reference for the next. Check every mix against the sound you're building.</p>
+                    <div class="progress" id="railProgress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                </div>
+                <div class="rail">
+                    <div class="rail-track" id="railTrack">
+                        <p class="verb"><em>01</em>Mix.</p>
+                        <p class="verb"><em>02</em>Analyse.</p>
+                        <p class="verb"><em>03</em>Correct.</p>
+                        <p class="verb"><em>04</em>Compare.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 · WHAT IT GIVES -->
+        <section id="gives" aria-labelledby="givesTitle">
+            <div class="wrap">
+                <div class="grid">
+                    <div>
+                        <p class="eyebrow" data-rv>07 · What it gives</p>
+                        <h2 class="display" id="givesTitle" data-rv>More capability.<span class="l2">More consistency. More control.</span></h2>
+                    </div>
+                    <div>
+                        <div class="give" data-rv>
+                            <p>FREQ gives <b>engineers</b> more capability.</p>
+                            <p>It gives <b>production houses</b> more consistency.</p>
+                            <p>It gives <b>labels</b> control over the sound of their catalogue.</p>
+                        </div>
+                        <p class="note" data-rv>Without asking anyone to compromise on the music.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 · CLOSE -->
+        <section id="close" aria-labelledby="closeTitle">
+            <div class="wrap">
+                <p class="eyebrow" data-rv style="justify-content:center">08 · Yours</p>
+                <h2 class="display" id="closeTitle" data-rv>Your story should be yours.</h2>
+                <p class="lede" data-rv>The people behind a record should still be the people behind the record. I built FREQ for the ones who care enough to notice the difference.</p>
+                <div class="sign" data-rv>
+                    <p>You be the story.</p>
+                    <p>I'll help you make it your music.</p>
+                    <p class="mark">FREQ</p>
+                </div>
+                <div class="btn-row" data-rv>
+                    <a class="btn" href="https://app.thefreq.in/signup">Explore FREQ <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+                    <a class="btn ghost" href="https://app.thefreq.in/contact?intent=demo">Talk to me <span class="disc" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 13 3M5 3h8v8"/></svg></span></a>
+                </div>
+                <p class="foot-note" data-rv>Built by Alias Analogue Music Studio</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <a class="brand" href="../index.html">
+                <svg viewBox="0 0 350 330" aria-hidden="true"><g fill="#F50CA0"><path d="M26 30h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/><path d="M226 10h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V26a16 16 0 0 1 16-16z"/><path d="M296 30h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16h-28a16 16 0 0 1-16-16V46a16 16 0 0 1 16-16z"/></g><g fill="#00CED1"><path d="M166 240h158a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H166a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/><path d="M96 220h28a16 16 0 0 1 16 16v68a16 16 0 0 1-16 16H96a16 16 0 0 1-16-16v-68a16 16 0 0 1 16-16z"/><path d="M26 240h28a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-28a16 16 0 0 1 16-16z"/></g><path fill="#fff" d="M26 140h298a16 16 0 0 1 16 16v8a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16v-8a16 16 0 0 1 16-16z"/></svg>
+                <b>FREQ</b><span>— The architecture of better sound.</span>
+            </a>
+            <nav aria-label="Footer">
+                <a href="v2.html">For labels</a>
+                <a href="mix.html">FREQ Mix</a>
+                <a href="id.html">FREQ ID</a>
+                <a href="rx.html">FREQ Rx</a>
+                <a href="https://thefreq.in">thefreq.in</a>
+                <a href="https://www.linkedin.com/in/kushal-jaju-5ba001200" rel="noopener">LinkedIn</a>
+                <a href="https://www.instagram.com/thefreq.in" rel="noopener">Instagram</a>
+            </nav>
+            <span>Alias Analogue Music Studio</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+    <script>
+    (function () {
+        document.body.classList.remove('no-js');
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+        if (window.SplitText) gsap.registerPlugin(SplitText);
+
+        var $ = function (s, r) { return (r || document).querySelector(s); };
+        var $$ = function (s, r) { return gsap.utils.toArray(s, r); };
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var clamp01 = gsap.utils.clamp(0, 1);
+        var smooth = function (t) { t = clamp01(t); return t * t * (3 - 2 * t); };
+
+        /* ------------------------------------------------------------------
+           THE FIELD
+
+           N marks. Mark 0 is always the one at the centre — the record that
+           gets your full attention. Three layouts, blended by weight:
+
+             SCATTER  the catalogue as it really is, drifting
+             LATTICE  a system imposed on it
+             ROW      one standard, everything on the same line
+
+           BOUND is the Sonic Fingerprint: a closed boundary measured from
+           the catalogue. As it fades in, marks outside it are drawn back.
+           ------------------------------------------------------------------ */
+        var N = 100;
+        function rnd(i, salt) { var x = Math.sin((i + 1) * 12.9898 + salt * 78.233) * 43758.5453; return x - Math.floor(x); }
+
+        var SCATTER = [], LATTICE = [], ROW = [], SEED = [];
+        for (var i = 0; i < N; i++) {
+            if (i === 0) { SCATTER.push([0, 0]); }
+            else {
+                var a = rnd(i, 1) * Math.PI * 2, rr = 7 + 45 * Math.sqrt(rnd(i, 2));
+                SCATTER.push([Math.cos(a) * rr, Math.sin(a) * rr]);
+            }
+            var col = i % 10, row = Math.floor(i / 10);
+            LATTICE.push([(col - 4.5) * 10.4, (row - 4.5) * 10.4]);
+            ROW.push(i === 0 ? [0, 0] : [-54 + 108 * (i / (N - 1)), 0]);
+            SEED.push([rnd(i, 3) * 6.283, rnd(i, 4) * 6.283, .6 + rnd(i, 5) * 1.5]);
+        }
+
+        // the fingerprint boundary — eight measured radii, cosine-blended
+        var BND = [.80, .60, .90, .70, .56, .84, .64, .76];
+        function anchors(vals, u) {
+            var K = vals.length, p = u * K, k = Math.floor(p), f = p - k, ff = (1 - Math.cos(f * Math.PI)) / 2;
+            return vals[k % K] * (1 - ff) + vals[(k + 1) % K] * ff;
+        }
+        function boundRadius(u) { return 25 + 23 * anchors(BND, u - Math.floor(u)); }
+        (function () {
+            var d = '';
+            for (var i = 0; i <= 180; i++) {
+                var u = (i % 180) / 180, a = u * Math.PI * 2 - Math.PI / 2, r = boundRadius(u);
+                d += (i ? 'L' : 'M') + (Math.cos(a) * r).toFixed(2) + ' ' + (Math.sin(a) * r).toFixed(2);
+            }
+            $('#bound').setAttribute('d', d + 'Z');
+        })();
+
+        // the half-decibel scale
+        (function () {
+            var g = $('#scaleTicks');
+            for (var t = -44; t <= 44; t += 3.5) {
+                var maj = Math.abs(t % 14) < .01, h = maj ? 4 : 2.2;
+                var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                ln.setAttribute('x1', t.toFixed(2)); ln.setAttribute('y1', (-h).toFixed(2));
+                ln.setAttribute('x2', t.toFixed(2)); ln.setAttribute('y2', h.toFixed(2));
+                if (maj) ln.setAttribute('class', 'maj');
+                g.appendChild(ln);
+            }
+        })();
+
+        var dots = $('#dots'), dotEdge = $('#dotEdge'), bound = $('#bound'),
+            ruleEl = $('#rule'), scaleG = $('#scale'), wrap = $('#fld .fl-wrap');
+
+        /* Pose — derived from each stage trigger's progress every frame, then
+           eased. Deterministic under refresh, resize and scroll jumps. */
+        var S = { ph: 0, count: 1, wG: 0, wL: 0, jit: 0, ring: 0, scale: 0, rule: 0, op: .5, x: 16, y: 12, s: 1.15, rot: 0 };
+        var KEYS = ['count', 'wG', 'wL', 'jit', 'ring', 'scale', 'rule', 'op', 'x', 'y', 's', 'rot'];
+        var poseBase = null, poseStages = [];
+
+        function targetPose() {
+            var P = Object.assign({}, poseBase || S);
+            for (var i = 0; i < poseStages.length; i++) {
+                var sg = poseStages[i], p = sg.st.progress;
+                if (sg.a != null) p = clamp01((p - sg.a) / (sg.b - sg.a));
+                if (p <= 0) continue;
+                for (var key in sg.to) {
+                    var v = typeof sg.to[key] === 'function' ? sg.to[key]() : sg.to[key];
+                    P[key] = P[key] + (v - P[key]) * p;
+                }
+            }
+            return P;
+        }
+
+        // position of mark i under the current pose
+        var px = 0, py = 0, pr = 0;
+        function markAt(i) {
+            var wS = 1 - S.wG - S.wL;
+            var x = SCATTER[i][0] * wS + LATTICE[i][0] * S.wG + ROW[i][0] * S.wL;
+            var y = SCATTER[i][1] * wS + LATTICE[i][1] * S.wG + ROW[i][1] * S.wL;
+            var sd = SEED[i];
+            var drift = (.6 + S.jit * 7) * (1 - S.wL * .92);   // the standard is an even line, not a wobble
+            x += Math.sin(S.ph * sd[2] * .55 + sd[0]) * drift;
+            y += Math.cos(S.ph * sd[2] * .47 + sd[1]) * drift;
+            if (S.ring > .005) {                              // nothing sits outside your own catalogue
+                var an = Math.atan2(y, x), rr = Math.sqrt(x * x + y * y);
+                var lim = boundRadius((an + Math.PI / 2) / (Math.PI * 2)) - 4;
+                if (rr > lim) { var nr = rr + (lim - rr) * S.ring; x = Math.cos(an) * nr; y = Math.sin(an) * nr; }
+            }
+            px = x; py = y;
+            pr = (i === 0 ? 1.5 : .95) - S.wL * .35;
+        }
+        function arc(x, y, r) {
+            return 'M' + (x - r).toFixed(2) + ' ' + y.toFixed(2)
+                 + 'a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (r * 2).toFixed(2) + ' 0'
+                 + 'a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (-r * 2).toFixed(2) + ' 0';
+        }
+
+        var hidden = false;
+        function render() {
+            if (poseBase) {
+                var P = targetPose(), dr = gsap.ticker.deltaRatio(60);
+                if (!(dr > 0)) dr = 1;                       // first frame / stalled ticker
+                var kk = 1 - Math.pow(.86, Math.min(dr, 6)); // and never overshoot after a long stall
+                for (var i = 0; i < KEYS.length; i++) S[KEYS[i]] += (P[KEYS[i]] - S[KEYS[i]]) * kk;
+            }
+            if (S.op < .005) { if (!hidden) { wrap.style.opacity = 0; hidden = true; } return; }
+            hidden = false;
+            S.ph += .012;
+
+            var full = Math.max(1, Math.min(N, Math.floor(S.count))), d = '';
+            for (var k = 0; k < full; k++) { markAt(k); d += arc(px, py, pr); }
+            dots.setAttribute('d', d);
+
+            var frac = S.count - full;
+            if (full < N && frac > .01) { markAt(full); dotEdge.setAttribute('d', arc(px, py, pr)); dotEdge.style.opacity = frac.toFixed(3); }
+            else dotEdge.style.opacity = 0;
+
+            bound.style.opacity = S.ring.toFixed(3);
+            ruleEl.style.opacity = S.rule.toFixed(3);
+            scaleG.style.opacity = S.scale.toFixed(3);
+            wrap.style.opacity = S.op;
+            wrap.style.transform = 'translate3d(' + S.x + 'vw,' + S.y + 'vh,0) scale(' + S.s + ') rotate(' + S.rot + 'deg)';
+        }
+        window.FREQ_FIELD = { snap: function () { if (!poseBase) return; var P = targetPose(); KEYS.forEach(function (k) { S[k] = P[k]; }); render(); } };
+
+        if (reduce) {
+            Object.assign(S, { count: N, wG: 1, wL: 0, jit: .05, ring: 1, scale: 0, rule: 0, op: .16, x: 0, y: 0, s: 1, rot: 0 });
+            render();
+            return;
+        }
+        gsap.ticker.add(render);
+
+        /* anchors: native smooth scroll (CSS scroll-behavior breaks ScrollTrigger refresh) */
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="#"]');
+            if (!a) return;
+            var t = document.getElementById(a.getAttribute('href').slice(1));
+            if (!t) return;
+            e.preventDefault();
+            t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', a.getAttribute('href'));
+        });
+        ScrollTrigger.create({ start: 80, onUpdate: function (st) { $('#nav').classList.toggle('is-scrolled', st.scroll() > 80); } });
+
+        /* ambient light: scene tint follows the section, spot follows the pointer */
+        var body = document.body, aura = $('.aura');
+        function scene(name) { if (body.dataset.scene !== name) body.dataset.scene = name; }
+        scene('hero');
+        ['hear', 'grow', 'drift', 'system', 'sound', 'standard', 'close'].forEach(function (id, i, all) {
+            ScrollTrigger.create({
+                trigger: '#' + id, start: 'top 60%', end: 'bottom 60%',
+                onToggle: function (st) { if (st.isActive) scene(id); else if (st.direction < 0) scene(i ? all[i - 1] : 'hero'); }
+            });
+        });
+        if (aura && window.matchMedia('(pointer: fine)').matches) {
+            var mx = 0, my = 0, raf = 0;
+            window.addEventListener('pointermove', function (e) {
+                mx = e.clientX; my = e.clientY;
+                if (!raf) raf = requestAnimationFrame(function () { raf = 0; aura.style.setProperty('--mx', mx + 'px'); aura.style.setProperty('--my', my + 'px'); body.classList.add('has-pointer'); });
+            }, { passive: true });
+        }
+
+        /* hero entrance */
+        var intro = gsap.timeline({ defaults: { ease: 'expo.out' } });
+        var heroLines = $$('#heroTitle .w');
+        if (window.SplitText) {
+            var split = new SplitText(heroLines, { type: 'chars,words' });
+            intro.from(split.words, { yPercent: 115, opacity: 0, duration: 1.35, stagger: .055 }, .25);
+        } else {
+            intro.from(heroLines, { yPercent: 115, opacity: 0, duration: 1.35 }, .25);
+        }
+        intro.from('#hero [data-rv]', { y: 24, opacity: 0, duration: 1.1, stagger: .09 }, '-=.85');
+        $$('#hero [data-rv]').forEach(function (el) { el.removeAttribute('data-rv'); });
+        gsap.to('#hero .hero-inner', { y: -90, opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero', start: '35% top', end: 'bottom top', scrub: true } });
+
+        /* generic reveals */
+        $$('[data-rv]').forEach(function (el) {
+            gsap.from(el, { y: 30, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
+        });
+
+        /* 01 · the four notices step in one at a time and stay solid */
+        (function () {
+            var steps = $$('#hear .step'), closer = $('#hear .closer');
+            gsap.set(steps, { opacity: 0, x: -18 }); gsap.set(closer, { opacity: 0, y: 26 });
+            var tl = gsap.timeline({ scrollTrigger: { trigger: '#hear', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+            tl.to({}, { duration: .35 });
+            steps.forEach(function (l) {
+                tl.to(l, { opacity: 1, x: 0, duration: .8, ease: 'none' });
+                tl.to({}, { duration: .35 });
+            });
+            tl.to(closer, { opacity: 1, y: 0, duration: .9, ease: 'none' }, '+=.25').to({}, { duration: .7 });
+        })();
+
+        /* 02 · the rows arrive as the field multiplies, and stay solid */
+        var growST = ScrollTrigger.create({ trigger: '#grow', start: 'top top', end: 'bottom bottom', invalidateOnRefresh: true });
+        (function () {
+            var rows = $$('#grow .srow'), closer = $('#grow .closer');
+            gsap.set(rows, { opacity: 0, y: 26 }); gsap.set(closer, { opacity: 0, y: 26 });
+            var tl = gsap.timeline({ scrollTrigger: { trigger: '#grow', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+            tl.to({}, { duration: .3 });
+            rows.forEach(function (l) {
+                tl.to(l, { opacity: 1, y: 0, duration: .8, ease: 'none' });
+                tl.to({}, { duration: .5 });
+            });
+            tl.to(closer, { opacity: 1, y: 0, duration: .9, ease: 'none' }, '+=.2').to({}, { duration: .7 });
+        })();
+        // 1 → 10 → 50 → 100, holding on each number rather than sliding through
+        var STEPS = [1, 10, 50, 100];
+        function stepCount() {
+            var p = growST.progress * (STEPS.length + .35);
+            var k = Math.min(STEPS.length - 1, Math.floor(p)), f = smooth(clamp01((p - k) * 1.7 - .35));
+            return STEPS[k] + (STEPS[Math.min(STEPS.length - 1, k + 1)] - STEPS[k]) * f;
+        }
+        function stepJitter() { return .12 + .5 * smooth(growST.progress * 1.2); }
+
+        /* 06 · the verbs travel across the sticky */
+        var railST = null;
+
+        var mm = gsap.matchMedia();
+        mm.add({ desk: '(min-width: 900px)', mob: '(max-width: 899px)' }, function (ctx) {
+            var desk = ctx.conditions.desk;
+            var track = $('#railTrack'), bars = $$('#railProgress i');
+
+            poseBase = desk ? { count: 1, wG: 0, wL: 0, jit: 0, ring: 0, scale: 0, rule: 0, op: .5, x: 17, y: 11, s: 1.15, rot: 0 }
+                            : { count: 1, wG: 0, wL: 0, jit: 0, ring: 0, scale: 0, rule: 0, op: .42, x: 0, y: 26, s: 1.3, rot: 0 };
+            Object.assign(S, poseBase);
+            poseStages = [];
+            function stage(trigger, start, end, to, a, b) {
+                var st = trigger && trigger.progress !== undefined ? trigger
+                       : ScrollTrigger.create({ trigger: trigger, start: start, end: end, invalidateOnRefresh: true });
+                poseStages.push({ st: st, to: to, a: a, b: b });
+            }
+
+            // hero → the ear: the one mark settles dead centre and the scale comes up
+            stage('#hear', 'top bottom', 'top top', { op: .85, x: desk ? 22 : 0, y: desk ? 0 : -8, s: desk ? .84 : .95, count: 1, scale: 1, jit: 0 });
+            // the ear → scale: the ruler goes, the catalogue starts multiplying
+            stage('#grow', 'top bottom', 'top top', { scale: 0, op: .42, s: 1.05, x: desk ? 20 : 0, y: desk ? 2 : 18 });
+            stage(growST, null, null, { count: stepCount, jit: stepJitter });
+            // scale → drift: a hundred marks, nobody everywhere at once
+            stage('#drift', 'top bottom', 'top 45%', { count: N, jit: 1, op: .34, s: 1.22, rot: 7, x: desk ? 6 : 0, y: 0 });
+            // drift → the system: a lattice is imposed on the same catalogue
+            stage('#system', 'top bottom', 'top 35%', { wG: 1, jit: .1, op: .26, s: 1.02, rot: 0, x: desk ? -24 : 0, y: 4 });
+            // the system → your sound: the fingerprint is drawn, and the strays come back inside
+            stage('#sound', 'top bottom', 'top top', { wG: 1, ring: 1, jit: .05, op: .95, x: 0, y: desk ? 2 : -8, s: desk ? .84 : .9 });
+            stage('#sound', 'top -20%', 'bottom bottom', { rot: 10, s: desk ? .8 : .86 });
+            // your sound → one standard: everything aligns on a single line
+            stage('#standard', 'top bottom', 'top 30%', { wG: 0, wL: 1, ring: 0, rule: 1, jit: 0, op: .5, x: 0, y: 0, s: 1, rot: 0 });
+            // one standard → close: back to the one that started it
+            stage('#gives', 'top bottom', 'top 40%', { op: .2, rule: .4, ring: 0, s: 1.1, y: 2 });
+            stage('#close', 'top bottom', 'center center', { count: 1, wL: 1, wG: 0, rule: 0, op: .55, s: 1, x: 0, y: desk ? -19 : -24, rot: 0, jit: 0 });
+
+            if (desk) {
+                railST = ScrollTrigger.create({
+                    trigger: '#standard', start: 'top top', end: 'bottom bottom', scrub: .8, invalidateOnRefresh: true,
+                    onUpdate: function (st) {
+                        var dist = Math.max(0, track.scrollWidth - window.innerWidth);
+                        var p = smooth(clamp01((st.progress - .12) / .76));
+                        gsap.set(track, { x: -dist * p });
+                        var q = p * bars.length;
+                        bars.forEach(function (b, i) { b.style.setProperty('--p', clamp01(q - i)); });
+                    }
+                });
+            } else {
+                gsap.from($$('#standard .verb'), { y: 26, opacity: 0, duration: 1, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: '.rail', start: 'top 82%', once: true } });
+            }
+
+            return function () {
+                if (railST) { railST.kill(); railST = null; }
+                gsap.set(track, { clearProps: 'transform' });
+                poseStages = []; poseBase = null;
+            };
+        });
+
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+        window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+    })();
+    </script>
+</body>
+
+</html>
